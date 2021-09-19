@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Scene : MonoBehaviour
 {
@@ -20,6 +21,18 @@ public class Scene : MonoBehaviour
     }
 
     public static SCENETYPE sceneType = SCENETYPE.LOAD;
+
+    void Start()
+    {
+        if(sceneType == SCENETYPE.GAME)
+        {
+            sceneType = SCENETYPE.GAME;
+            cameraAnim.SetBool("GameCamera", true);
+            titleUI.SetActive(false);
+            StartCoroutine("GameFromTitle");
+            Sound.SoundPlaySE(7);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -89,4 +102,10 @@ public class Scene : MonoBehaviour
         titleUI.SetActive(true);
         sceneType = SCENETYPE.TITLE;
     }
+
+    //public void RestartButton()
+    //{
+    //    Scene.sceneType = Scene.SCENETYPE.GAME;
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    //}
 }

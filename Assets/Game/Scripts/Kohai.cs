@@ -9,4 +9,9 @@ public class Kohai : MonoBehaviour
         int rand = Random.Range(0, 100);
         if (rand > 100) { gameObject.SetActive(false); }
     }
+
+    private void Update()
+    {
+        if (gameObject.tag == "Jet" && !Player.isJet) { gameObject.SetActive(false); }
+    }
 }

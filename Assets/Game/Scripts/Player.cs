@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     GameObject[] resultType;
 
+    [SerializeField]
+    GameObject pointer;
+
     private ContactFilter2D filter2d;
 
     private CameraShake cameraShake;
@@ -58,18 +61,10 @@ public class Player : MonoBehaviour
 
         if (isGameOver) { return; }
 
-        PlayerKey();
-        PlayerFall();
-        PlayerAutoJumpCountDown();
-    }
-
-
-    /// <summary>
-    /// プレイヤーの落下判定
-    /// </summary>
-    void PlayerFall()
-    {
-        if (transform.localPosition.y < -7) { PlayerDestroy(1); }
+        PlayerKey();//操作
+        PlayerFall();//落下判定
+        PlayerPointer();//ポインタ
+        PlayerAutoJumpCountDown();//オートジャンプ
     }
 
 
@@ -99,6 +94,36 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// プレイヤーの落下判定
+    /// </summary>
+    void PlayerFall()
+    {
+        if (transform.localPosition.y < -7) { PlayerDestroy(1); }
+    }
+
+
+    /// <summary>
+    /// プレイヤーが画面外に出た時のみPointerを表示
+    /// </summary>
+    void PlayerPointer()
+    {
+        if (transform.localPosition.y > 6.7f) { pointer.SetActive(true); }
+        else { pointer.SetActive(false); }
+    }
+
+
+    /// <summary>
+    /// プレイヤーのオートジャンプのカウントダウン
+    /// </summary>
+    float PlayerAutoJumpCountDown()
+    {
+        if (autoJumpCount == 0) { return 0; }
+        return autoJumpCount -= Time.deltaTime;
+    }
+
+
     /// <summary>
     /// プレイヤーのジェット開始
     /// </summary>
@@ -113,7 +138,7 @@ public class Player : MonoBehaviour
         box2d.isTrigger = true;
         rb.gravityScale = 0;
         spriteRenderer.sortingLayerName = "Jet";
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         itemSystem.AddStamina(100);
         concentrationLine.SetActive(true);
 
@@ -131,42 +156,34 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(6f);
 
+        //ジャンプ
         Vector3 force = new Vector3(0.0f, 600.0f, 0.0f);    // 力を設定
         rb.AddForce(force);  // 力を加える
-
         anim.SetBool("Jump", true);
         isJump = true;
 
-        kohai.SetActive(false);
-        isJet = false;
+        //変更したパラメータを元に戻す
         waveConfig.startScrollSpeed = waveConfig.jetBeforeScrollSpeed;
         box2d.isTrigger = false;
         rb.gravityScale = 1;
-        spriteRenderer.sortingLayerName = "Player";
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         itemSystem.ResetKohai();
         concentrationLine.SetActive(false);
+        isJet = false;
+
+        yield return new WaitForSeconds(0.2f);
+
+        spriteRenderer.sortingLayerName = "Player";
     }
-
-
-    /// <summary>
-    /// プレイヤーのオートジャンプのカウントダウン
-    /// </summary>
-    float PlayerAutoJumpCountDown()
-    {
-        if (autoJumpCount == 0) { return 0; }
-        return autoJumpCount -= Time.deltaTime;
-    }
-
 
     /// <summary>
     /// プレイヤーの死亡判定
     /// </summary>
     void PlayerDestroy(int type)
     {
-        GetComponent<Rigidbody2D>().gravityScale = 0;
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        GetComponent<SpriteRenderer>().sortingLayerName = "GameOver";
+        rb.gravityScale = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        spriteRenderer.sortingLayerName = "GameOver";
 
         anim.SetBool("GameOver", true);
         isGameOver = true;
@@ -224,7 +241,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isJet) { return; }
+        if (isJet || gameObject.tag != "Player") { return; }
 
         //顔がビルに激突したらゲームオーバー
         if (other.tag == "Stage")
