@@ -37,7 +37,6 @@ public class Scene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(sceneType);
         switch (sceneType)
         {
             case SCENETYPE.SENDEN:
@@ -62,7 +61,7 @@ public class Scene : MonoBehaviour
     /// </summary>
     void TitleScene()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             sceneType = SCENETYPE.GAME;
             cameraAnim.SetBool("GameCamera", true);

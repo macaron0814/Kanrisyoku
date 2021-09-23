@@ -78,13 +78,13 @@ public class Player : MonoBehaviour
         isTouched = rb.IsTouching(filter2d);
 
         //重力をかける
-        if (!isTouched && Input.GetKeyDown(KeyCode.Space)) { autoJumpCount = 1; rb.gravityScale = 7; return; }
+        if (!isTouched && Input.GetMouseButtonDown(0)) { autoJumpCount = 1; rb.gravityScale = 7; return; }
 
         //重力を戻す
         if (isTouched) { rb.gravityScale = 2; }
 
         //ジャンプ
-        if (!isJump && Input.GetKeyDown(KeyCode.Space))
+        if (!isJump && Input.GetMouseButtonDown(0))
         {
             Vector3 force = new Vector3(0.0f, 600.0f, 0.0f);    // 力を設定
             rb.AddForce(force);  // 力を加える
