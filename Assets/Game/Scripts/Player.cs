@@ -19,9 +19,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     GameObject[] resultType;
 
-    [SerializeField]
-    GameObject pointer;
-
     private ContactFilter2D filter2d;
 
     private CameraShake cameraShake;
@@ -63,7 +60,6 @@ public class Player : MonoBehaviour
 
         PlayerKey();//操作
         PlayerFall();//落下判定
-        PlayerPointer();//ポインタ
         PlayerAutoJumpCountDown();//オートジャンプ
     }
 
@@ -78,7 +74,13 @@ public class Player : MonoBehaviour
         isTouched = rb.IsTouching(filter2d);
 
         //重力をかける
-        if (!isTouched && Input.GetMouseButtonDown(0)) { autoJumpCount = 1; rb.gravityScale = 7; return; }
+        if (!isTouched && Input.GetMouseButtonDown(0))
+        {
+            spriteRenderer.sortingLayerName = "Player";
+            autoJumpCount = 1;
+            rb.gravityScale = 7;
+            return;
+        }
 
         //重力を戻す
         if (isTouched) { rb.gravityScale = 2; }
@@ -86,7 +88,7 @@ public class Player : MonoBehaviour
         //ジャンプ
         if (!isJump && Input.GetMouseButtonDown(0))
         {
-            Vector3 force = new Vector3(0.0f, 600.0f, 0.0f);    // 力を設定
+            Vector3 force = new Vector3(0.0f, 550.0f, 0.0f);    // 力を設定
             rb.AddForce(force);  // 力を加える
 
             anim.SetBool("Jump", true);
@@ -101,16 +103,6 @@ public class Player : MonoBehaviour
     void PlayerFall()
     {
         if (transform.localPosition.y < -7) { PlayerDestroy(1); }
-    }
-
-
-    /// <summary>
-    /// プレイヤーが画面外に出た時のみPointerを表示
-    /// </summary>
-    void PlayerPointer()
-    {
-        if (transform.localPosition.y > 6.7f) { pointer.SetActive(true); }
-        else { pointer.SetActive(false); }
     }
 
 
@@ -157,7 +149,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(6f);
 
         //ジャンプ
-        Vector3 force = new Vector3(0.0f, 600.0f, 0.0f);    // 力を設定
+        Vector3 force = new Vector3(0.0f, 550.0f, 0.0f);    // 力を設定
         rb.AddForce(force);  // 力を加える
         anim.SetBool("Jump", true);
         isJump = true;
@@ -171,7 +163,7 @@ public class Player : MonoBehaviour
         concentrationLine.SetActive(false);
         isJet = false;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         spriteRenderer.sortingLayerName = "Player";
     }

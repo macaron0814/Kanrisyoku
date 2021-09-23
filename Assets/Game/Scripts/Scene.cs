@@ -76,10 +76,12 @@ public class Scene : MonoBehaviour
     /// </summary>
     IEnumerator GameFromTitle()
     {
+
+        gameUI.SetActive(true); //ゲームUI表示
+
         yield return new WaitForSeconds(1f);
 
         cameraAnim.enabled = false;
-        gameUI.SetActive(true);
 
         yield return new WaitForSeconds(3f);
 
