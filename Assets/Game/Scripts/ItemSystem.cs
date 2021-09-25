@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ItemSystem : MonoBehaviour
 {
     [SerializeField] private Slider ramenUI;
-    [SerializeField] private Text coinUI;
-    [SerializeField] private Text metreUI;
+    [SerializeField] private Text coinUI,coinResultUI;
+    [SerializeField] private Text metreUI, metreResultUI;
     [SerializeField] private Text kohaiUI;
     private int coin = 0;
     public static float metre = 0;
@@ -33,14 +33,14 @@ public class ItemSystem : MonoBehaviour
             }
 
             metre += 1.0f / 10.0f;
-            metreUI.text = metre.ToString("F2") + "m";
+            metreResultUI.text = metreUI.text = metre.ToString("F2") + "m";
         }
     }
 
     public void AddCoin()
     {
         coin++;
-        coinUI.text = coin.ToString("D4");
+        coinResultUI.text = coinUI.text = coin.ToString("D4");
         Sound.SoundPlaySE(0);
     }
 

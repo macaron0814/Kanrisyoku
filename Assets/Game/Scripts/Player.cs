@@ -182,16 +182,22 @@ public class Player : MonoBehaviour
         Scene.sceneType = Scene.SCENETYPE.RESULT;
         Sound.SoundStop();
 
-        StartCoroutine(ResultFromGameOver(type));
+        StartCoroutine(ResultFromGameOverandPlaySound(type));
     }
 
-    IEnumerator ResultFromGameOver(int type)
+    IEnumerator ResultFromGameOverandPlaySound(int type)
     {
-        yield return new WaitForSeconds(2f);
+        if (isSound) { yield break; }
 
+        yield return new WaitForSeconds(1f);
+
+        Sound.SoundPlayBGM(1);
         resultType[type].SetActive(true);
 
-        if (!isSound) { isSound = true; Sound.SoundPlayBGM(1); }
+        yield return new WaitForSeconds(2.25f);
+
+        Sound.SoundPlaySE(9);
+        isSound = true;
     }
 
     void DestroyEffect()

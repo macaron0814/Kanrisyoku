@@ -12,5 +12,7 @@ public static class Config
     {
         /*システム設定*/
         Application.targetFrameRate = 60;//フレームレートを固定
+
+        iOSRankingUtility.Auth();
     }
 }
