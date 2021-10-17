@@ -11,6 +11,7 @@ TagManager:
   - Kohai
   - GoldenRamen
   - Jet
+  - Sound
   layers:
   - Default
   - TransparentFX

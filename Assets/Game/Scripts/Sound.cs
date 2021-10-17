@@ -35,6 +35,12 @@ public class Sound : MonoBehaviour
         audioSource.PlayOneShot(se_static[playse]);//再生
     }
 
+    public static IEnumerator SoundPlaySEforCountDown(int playse, float time)//配列番号
+    {
+        yield return new WaitForSeconds(time);
+        audioSource.PlayOneShot(se_static[playse]);//再生
+    }
+
     public static void SoundStop()
     {
         audioSource.Stop();//停止

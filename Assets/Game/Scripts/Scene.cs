@@ -30,7 +30,7 @@ public class Scene : MonoBehaviour
             cameraAnim.SetBool("GameCamera", true);
             titleUI.SetActive(false);
             StartCoroutine("GameFromTitle");
-            Sound.SoundPlaySE(7);
+            StartCoroutine(Sound.SoundPlaySEforCountDown(7,0.1f));
         }
     }
 
@@ -90,11 +90,9 @@ public class Scene : MonoBehaviour
 
     public void RankingButton()
     {
-        string score;
-        score = ItemSystem.metre.ToString("F2");
+        long score = (long)ItemSystem.metre * 100;
 
-        resultUI.SetActive(false);
-        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(double.Parse(score));
+        iOSRankingUtility.ReportScore("hiScore", score);
     }
 
     public void TitleButton()
@@ -104,9 +102,15 @@ public class Scene : MonoBehaviour
         sceneType = SCENETYPE.TITLE;
     }
 
-    //public void RestartButton()
-    //{
-    //    Scene.sceneType = Scene.SCENETYPE.GAME;
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //}
+    public void RestartButton()
+    {
+        Scene.sceneType = Scene.SCENETYPE.GAME;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void HomeButton()
+    {
+        Scene.sceneType = Scene.SCENETYPE.TITLE;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

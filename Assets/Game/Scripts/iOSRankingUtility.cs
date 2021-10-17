@@ -34,7 +34,7 @@ public static class iOSRankingUtility
         Social.localUser.Authenticate(callBack);
 
         //アチーブメント獲得時の通知をONにする
-       // UnityEngine.SocialPlatforms.GameCenter.GameCenterPlatform.ShowDefaultAchievementCompletionBanner(true);
+        UnityEngine.SocialPlatforms.GameCenter.GameCenterPlatform.ShowDefaultAchievementCompletionBanner(true);
 
     }
 

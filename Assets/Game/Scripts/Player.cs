@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         //ジャンプ
         if (!isJump && Input.GetMouseButtonDown(0))
         {
-            Vector3 force = new Vector3(0.0f, 550.0f, 0.0f);    // 力を設定
+            Vector3 force = new Vector3(0.0f, 575.0f, 0.0f);    // 力を設定
             rb.AddForce(force);  // 力を加える
 
             anim.SetBool("Jump", true);
@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(6f);
 
         //ジャンプ
-        Vector3 force = new Vector3(0.0f, 550.0f, 0.0f);    // 力を設定
+        Vector3 force = new Vector3(0.0f, 575.0f, 0.0f);    // 力を設定
         rb.AddForce(force);  // 力を加える
         anim.SetBool("Jump", true);
         isJump = true;

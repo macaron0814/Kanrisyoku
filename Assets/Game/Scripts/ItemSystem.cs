@@ -9,10 +9,13 @@ public class ItemSystem : MonoBehaviour
     [SerializeField] private Text coinUI,coinResultUI;
     [SerializeField] private Text metreUI, metreResultUI;
     [SerializeField] private Text kohaiUI;
+    [SerializeField] private GameObject kohaiObj;
+
     private int coin = 0;
     public static float metre = 0;
     public static float ramen = 0;
     public static float kohai = 0;
+    private bool isKohaiCountInterval; //カウントが連続で増えてしまわないようにフラグで管理
 
     private void Start()
     {
@@ -52,9 +55,25 @@ public class ItemSystem : MonoBehaviour
 
     public void AddKohai()
     {
+        //Interval期間であれば加算しない
+        if (isKohaiCountInterval) { return; }
+
         kohai++;
         kohaiUI.text = kohai.ToString() + "/5";
         Sound.SoundPlaySE(2);
+        StartCoroutine(KohaiUIShow());
+    }
+
+    IEnumerator KohaiUIShow()
+    {
+        kohaiObj.SetActive(true);
+        isKohaiCountInterval = true;
+
+        yield return new WaitForSeconds(0.25f);
+        isKohaiCountInterval = false;
+
+        yield return new WaitForSeconds(0.75f);
+        kohaiObj.SetActive(false);
     }
 
     public void ResetKohai()
