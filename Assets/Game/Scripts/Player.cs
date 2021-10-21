@@ -173,6 +173,8 @@ public class Player : MonoBehaviour
     /// </summary>
     void PlayerDestroy(int type)
     {
+        itemSystem.AddStamina(100);
+
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         spriteRenderer.sortingLayerName = "GameOver";

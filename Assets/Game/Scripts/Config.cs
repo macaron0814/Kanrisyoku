@@ -14,5 +14,9 @@ public static class Config
         Application.targetFrameRate = 60;//フレームレートを固定
 
         iOSRankingUtility.Auth();
+
+#if UNITY_IOS
+        ShowAttDialog.RequestIDFA();
+#endif
     }
 }

@@ -90,7 +90,7 @@ public class Scene : MonoBehaviour
 
     public void RankingButton()
     {
-        long score = (long)ItemSystem.metre * 100;
+        long score = (long)(ItemSystem.metre * 100);
 
         iOSRankingUtility.ReportScore("hiScore", score);
     }
