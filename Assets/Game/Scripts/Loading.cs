@@ -19,17 +19,17 @@ public class Loading : MonoBehaviour
             rand = Random.Range(2, 5);
         }
 
-        if (Scene.sceneType != Scene.SCENETYPE.LOAD) { Sound.SoundPlayBGM(0); Destroy(gameObject); }
+        if (GameScene.sceneType != GameScene.SCENETYPE.LOAD) { Sound.SoundPlayBGM(0); Destroy(gameObject); }
     }
 
     void Update()
     {
-        if(Scene.sceneType != Scene.SCENETYPE.LOAD) { return; }
+        if(GameScene.sceneType != GameScene.SCENETYPE.LOAD) { return; }
 
         if (loadingCount > rand)
         {
             Destroy(gameObject);
-            Scene.sceneType = Scene.SCENETYPE.TITLE;
+            GameScene.sceneType = GameScene.SCENETYPE.TITLE;
             Sound.SoundPlayBGM(0);
         }
     }

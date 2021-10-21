@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Scene : MonoBehaviour
+public class GameScene : MonoBehaviour
 {
     [SerializeField]
     private Animator cameraAnim;
@@ -43,12 +43,14 @@ public class Scene : MonoBehaviour
                 sendenUI.SetActive(true);
                 titleUI.SetActive(false);
                 break;
+
             case SCENETYPE.TITLE:
                 sceneType = SCENETYPE.TITLE;
-                TitleScene();
                 break;
+
             case SCENETYPE.GAME:
                 break;
+
             case SCENETYPE.RESULT:
                 gameUI.SetActive(false);
                 resultUI.SetActive(true);
@@ -57,43 +59,53 @@ public class Scene : MonoBehaviour
     }
 
     /// <summary>
-    /// TitleSceneに関する処理
+    /// ゲーム画面切り替え時に関する処理
     /// </summary>
-    void TitleScene()
+    public void ChangeGameScene()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            sceneType = SCENETYPE.GAME;
-            cameraAnim.SetBool("GameCamera", true);
-            titleUI.SetActive(false);
-            StartCoroutine("GameFromTitle");
-            Sound.SoundPlaySE(7);
-        }
+        sceneType = SCENETYPE.GAME;
+        cameraAnim.SetBool("GameCamera", true);
+        titleUI.SetActive(false);
+        StartCoroutine("GameFromTitle");
+        Sound.SoundPlaySE(7);
     }
+
+
+
+    /// <summary>
+    /// リザルト画面切り替え時に関する処理
+    /// </summary>
+    public static void ChangeResultScene()
+    {
+        //リザルト画面に変更
+        GameScene.sceneType = GameScene.SCENETYPE.RESULT;
+        Sound.SoundStop();
+
+        //スコア送信
+        long score = (long)(ItemSystem.metre * 100);
+        iOSRankingUtility.ReportScore("hiScore", score);
+
+        Record.ClearRecord();
+
+    }
+
+
 
     /// <summary>
     /// GameFromTitleに関する処理
     /// </summary>
     IEnumerator GameFromTitle()
     {
-
         gameUI.SetActive(true); //ゲームUI表示
 
         yield return new WaitForSeconds(1f);
-
         cameraAnim.enabled = false;
 
         yield return new WaitForSeconds(3f);
-
         tutorialUI.SetActive(false);
     }
 
-    public void RankingButton()
-    {
-        long score = (long)(ItemSystem.metre * 100);
 
-        iOSRankingUtility.ReportScore("hiScore", score);
-    }
 
     public void TitleButton()
     {
@@ -102,15 +114,19 @@ public class Scene : MonoBehaviour
         sceneType = SCENETYPE.TITLE;
     }
 
+
+
     public void RestartButton()
     {
-        Scene.sceneType = Scene.SCENETYPE.GAME;
+        GameScene.sceneType = GameScene.SCENETYPE.GAME;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+
+
     public void HomeButton()
     {
-        Scene.sceneType = Scene.SCENETYPE.TITLE;
+        GameScene.sceneType = GameScene.SCENETYPE.TITLE;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

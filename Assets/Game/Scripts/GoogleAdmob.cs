@@ -7,7 +7,7 @@ public class GoogleAdmob : MonoBehaviour
 {
     public static bool isBanner;
 
-    private void Awake()
+    private void Start()
     {
         if (isBanner) { return; }
 

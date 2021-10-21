@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Scene.sceneType != Scene.SCENETYPE.GAME) { return; }
+        if (GameScene.sceneType != GameScene.SCENETYPE.GAME) { return; }
         if (ItemSystem.ramen <= 0) { PlayerDestroy(2); }
 
         if (isGameOver) { return; }
@@ -181,9 +181,8 @@ public class Player : MonoBehaviour
 
         anim.SetBool("GameOver", true);
         isGameOver = true;
-        Scene.sceneType = Scene.SCENETYPE.RESULT;
-        Sound.SoundStop();
 
+        GameScene.ChangeResultScene();
         StartCoroutine(ResultFromGameOverandPlaySound(type));
     }
 
