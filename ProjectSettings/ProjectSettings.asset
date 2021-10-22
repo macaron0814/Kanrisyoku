@@ -171,7 +171,8 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.Kanrisyoku
     iPhone: com.Kanrisyoku
-  buildNumber: {}
+  buildNumber:
+    iPhone: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 29
   AndroidTargetSdkVersion: 0

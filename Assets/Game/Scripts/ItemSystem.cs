@@ -26,7 +26,7 @@ public class ItemSystem : MonoBehaviour
 
     private void Update()
     {
-        if (GameScene.sceneType == GameScene.SCENETYPE.GAME)
+        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.GAME)
         {
 
             if (!Player.isJet)

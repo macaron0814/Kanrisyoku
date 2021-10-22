@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         box2d = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        itemSystem = GameObject.Find("SceneConfig").GetComponent<ItemSystem>();
+        itemSystem = GameObject.Find("GameModeConfig").GetComponent<ItemSystem>();
         waveConfig = GameObject.Find("WaveConfig").GetComponent<WaveConfig>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
     }
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameScene.sceneType != GameScene.SCENETYPE.GAME) { return; }
+        if (GameModeConfig.sceneType != GameModeConfig.SCENETYPE.GAME) { return; }
         if (ItemSystem.ramen <= 0) { PlayerDestroy(2); }
 
         if (isGameOver) { return; }
@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
         anim.SetBool("GameOver", true);
         isGameOver = true;
 
-        GameScene.ChangeResultScene();
+        GameModeConfig.ChangeResultScene();
         StartCoroutine(ResultFromGameOverandPlaySound(type));
     }
 

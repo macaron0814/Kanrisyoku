@@ -62,7 +62,7 @@ public class WaveConfig : MonoBehaviour
             //指定座標まで来たら戻してループ
             if (pos.x < -18)
             {
-                if (GameScene.sceneType == GameScene.SCENETYPE.GAME)
+                if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.GAME)
                 {
                     Destroy(waveCategoryRotation[i]);
 

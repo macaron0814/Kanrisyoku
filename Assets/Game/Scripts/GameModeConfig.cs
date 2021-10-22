@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameScene : MonoBehaviour
+public class GameModeConfig : MonoBehaviour
 {
     [SerializeField]
     private Animator cameraAnim;
@@ -78,7 +78,7 @@ public class GameScene : MonoBehaviour
     public static void ChangeResultScene()
     {
         //リザルト画面に変更
-        GameScene.sceneType = GameScene.SCENETYPE.RESULT;
+        GameModeConfig.sceneType = GameModeConfig.SCENETYPE.RESULT;
         Sound.SoundStop();
 
         //スコア送信
@@ -118,7 +118,7 @@ public class GameScene : MonoBehaviour
 
     public void RestartButton()
     {
-        GameScene.sceneType = GameScene.SCENETYPE.GAME;
+        GameModeConfig.sceneType = GameModeConfig.SCENETYPE.GAME;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -126,7 +126,7 @@ public class GameScene : MonoBehaviour
 
     public void HomeButton()
     {
-        GameScene.sceneType = GameScene.SCENETYPE.TITLE;
+        GameModeConfig.sceneType = GameModeConfig.SCENETYPE.TITLE;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
