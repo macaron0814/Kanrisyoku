@@ -5,9 +5,13 @@ using UnityEngine;
 public class SelectModeConfig : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+
+#if UNITY_IOS
+        iOSRankingUtility.Auth();
+        ShowAttDialog.RequestIDFA();
+#endif
     }
 
     // Update is called once per frame

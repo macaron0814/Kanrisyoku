@@ -33,6 +33,9 @@ public static class iOSRankingUtility
         }
         Social.localUser.Authenticate(callBack);
 
+        //全アチーブメントを未取得に戻す
+        UnityEngine.SocialPlatforms.GameCenter.GameCenterPlatform.ResetAllAchievements(callBack);
+
         //アチーブメント獲得時の通知をONにする
         UnityEngine.SocialPlatforms.GameCenter.GameCenterPlatform.ShowDefaultAchievementCompletionBanner(true);
 

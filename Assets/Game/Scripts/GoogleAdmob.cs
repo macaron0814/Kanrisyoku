@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
 
-public class GoogleAdmob : MonoBehaviour
+public class GoogleAdmob
 {
     public static bool isBanner;
 
-    private void Start()
+    public static void LoadAdmob()
     {
         if (isBanner) { return; }
 
@@ -21,13 +21,5 @@ public class GoogleAdmob : MonoBehaviour
         MobileAds.Initialize((initStatus) => { });
 
         BannerManager.RequestBanner();
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

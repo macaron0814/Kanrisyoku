@@ -31,6 +31,8 @@ public class Loading : MonoBehaviour
             Destroy(gameObject);
             GameModeConfig.sceneType = GameModeConfig.SCENETYPE.TITLE;
             Sound.SoundPlayBGM(0);
+
+            GoogleAdmob.LoadAdmob(); //広告読み込み
         }
     }
 
