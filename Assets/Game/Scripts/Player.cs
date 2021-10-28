@@ -174,6 +174,7 @@ public class Player : MonoBehaviour
     void PlayerDestroy(int type)
     {
         itemSystem.AddStamina(100);
+        ItemSystem.gameoverPattern = type;
 
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -191,12 +192,10 @@ public class Player : MonoBehaviour
         if (isSound) { yield break; }
 
         yield return new WaitForSeconds(1f);
-
         Sound.SoundPlayBGM(1);
         resultType[type].SetActive(true);
 
         yield return new WaitForSeconds(2.25f);
-
         Sound.SoundPlaySE(9);
         isSound = true;
     }

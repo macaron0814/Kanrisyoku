@@ -5,7 +5,7 @@ using UnityEngine;
 public class SelectModeConfig : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
 
 #if UNITY_IOS

@@ -85,10 +85,15 @@ public class GameModeConfig : MonoBehaviour
         long score = (long)(ItemSystem.metre * 100);
         iOSRankingUtility.ReportScore("hiScore", score);
 
+        Record.UpdateRecord(Record.RecordList.FIRSTRUN);
+
+        Record.UpdateRecord(Record.RecordList.RUNCOUNT);
+        Record.UpdateRecord(Record.RecordList.RUNTOTALMETER, ItemSystem.metre);
+
+        Record.UpdateRecord(Record.RecordList.DEAD, ItemSystem.gameoverPattern);
+
         Record.ClearRecord();
-
     }
-
 
 
     /// <summary>

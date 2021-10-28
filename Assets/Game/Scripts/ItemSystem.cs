@@ -15,6 +15,7 @@ public class ItemSystem : MonoBehaviour
     public static float metre = 0;
     public static float ramen = 0;
     public static float kohai = 0;
+    public static int gameoverPattern = 0;
     private bool isKohaiCountInterval; //カウントが連続で増えてしまわないようにフラグで管理
 
     private void Start()

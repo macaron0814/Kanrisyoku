@@ -1,13 +1,15 @@
 ﻿//  iOSRankingUtility.cs
-//  http://kan-kikuchi.hatenablog.com/entry/iOSRankingUtility
 //
+//  元 http://kan-kikuchi.hatenablog.com/entry/iOSRankingUtility
 //  Created by kan.kikuchi on 2016.03.31.
+//
+//  改良版 https://note.com/08_14/n/n5b5161d5b699
+//  Created by macaron on 2021.10.25.
 
+using System;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SocialPlatforms.GameCenter;
 
 /// <summary>
 /// iOSのランキング用便利クラス
@@ -31,14 +33,8 @@ public static class iOSRankingUtility
                 Debug.Log(success ? "認証成功" : "認証失敗");
             };
         }
+        
         Social.localUser.Authenticate(callBack);
-
-        //全アチーブメントを未取得に戻す
-        UnityEngine.SocialPlatforms.GameCenter.GameCenterPlatform.ResetAllAchievements(callBack);
-
-        //アチーブメント獲得時の通知をONにする
-        UnityEngine.SocialPlatforms.GameCenter.GameCenterPlatform.ShowDefaultAchievementCompletionBanner(true);
-
     }
 
     //=================================================================================
@@ -95,32 +91,20 @@ public static class iOSRankingUtility
     /// <summary>
     /// 実績の進捗状況を送信する
     /// </summary>
-    public static void ReportProgress(string achievementKey, float percent, Action<bool> callBack = null)
+    public static void ReportProgress(string achievementKey, double percent, Action<bool> callBack = null)
     {
+        //値が100を超えていたら100に戻す
+        if (percent >= 100) { percent = 100; }
 
-        //アチーブメントのインスタンスを作成し、keyと進捗率を設定
-        IAchievement achievement = Social.CreateAchievement();
-
-        achievement.id = achievementKey;
-        achievement.percentCompleted = percent;
-
-        //コールバックが設定されていない場合はログを設定
-        if (callBack == null)
-        {
-            callBack = (success) => {
-                Debug.Log(success ? "進捗送信成功" : "進捗送信失敗");
-            };
-        }
+        //値が100なら通知を出す
+        if (percent == 100) { RecordAchievement.Action(achievementKey); }
 
         //エディター上で送信すると、エラーが出るので、送信が成功したことにする
 #if UNITY_EDITOR
-        callBack(true);
+
 #else
-
-    //送信
-    achievement.ReportProgress(callBack);
-
+        //送信
+        for(int i = 0; i < 100; i++){ GKAchievementReporter.ReportAchievement(achievementKey, (float)percent, false); }
 #endif
     }
-
 }
