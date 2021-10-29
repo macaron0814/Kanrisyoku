@@ -134,6 +134,8 @@ public class Player : MonoBehaviour
         itemSystem.AddStamina(100);
         concentrationLine.SetActive(true);
 
+        Record.UpdateRecord(Record.RecordList.KOHAIJET);
+
         StartCoroutine(PlayerEndJet());
     }
 

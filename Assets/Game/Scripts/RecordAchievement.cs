@@ -10,17 +10,17 @@ public class RecordAchievement : MonoBehaviour
     [SerializeField] private Text       recordTitleUI;
     [SerializeField] private Text       recordTextUI;
 
-    [SerializeField] private Color[]   recordColor;
+    [SerializeField] private Color []   recordColor;
     [SerializeField] private string[]   recordTitle;
     [SerializeField] private string[]   recordText;
 
     //recordAchievementのstatic変数
     [SerializeField] private static GameObject recAch;
-    [SerializeField] private static Image recCorUI;
-    [SerializeField] private static Text recTitUI;
-    [SerializeField] private static Text recTexUI;
+    [SerializeField] private static Image      recCorUI;
+    [SerializeField] private static Text       recTitUI;
+    [SerializeField] private static Text       recTexUI;
 
-    [SerializeField] private static Color[] recCor;
+    [SerializeField] private static Color [] recCor;
     [SerializeField] private static string[] recTit;
     [SerializeField] private static string[] recTex;
 
@@ -53,6 +53,11 @@ public class RecordAchievement : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 実績を達成した際のAnimation
+    /// </summary>
+    /// <param name="key">Achievementの名前</param>
+    /// <returns></returns>
     private static IEnumerator AnimationCoroutine(string key)
     {
         recCorUI.color = recCor[Type(key)];
@@ -65,6 +70,13 @@ public class RecordAchievement : MonoBehaviour
         recAch.SetActive(false);
         count--;
     }
+
+    /// <summary>
+    /// 実績を達成した際のAnimation(2回目以降)
+    /// </summary>
+    /// <param name="key">Achievementの名前</param>
+    /// <param name="cnt">現在何個目のAchievementか</param>
+    /// <returns></returns>
     private static IEnumerator NextAnimationCoroutine(string key,int cnt)
     {
         yield return new WaitForSeconds((cnt * 5f) - 5f + (cnt / 10.0f));
@@ -113,6 +125,18 @@ public class RecordAchievement : MonoBehaviour
             case "run_totalmeter_500":
                 Record.save.recordKey[5] = key;
                 return 5;
+
+            case "run_totalmeter_2000":
+                Record.save.recordKey[6] = key;
+                return 6;
+
+            case "run_totalmeter_5000":
+                Record.save.recordKey[7] = key;
+                return 7;
+
+            case "kohai_jet":
+                Record.save.recordKey[8] = key;
+                return 8;
 
             default:
                 return -1;

@@ -11,6 +11,8 @@ public class SaveRecord
     public byte     run;
     public float    runTotalMeter;
     public bool[]   dead = new bool[3];
+    public bool     kohaiJet;
+
     public string[] recordKey = new string[100];
 }
 
@@ -27,7 +29,8 @@ public static class Record
         FIRSTRUN,
         RUNCOUNT,
         RUNTOTALMETER,
-        DEAD
+        DEAD,
+        KOHAIJET
     }
 
     //=================================================
@@ -42,6 +45,8 @@ public static class Record
 
         if (list == RecordList.DEAD)            save.dead[(int)value] = true;
 
+        if (list == RecordList.KOHAIJET)        save.kohaiJet = true;
+
         SaveRecord();
     }
 
@@ -51,7 +56,9 @@ public static class Record
     public static void ClearRecord()
     {
         //合計走行距離
-        iOSRankingUtility.ReportProgress("run_totalmeter_500", save.runTotalMeter * 0.2);
+        iOSRankingUtility.ReportProgress("run_totalmeter_500",  save.runTotalMeter * 0.2);
+        iOSRankingUtility.ReportProgress("run_totalmeter_2000", save.runTotalMeter * 0.05);
+        iOSRankingUtility.ReportProgress("run_totalmeter_5000", save.runTotalMeter * 0.02);
 
         //はじめての走り
         if (save.firstrun)   { iOSRankingUtility.ReportProgress("first_run", 100); }
@@ -63,6 +70,9 @@ public static class Record
 
         //死んだ種類
         if (save.dead.Distinct().Count() == 1) { iOSRankingUtility.ReportProgress("dead_3", 100); }
+
+        //コーハイジェット発動
+        if (save.kohaiJet) { iOSRankingUtility.ReportProgress("kohai_jet", 100); }
     }
 
     //=================================================
