@@ -9,7 +9,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+
+#if !UNITY_ANDROID
 using UnityEngine.SocialPlatforms.GameCenter;
+#endif
 
 /// <summary>
 /// iOSのランキング用便利クラス

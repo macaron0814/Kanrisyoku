@@ -17,7 +17,8 @@ public class GameModeConfig : MonoBehaviour
         SENDEN,
         TITLE,
         GAME,
-        RESULT
+        RESULT,
+        BOSSBATTLE
     }
 
     public static SCENETYPE sceneType = SCENETYPE.LOAD;
@@ -66,6 +67,18 @@ public class GameModeConfig : MonoBehaviour
         sceneType = SCENETYPE.GAME;
         cameraAnim.SetBool("GameCamera", true);
         titleUI.SetActive(false);
+        StartCoroutine("GameFromTitle");
+    }
+
+
+
+    /// <summary>
+    /// ボスバトル画面切り替え時に関する処理
+    /// </summary>
+    public void ChangeBossBattleScene()
+    {
+        sceneType = SCENETYPE.BOSSBATTLE;
+        cameraAnim.SetBool("GameCamera", true);
         StartCoroutine("GameFromTitle");
         Sound.SoundPlaySE(7);
     }
