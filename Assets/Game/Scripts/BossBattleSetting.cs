@@ -11,6 +11,7 @@ public class BossBattleSetting : MonoBehaviour
     private void OnEnable()
     {
         SelectSyain(0);
+        BossBattleConfig.syainNumber = 0;
     }
 
     /// <summary>
@@ -34,5 +35,7 @@ public class BossBattleSetting : MonoBehaviour
                 syainIcon[i].effectDistance = new Vector2(4, -4);
             }
         }
+
+        BossBattleConfig.syainNumber = num;
     }
 }

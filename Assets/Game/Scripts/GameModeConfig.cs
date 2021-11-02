@@ -9,7 +9,7 @@ public class GameModeConfig : MonoBehaviour
     private Animator cameraAnim;
 
     [SerializeField]
-    private GameObject titleUI, gameUI,loadUI,tutorialUI, resultUI,sendenUI;
+    private GameObject titleUI, gameUI, loadUI, tutorialUI, resultUI, sendenUI, bossBattleUI;
 
     public enum SCENETYPE
     {
@@ -79,7 +79,7 @@ public class GameModeConfig : MonoBehaviour
     {
         sceneType = SCENETYPE.BOSSBATTLE;
         cameraAnim.SetBool("GameCamera", true);
-        StartCoroutine("GameFromTitle");
+        StartCoroutine("BossBattleFromTitle");
         Sound.SoundPlaySE(7);
     }
 
@@ -110,7 +110,7 @@ public class GameModeConfig : MonoBehaviour
 
 
     /// <summary>
-    /// GameFromTitleに関する処理
+    /// ゲーム画面への移行処理
     /// </summary>
     IEnumerator GameFromTitle()
     {
@@ -121,6 +121,25 @@ public class GameModeConfig : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         tutorialUI.SetActive(false);
+    }
+
+
+
+    /// <summary>
+    /// ボスバトル画面への移行処理
+    /// </summary>
+    IEnumerator BossBattleFromTitle()
+    {
+        bossBattleUI.SetActive(true); //ボスバトルUI表示
+
+        yield return new WaitForSeconds(1f);
+        cameraAnim.enabled = false;
+
+        yield return new WaitForSeconds(1f);
+        BossBattleConfig.syaUI[BossBattleConfig.syainNumber].SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+        BossBattleConfig.sya[BossBattleConfig.syainNumber].SetActive(true);
     }
 
 
