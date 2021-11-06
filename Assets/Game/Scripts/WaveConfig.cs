@@ -8,6 +8,10 @@ public class WaveConfig : MonoBehaviour
     private GameObject[] waveCategory;//使用するwaveの種類
     [SerializeField]
     private GameObject[] waveCategoryRamen;//使用するwaveの種類
+
+    [SerializeField]
+    private GameObject[] waveCategoryBoss;//使用するwaveの種類
+
     private GameObject[] waveCategoryRotation = new GameObject[3];//使用しているwave
 
     [SerializeField]
@@ -16,8 +20,8 @@ public class WaveConfig : MonoBehaviour
 
     [SerializeField]
     private float scrollSpeed;//スクロールする速度
-    public float startScrollSpeed;//初期状態の速度
-    public float jetBeforeScrollSpeed;//ジェットが発動する前の速度
+    public  float startScrollSpeed;//初期状態の速度
+    public  float jetBeforeScrollSpeed;//ジェットが発動する前の速度
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +76,15 @@ public class WaveConfig : MonoBehaviour
                     else { waveCategoryRotation[i] = Instantiate(waveCategory[Random.Range(0, waveCategory.Length)]); }
                     waveCategoryRotation[i].transform.parent = transform;
                 }
+
+                if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSBATTLE)
+                {
+                    Destroy(waveCategoryRotation[i]);
+
+                    waveCategoryRotation[i] = Instantiate(waveCategoryBoss[Random.Range(0, waveCategoryBoss.Length)]);
+                    waveCategoryRotation[i].transform.parent = transform;
+                }
+
                 pos.x = 36;
             }
 
@@ -90,9 +103,18 @@ public class WaveConfig : MonoBehaviour
             backWaveCategoryRotation[i].transform.localPosition = pos;
         }
 
-        //進んだ距離に比例して徐々に加速
-        scrollSpeed = startScrollSpeed * (1 + ItemSystem.metre / 1000.0f);
-        if(scrollSpeed > 0.25f && scrollSpeed < 0.3f) { scrollSpeed = 0.2f; }
+        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.GAME)
+        {
+            //進んだ距離に比例して徐々に加速
+            scrollSpeed = startScrollSpeed * (1 + ItemSystem.metre / 1000.0f);
+            if (scrollSpeed > 0.25f && scrollSpeed < 0.3f) { scrollSpeed = 0.2f; }
+        }
+
+        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSBATTLE)
+        {
+            //進んだ距離に比例して徐々に加速
+            scrollSpeed = 0.15f;
+        }
     }
 
     /// <summary>

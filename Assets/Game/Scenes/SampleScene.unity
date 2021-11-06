@@ -412,6 +412,9 @@ MonoBehaviour:
   bgm:
   - {fileID: 8300000, guid: 77f3793914367c347a619f6b8dcc5b7a, type: 3}
   - {fileID: 8300000, guid: f25491f2d839194489f7e66ebe914f47, type: 3}
+  - {fileID: 8300000, guid: 611c6a1ac3d4699439f9f0cc41f56e3d, type: 3}
+  - {fileID: 8300000, guid: 72e28157a7cdb9541b6dec32fca0e5cd, type: 3}
+  - {fileID: 8300000, guid: 4b8acfbce1b21aa41ab206b3efa610d2, type: 3}
   se:
   - {fileID: 8300000, guid: 2ad0ca3921a843347afe3d375d3ceb98, type: 3}
   - {fileID: 8300000, guid: 457314c42fcaaef45819d3db0720e1b5, type: 3}
@@ -423,6 +426,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: da1222900d1fee14e8b6782bd70171d9, type: 3}
   - {fileID: 8300000, guid: b47dd2543c5073048a48327c7f98952b, type: 3}
   - {fileID: 8300000, guid: 90a211416e3cdd44baca62ac1b518c44, type: 3}
+  - {fileID: 8300000, guid: 43cf062740ce8644183bc5badac71db5, type: 3}
+  - {fileID: 8300000, guid: 1e4bef1b53e6b9141872e236e421fd46, type: 3}
 --- !u!4 &22553373
 Transform:
   m_ObjectHideFlags: 0
@@ -934,9 +939,11 @@ GameObject:
   - component: {fileID: 68587822}
   - component: {fileID: 68587821}
   - component: {fileID: 68587823}
+  - component: {fileID: 68587824}
+  - component: {fileID: 68587825}
   m_Layer: 0
   m_Name: Joshi
-  m_TagString: Untagged
+  m_TagString: Joshi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1025,6 +1032,44 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &68587824
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68587820}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -15, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 64, y: 64}
+    newSize: {x: 64, y: 64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 24, y: 60}
+  m_EdgeRadius: 0
+--- !u!114 &68587825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68587820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00edf07ba8b0dca4ea8bc923a28b760a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &71453240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2554,6 +2599,12 @@ MonoBehaviour:
   - {fileID: 9118067205392849024, guid: 41104bd06f9cf564c9974c3b65b6c931, type: 3}
   - {fileID: 5464648172078039488, guid: 43692e2ef984f244da00247bcf015e51, type: 3}
   - {fileID: 4589890308464303432, guid: 111a21779ad7f3f409f3c6915d749b0d, type: 3}
+  waveCategoryBoss:
+  - {fileID: 4473629329472332972, guid: f65079a7874b3d34e9af41b8dd412c1c, type: 3}
+  - {fileID: 3574908446538931915, guid: d88bd7052de0ccc4baf9ed67b7557358, type: 3}
+  - {fileID: 4112311722147463516, guid: 2794efe5f2639e643be0ff4d9aefd1fd, type: 3}
+  - {fileID: 3393628580034731646, guid: cfbb8d18f586a0f44b28bcc8b76e0384, type: 3}
+  - {fileID: 6529862349245503003, guid: ac9cda8158535674092d0fb7ba68ca9e, type: 3}
   backWaveCategory:
   - {fileID: 7241507948518157394, guid: f613ef47c10c08e48bde8541946bd6b9, type: 3}
   - {fileID: 4484470062903603831, guid: d59f26d8aed7ef94d993e707545e5779, type: 3}
@@ -3274,6 +3325,7 @@ MonoBehaviour:
   resultUI: {fileID: 135940926}
   sendenUI: {fileID: 0}
   bossBattleUI: {fileID: 1498528207}
+  contentsUI: {fileID: 901540754}
 --- !u!4 &374419904
 Transform:
   m_ObjectHideFlags: 0
@@ -3301,6 +3353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ramenUI: {fileID: 71453242}
+  ramenUI_HP: {fileID: 1215109452}
   coinUI: {fileID: 693682341}
   coinResultUI: {fileID: 1791095120}
   metreUI: {fileID: 1990072173}
@@ -9434,9 +9487,11 @@ GameObject:
   - component: {fileID: 1133427761}
   - component: {fileID: 1133427760}
   - component: {fileID: 1133427762}
+  - component: {fileID: 1133427763}
+  - component: {fileID: 1133427764}
   m_Layer: 0
   m_Name: Kaicho
-  m_TagString: Untagged
+  m_TagString: Joshi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9499,8 +9554,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133427759}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.99, y: -10, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.98999, y: -10, z: 0}
   m_LocalScale: {x: -0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9525,6 +9580,44 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &1133427763
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133427759}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -15, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 64, y: 64}
+    newSize: {x: 64, y: 64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 24, y: 60}
+  m_EdgeRadius: 0
+--- !u!114 &1133427764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133427759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00edf07ba8b0dca4ea8bc923a28b760a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1136559739
 GameObject:
   m_ObjectHideFlags: 0
@@ -9620,7 +9713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1154125244
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10569,7 +10662,7 @@ GameObject:
   - component: {fileID: 1215109451}
   - component: {fileID: 1215109452}
   m_Layer: 5
-  m_Name: RamenSlider
+  m_Name: RamenSlider_HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20521,9 +20614,11 @@ GameObject:
   - component: {fileID: 1963421395}
   - component: {fileID: 1963421394}
   - component: {fileID: 1963421396}
+  - component: {fileID: 1963421397}
+  - component: {fileID: 1963421398}
   m_Layer: 0
   m_Name: Syacho
-  m_TagString: Untagged
+  m_TagString: Joshi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20612,6 +20707,44 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &1963421397
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963421393}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -15, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 64, y: 64}
+    newSize: {x: 64, y: 64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 24, y: 60}
+  m_EdgeRadius: 0
+--- !u!114 &1963421398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963421393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00edf07ba8b0dca4ea8bc923a28b760a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1974178977
 GameObject:
   m_ObjectHideFlags: 0

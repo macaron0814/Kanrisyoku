@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameModeConfig.sceneType != GameModeConfig.SCENETYPE.GAME) { return; }
+        if (GameModeConfig.sceneType != GameModeConfig.SCENETYPE.GAME && GameModeConfig.sceneType != GameModeConfig.SCENETYPE.BOSSBATTLE) { return; }
         if (ItemSystem.ramen <= 0) { PlayerDestroy(2); }
 
         if (isGameOver) { return; }

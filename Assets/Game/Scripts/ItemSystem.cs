@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ItemSystem : MonoBehaviour
 {
-    [SerializeField] private Slider ramenUI;
+    [SerializeField] private Slider ramenUI, ramenUI_HP;
     [SerializeField] private Text coinUI,coinResultUI;
     [SerializeField] private Text metreUI, metreResultUI;
     [SerializeField] private Text kohaiUI;
@@ -21,7 +21,7 @@ public class ItemSystem : MonoBehaviour
     private void Start()
     {
         metre = 0;
-        ramen = 0;
+        ramen = 100;
         kohai = 0;
     }
 
@@ -39,6 +39,8 @@ public class ItemSystem : MonoBehaviour
             metre += 1.0f / 10.0f;
             metreResultUI.text = metreUI.text = metre.ToString("F2") + "m";
         }
+
+        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSBATTLE) ramen = ramenUI_HP.value;
     }
 
     public void AddCoin()
@@ -51,7 +53,8 @@ public class ItemSystem : MonoBehaviour
     public void AddStamina(int cnt)
     {
         ramenUI.value += cnt;
-        if(cnt > 0) Sound.SoundPlaySE(1);
+        ramenUI_HP.value += cnt;
+        if (cnt > 0) Sound.SoundPlaySE(1);
     }
 
     public void AddKohai()

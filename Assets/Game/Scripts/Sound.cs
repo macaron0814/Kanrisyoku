@@ -29,6 +29,16 @@ public class Sound : MonoBehaviour
         audioSource.Play();//再生
     }
 
+    public static IEnumerator SoundPlayBGMforCountDown(int playbgm, float time, bool loop = true)//配列番号
+    {
+        SoundStop();//停止
+        yield return new WaitForSeconds(time);
+
+        audioSource.clip = bgm_static[playbgm];//clipにbgmを代入
+        audioSource.loop = loop;//ループするか
+        audioSource.Play();//再生
+    }
+
     //SE再生
     public static void SoundPlaySE(int playse)//配列番号
     {
