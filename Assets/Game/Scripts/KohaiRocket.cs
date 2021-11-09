@@ -80,7 +80,7 @@ public class KohaiRocket : MonoBehaviour
         //開始、終了地点変更
         time = 0;
         currentPos = targetPos;
-        targetPos.x = 9.5f;
+        targetPos.x = 14.5f;
 
         //移動②
         while (time < 1)
