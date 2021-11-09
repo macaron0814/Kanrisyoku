@@ -1070,6 +1070,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00edf07ba8b0dca4ea8bc923a28b760a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 68587823}
+  kotodama:
+  - {fileID: 7511329779904125144, guid: 4002a9b43fe3a664e8bc0e5252067369, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &71453240
 GameObject:
   m_ObjectHideFlags: 0
@@ -6001,7 +6007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 107.2, y: -250}
+  m_AnchoredPosition: {x: 107.200195, y: -250}
   m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &655451637
@@ -9618,6 +9624,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00edf07ba8b0dca4ea8bc923a28b760a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  kotodama:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1136559739
 GameObject:
   m_ObjectHideFlags: 0
@@ -9713,7 +9725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1154125244
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20745,6 +20757,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00edf07ba8b0dca4ea8bc923a28b760a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  kotodama:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1974178977
 GameObject:
   m_ObjectHideFlags: 0

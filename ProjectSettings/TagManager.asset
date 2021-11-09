@@ -14,6 +14,7 @@ TagManager:
   - Sound
   - KohaiRocket
   - Joshi
+  - Shot
   layers:
   - Default
   - TransparentFX
@@ -59,6 +60,9 @@ TagManager:
     locked: 0
   - name: Jet
     uniqueID: 2240268119
+    locked: 0
+  - name: Shot
+    uniqueID: 1029710067
     locked: 0
   - name: Effect
     uniqueID: 137613889

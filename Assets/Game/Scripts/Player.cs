@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
     private bool isSound;
     public bool isTouched;
 
+    //ダメージ点滅中かの有無
+    private float damageFlashTime;
+
     ItemSystem itemSystem = null;
     WaveConfig waveConfig = null;
 
@@ -48,6 +51,8 @@ public class Player : MonoBehaviour
         itemSystem = GameObject.Find("GameModeConfig").GetComponent<ItemSystem>();
         waveConfig = GameObject.Find("WaveConfig").GetComponent<WaveConfig>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+
+        damageFlashTime = 0.0f;
     }
 
     // Update is called once per frame
@@ -61,6 +66,7 @@ public class Player : MonoBehaviour
         PlayerKey();//操作
         PlayerFall();//落下判定
         PlayerAutoJumpCountDown();//オートジャンプ
+        PlayerDamegeFrashTime();//無敵時間計測
     }
 
 
@@ -73,7 +79,7 @@ public class Player : MonoBehaviour
 
         isTouched = rb.IsTouching(filter2d);
 
-        //重力をかける
+        //高速着地
         if (!isTouched && Input.GetMouseButtonDown(0))
         {
             spriteRenderer.sortingLayerName = "Player";
@@ -208,6 +214,11 @@ public class Player : MonoBehaviour
     }
 
 
+    void PlayerDamegeFrashTime()
+    {
+        damageFlashTime -= Time.deltaTime;
+        if (damageFlashTime < 0.0f) { damageFlashTime = 0.0f; }
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -272,6 +283,29 @@ public class Player : MonoBehaviour
 
             //5体集めるとジェット発動
             if (ItemSystem.kohai == 5) PlayerStartJet();
+        }
+
+        if (damageFlashTime == 0.0f && other.tag == "Shot")
+        {
+            if (other.transform.localScale.y <= 0.35f) { return; }
+
+            itemSystem.AddStamina(-30);
+            damageFlashTime = 2.0f;
+
+            StartCoroutine(Generic.DamageFlash(GetComponent<SpriteRenderer>(),0.2f));
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (damageFlashTime == 0.0f && other.tag == "Shot")
+        {
+            if (other.transform.localScale.y <= 0.35f) { return; }
+
+            itemSystem.AddStamina(-30);
+            damageFlashTime = 2.0f;
+
+            StartCoroutine(Generic.DamageFlash(GetComponent<SpriteRenderer>(), 0.2f));
         }
     }
 }

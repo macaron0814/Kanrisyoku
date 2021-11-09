@@ -40,7 +40,11 @@ public class ItemSystem : MonoBehaviour
             metreResultUI.text = metreUI.text = metre.ToString("F2") + "m";
         }
 
-        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSBATTLE) ramen = ramenUI_HP.value;
+        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSBATTLE)
+        {
+            ramenUI_HP.value -= 1.0f / 30.0f;
+            ramen = ramenUI_HP.value;
+        }
     }
 
     public void AddCoin()
