@@ -45,6 +45,8 @@ public class Boss : MonoBehaviour
                     GameObject bullet = Instantiate(kotodama[0], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
                     Destroy(bullet, 5);
 
+                    StartCoroutine(Sound.SoundPlaySEforCountDown(13, 1.0f));
+
                     yield return new WaitForSeconds(Random.Range(speed.Item1, speed.Item2));
 
                     actionCount++;

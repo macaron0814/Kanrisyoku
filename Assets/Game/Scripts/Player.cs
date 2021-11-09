@@ -19,9 +19,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     GameObject[] resultType;
 
-    private ContactFilter2D filter2d;
+    [SerializeField]
+    GameObject bossBattleHP;
 
-    private CameraShake cameraShake;
+    private ContactFilter2D filter2d;
 
     private Rigidbody2D rb;
     private BoxCollider2D box2d;
@@ -50,7 +51,6 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         itemSystem = GameObject.Find("GameModeConfig").GetComponent<ItemSystem>();
         waveConfig = GameObject.Find("WaveConfig").GetComponent<WaveConfig>();
-        cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
 
         damageFlashTime = 0.0f;
     }
@@ -181,7 +181,6 @@ public class Player : MonoBehaviour
     /// </summary>
     void PlayerDestroy(int type)
     {
-        itemSystem.AddStamina(100);
         ItemSystem.gameoverPattern = type;
 
         rb.gravityScale = 0;
@@ -234,7 +233,7 @@ public class Player : MonoBehaviour
             {
                 effect.SetActive(true);
                 Invoke(nameof(DestroyEffect), 0.25f);
-                cameraShake.Shake(0.2f, 0.05f);
+                StartCoroutine(Generic.Shake(0.2f, 0.05f, Camera.main.gameObject));
                 itemSystem.AddStamina(-5);
 
                 //オートジャンプ発動
@@ -284,16 +283,6 @@ public class Player : MonoBehaviour
             //5体集めるとジェット発動
             if (ItemSystem.kohai == 5) PlayerStartJet();
         }
-
-        if (damageFlashTime == 0.0f && other.tag == "Shot")
-        {
-            if (other.transform.localScale.y <= 0.35f) { return; }
-
-            itemSystem.AddStamina(-30);
-            damageFlashTime = 2.0f;
-
-            StartCoroutine(Generic.DamageFlash(GetComponent<SpriteRenderer>(),0.2f));
-        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -304,7 +293,9 @@ public class Player : MonoBehaviour
 
             itemSystem.AddStamina(-30);
             damageFlashTime = 2.0f;
+            Sound.SoundPlaySE(12);
 
+            StartCoroutine(Generic.Shake(0.5f, 15.0f, bossBattleHP, true));
             StartCoroutine(Generic.DamageFlash(GetComponent<SpriteRenderer>(), 0.2f));
         }
     }

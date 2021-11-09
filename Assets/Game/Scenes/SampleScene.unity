@@ -428,6 +428,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 90a211416e3cdd44baca62ac1b518c44, type: 3}
   - {fileID: 8300000, guid: 43cf062740ce8644183bc5badac71db5, type: 3}
   - {fileID: 8300000, guid: 1e4bef1b53e6b9141872e236e421fd46, type: 3}
+  - {fileID: 8300000, guid: 588e9a6e9cb3d04438f10b7a991f56a1, type: 3}
+  - {fileID: 8300000, guid: 78ab7ad397cb91d44a663f9f6144aa93, type: 3}
 --- !u!4 &22553373
 Transform:
   m_ObjectHideFlags: 0
@@ -5101,7 +5103,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   m_Layer: 0
@@ -5119,18 +5120,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
---- !u!114 &519420030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7351406bc7eb86246811a1ce5a453fe9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -21335,6 +21324,7 @@ MonoBehaviour:
   - {fileID: 453264068}
   - {fileID: 1974178977}
   - {fileID: 1894793254}
+  bossBattleHP: {fileID: 1027247738}
   isTouched: 0
 --- !u!58 &2030370031
 CircleCollider2D:
