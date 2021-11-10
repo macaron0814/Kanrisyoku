@@ -23,9 +23,8 @@ public class ItemSystem : MonoBehaviour
         metre = 0;
         ramen = 100;
         kohai = 0;
-
         ramenUI.value = ramen;
-        ramenUI_HP.value += ramen;
+        ramenUI_HP.value = Parameter.save.hpValue;
     }
 
     private void Update()

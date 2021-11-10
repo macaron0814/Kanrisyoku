@@ -291,10 +291,14 @@ public class Player : MonoBehaviour
         {
             if (other.transform.localScale.y <= 0.35f) { return; }
 
-            itemSystem.AddStamina(-30);
-            damageFlashTime = 2.0f;
+            //音処理
             Sound.SoundPlaySE(12);
 
+            //ダメージ処理
+            itemSystem.AddStamina(-30 + Parameter.save.defValue);
+
+            //ダメージ効果処理
+            damageFlashTime = 2.0f;
             StartCoroutine(Generic.Shake(0.5f, 15.0f, bossBattleHP, true));
             StartCoroutine(Generic.DamageFlash(GetComponent<SpriteRenderer>(), 0.2f));
         }

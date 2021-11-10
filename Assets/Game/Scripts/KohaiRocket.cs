@@ -108,10 +108,17 @@ public class KohaiRocket : MonoBehaviour
 
         if (isRocket && col.tag == "Joshi")
         {
+            //音処理
             Sound.SoundPlaySE(10);
 
+            //ダメージ処理
+            Boss.Damage(Parameter.save.atkValue);
+
+            //エフェクト処理
             explosion = Instantiate(explosion, transform.localPosition, Quaternion.identity);
             Destroy(this.explosion, 1);
+
+            //自身を削除
             Destroy(this.gameObject);
         }
     }
