@@ -15,6 +15,7 @@ public class SaveParameter
     public int    hpLevel  = 1;
     public int    hpValue  = 100;
     public int    hpCost   = 10;
+    public int    coin     = 0;
 }
 
 public static class Parameter

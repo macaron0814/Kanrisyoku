@@ -9,6 +9,9 @@ public class SelectModeConfig : MonoBehaviour
     [SerializeField] private Text[] pram;
     [SerializeField] private Text[] value;
 
+    [SerializeField] private Text coinUI;           //コインUI
+    [SerializeField] private GameObject coinLackUI; //コインが不足していた場合に表示されるUI
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,9 @@ public class SelectModeConfig : MonoBehaviour
             value[1].text = Parameter.save.defCost.ToString();
             value[2].text = Parameter.save.hpCost.ToString();
         }
+
+        //コインを取得
+        coinUI.text = Parameter.save.coin.ToString("D4");
     }
 
     /// <summary>
@@ -65,8 +71,17 @@ public class SelectModeConfig : MonoBehaviour
     {
         switch (type)
         {
+            //=======================================================
             //攻撃力
+            //=======================================================
             case "ATK":
+
+                //コインが足りない場合はreturn
+                if (Parameter.save.coin < Parameter.save.atkCost)
+                {
+                    StartCoroutine(CoinLack());
+                    return;
+                }
 
                 //レベル上げ
                 Parameter.save.atkLevel++;
@@ -82,10 +97,22 @@ public class SelectModeConfig : MonoBehaviour
                     Parameter.save.atkCost += 20;
                     value[0].text = Parameter.save.atkCost.ToString();
                 }
+
+                //コスト分をコインから引く
+                Parameter.save.coin -= Parameter.save.atkCost;
                 break;
 
+            //=======================================================
             //防御力
+            //=======================================================
             case "DEF":
+
+                //コインが足りない場合はreturn
+                if (Parameter.save.coin < Parameter.save.defCost)
+                {
+                    StartCoroutine(CoinLack());
+                    return;
+                }
 
                 //レベル上げ
                 Parameter.save.defLevel++;
@@ -101,10 +128,22 @@ public class SelectModeConfig : MonoBehaviour
                     Parameter.save.defCost += 30;
                     value[1].text = Parameter.save.defCost.ToString();
                 }
+
+                //コスト分をコインから引く
+                Parameter.save.coin -= Parameter.save.defCost;
                 break;
 
+            //=======================================================
             //体力
+            //=======================================================
             case "HP":
+
+                //コインが足りない場合はreturn
+                if (Parameter.save.coin < Parameter.save.hpCost)
+                {
+                    StartCoroutine(CoinLack());
+                    return;
+                }
 
                 //レベル上げ
                 Parameter.save.hpLevel++;
@@ -120,11 +159,24 @@ public class SelectModeConfig : MonoBehaviour
                     Parameter.save.hpCost += 10;
                     value[2].text = Parameter.save.hpCost.ToString();
                 }
+                //コスト分をコインから引く
+                Parameter.save.coin -= Parameter.save.hpCost;
                 break;
 
             default:
                 break;
         }
-        Parameter.SaveParameter();
+        Parameter.SaveParameter(); //セーブ
+    }
+
+    /// <summary>
+    /// コインが足りなかったときの処理
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator CoinLack()
+    {
+        coinLackUI.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        coinLackUI.SetActive(false);
     }
 }

@@ -11,7 +11,7 @@ public class ItemSystem : MonoBehaviour
     [SerializeField] private Text kohaiUI;
     [SerializeField] private GameObject kohaiObj;
 
-    private int coin = 0;
+    public static int   coin = 0;
     public static float metre = 0;
     public static float ramen = 0;
     public static float kohai = 0;
@@ -20,6 +20,7 @@ public class ItemSystem : MonoBehaviour
 
     private void Start()
     {
+        coin  = 0;
         metre = 0;
         ramen = 100;
         kohai = 0;

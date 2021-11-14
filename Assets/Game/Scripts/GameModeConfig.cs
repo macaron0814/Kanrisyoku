@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameModeConfig : MonoBehaviour
@@ -10,6 +11,9 @@ public class GameModeConfig : MonoBehaviour
 
     [SerializeField]
     private GameObject titleUI, gameUI, loadUI, tutorialUI, resultUI, sendenUI, bossBattleUI, contentsUI;
+
+    [SerializeField]
+    private Text coinUI;
 
     public enum SCENETYPE
     {
@@ -107,6 +111,9 @@ public class GameModeConfig : MonoBehaviour
         Record.UpdateRecord(Record.RecordList.DEAD, ItemSystem.gameoverPattern);
 
         Record.ClearRecord();
+
+        Parameter.save.coin += ItemSystem.coin;
+        Parameter.SaveParameter(); //セーブ
     }
 
 
