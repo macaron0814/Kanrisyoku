@@ -1075,10 +1075,11 @@ MonoBehaviour:
   anim: {fileID: 68587823}
   kotodama:
   - {fileID: 7511329779904125144, guid: 4002a9b43fe3a664e8bc0e5252067369, type: 3}
+  - {fileID: 4772998561712013530, guid: e05dcaa3699113f4c9446ea14458dfc4, type: 3}
+  - {fileID: 4772998561712013530, guid: 4cad87b87b2d875448c2f2fc3272f5a5, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  bossHP: 0
+  spriteRenderer: {fileID: 68587821}
+  bossHP: 50
 --- !u!1 &71453240
 GameObject:
   m_ObjectHideFlags: 0
@@ -3443,6 +3444,7 @@ MonoBehaviour:
   sendenUI: {fileID: 0}
   bossBattleUI: {fileID: 1498528207}
   contentsUI: {fileID: 901540754}
+  coinUI: {fileID: 0}
 --- !u!4 &374419904
 Transform:
   m_ObjectHideFlags: 0
@@ -6251,6 +6253,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2131763032}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &677985830
 GameObject:
@@ -9811,6 +9825,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  spriteRenderer: {fileID: 0}
   bossHP: 0
 --- !u!1 &1136559739
 GameObject:
@@ -12544,6 +12559,18 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1468348507}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2131763032}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -21093,6 +21120,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  spriteRenderer: {fileID: 0}
   bossHP: 0
 --- !u!1 &1974178977
 GameObject:

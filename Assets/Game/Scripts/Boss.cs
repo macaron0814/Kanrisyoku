@@ -6,8 +6,11 @@ public class Boss : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject[] kotodama = new GameObject[4];
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     [SerializeField] private double bossHP;
     private static double hp;
+    private float colorHp;
 
     private Vector3[] bullet1Pos = { new Vector3(5, 3, 0), new Vector3(5, 0, 0), new Vector3(5, -3, 0) };
 
@@ -15,8 +18,15 @@ public class Boss : MonoBehaviour
     void Start()
     {
         hp = bossHP;
+        colorHp = 1 / (float)bossHP;
 
         StartCoroutine(BossAction1());
+    }
+
+    private void Update()
+    {
+        var color = colorHp * (float)hp;
+        spriteRenderer.color = new Color(1, color, color, 1);
     }
 
     IEnumerator BossAction1()
@@ -25,7 +35,18 @@ public class Boss : MonoBehaviour
         {
             yield return new WaitForSeconds(10.0f);
 
-            yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 2.5f)));
+            Random.InitState(System.DateTime.Now.Second);
+
+            int cnt = Random.Range(0, 2);
+            switch (cnt)
+            {
+                case 0:
+                    yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 2.5f)));
+                    break;
+                case 1:
+                    yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f)));
+                    break;
+            }
         }
     }
 
@@ -54,6 +75,27 @@ public class Boss : MonoBehaviour
 
                     actionCount++;
                 }
+                anim.SetBool(animName, false);
+                break;
+
+            //ト
+            case 1:
+
+                anim.SetBool(animName, true);
+                yield return new WaitForSeconds(2.0f);
+
+                while (actionCount < 7)
+                {
+                    Random.InitState(System.DateTime.Now.Second);
+
+                    GameObject bullet2 = Instantiate(kotodama[1], new Vector3(Random.Range(9, 17), kotodama[1].transform.localPosition.y, 1), Quaternion.identity);
+                    Destroy(bullet2, 7);
+
+                    yield return new WaitForSeconds(speed.Item1);
+
+                    actionCount++;
+                }
+
                 anim.SetBool(animName, false);
                 break;
 

@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         isTouched = rb.IsTouching(filter2d);
 
         //高速着地
-        if (isJump && Input.GetMouseButtonDown(0))
+        if (!isTouched && Input.GetMouseButtonDown(0))
         {
             spriteRenderer.sortingLayerName = "Player";
             autoJumpCount = 1;
