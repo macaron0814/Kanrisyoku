@@ -22,7 +22,8 @@ public class GameModeConfig : MonoBehaviour
         TITLE,
         GAME,
         RESULT,
-        BOSSBATTLE
+        BOSSBATTLE,
+        BOSSRESULT
     }
 
     public static SCENETYPE sceneType = SCENETYPE.LOAD;

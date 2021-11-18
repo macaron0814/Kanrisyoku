@@ -1079,6 +1079,8 @@ MonoBehaviour:
   - {fileID: 4772998561712013530, guid: 4cad87b87b2d875448c2f2fc3272f5a5, type: 3}
   - {fileID: 0}
   spriteRenderer: {fileID: 68587821}
+  smoke: {fileID: 3320048349479599835, guid: 44601d75ca5d4a042bef2fa25f4354d9, type: 3}
+  explosion: {fileID: 3495029125308151975, guid: 29af22ceb75cbb84fa9ce30d6d9da439, type: 3}
   bossHP: 50
 --- !u!1 &71453240
 GameObject:
@@ -9826,6 +9828,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spriteRenderer: {fileID: 0}
+  smoke: {fileID: 0}
+  explosion: {fileID: 0}
   bossHP: 0
 --- !u!1 &1136559739
 GameObject:
@@ -21121,6 +21125,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spriteRenderer: {fileID: 0}
+  smoke: {fileID: 0}
+  explosion: {fileID: 0}
   bossHP: 0
 --- !u!1 &1974178977
 GameObject:

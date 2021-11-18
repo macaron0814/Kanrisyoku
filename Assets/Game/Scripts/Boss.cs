@@ -8,16 +8,30 @@ public class Boss : MonoBehaviour
 
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private GameObject smoke;
+    [SerializeField] private GameObject explosion;
+
     [SerializeField] private double bossHP;
     private static double hp;
+    private double explosionHp;
     private float colorHp;
 
     private Vector3[] bullet1Pos = { new Vector3(5, 3, 0), new Vector3(5, 0, 0), new Vector3(5, -3, 0) };
 
+    enum Boss_Parameter
+    {
+        ALIVE,
+        DEATH
+    }
+    Boss_Parameter bossPram;
+
     // Start is called before the first frame update
     void Start()
     {
+        bossPram = Boss_Parameter.ALIVE;
+
         hp = bossHP;
+        explosionHp = bossHP / 4;
         colorHp = 1 / (float)bossHP;
 
         StartCoroutine(BossAction1());
@@ -25,6 +39,7 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
+        //ダメージを受ける度赤くなっていく
         var color = colorHp * (float)hp;
         spriteRenderer.color = new Color(1, color, color, 1);
     }
@@ -52,6 +67,9 @@ public class Boss : MonoBehaviour
 
     IEnumerator ActionType(int num, string animName, (float, float) speed)
     {
+        //死んでたら処理をやめる
+        if(bossPram == Boss_Parameter.DEATH) { yield break; }
+
         int actionCount = 0;
 
         switch (num)
@@ -104,9 +122,58 @@ public class Boss : MonoBehaviour
         }
     }
 
-    public static void Damage(double damage)
+
+    /// <summary>
+    /// ダメージ計算
+    /// </summary>
+    /// <param name="damage">ダメージ量</param>
+    public void Damage(double damage)
     {
         hp -= damage;
+        if(hp <= 0) Death();
+    }
+
+
+    /// <summary>
+    /// 死んだときの処理
+    /// </summary>
+    private void Death()
+    {
+        bossPram = Boss_Parameter.DEATH;
+        GameModeConfig.sceneType = GameModeConfig.SCENETYPE.BOSSRESULT;
+
+        anim.SetBool("isAction1", false);
+        anim.SetBool("isAction2", false);
+
+        for (int i = 0; i < 5; i++) { Explosion(true); }
+    }
+
+    /// <summary>
+    /// 爆破Effect生成
+    /// </summary>
+    public void Explosion(bool isDeath = false)
+    {
+        //死んでなければ体力での処理
+        if (!isDeath)
+        {
+            if (hp >= (bossHP - explosionHp)) return;
+            explosionHp += bossHP / 4;
+        }
+
+        //生成に必要な情報
+        Vector3 pos = transform.localPosition;
+        Random.InitState(System.DateTime.Now.Second);
+
+        //生成と削除
+        GameObject ex = Instantiate(explosion,new Vector3(pos.x + Random.Range(-0.25f, 0.5f), pos.y + Random.Range(-0.5f, 2.0f), pos.z),Quaternion.identity);
+        Destroy(ex, 0.75f);
+
+        //爆破後に煙を生成
+        GameObject smk = Instantiate(smoke, ex.transform.localPosition, Quaternion.identity);
+        smk.transform.parent = this.transform;
+
+        //振動
+        StartCoroutine(Generic.Shake(0.4f, 0.1f, Camera.main.gameObject));
     }
 
 

@@ -190,8 +190,15 @@ public class Player : MonoBehaviour
         anim.SetBool("GameOver", true);
         isGameOver = true;
 
-        GameModeConfig.ChangeResultScene();
-        StartCoroutine(ResultFromGameOverandPlaySound(type));
+        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.GAME)
+        {
+            GameModeConfig.ChangeResultScene();
+            StartCoroutine(ResultFromGameOverandPlaySound(type));
+        }
+        else if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSBATTLE)
+        {
+
+        }
     }
 
     IEnumerator ResultFromGameOverandPlaySound(int type)

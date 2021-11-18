@@ -15,10 +15,13 @@ public class KohaiRocket : MonoBehaviour
     [SerializeField]
     private GameObject explosion;
 
+    private Boss boss;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        boss = GameObject.Find("Joshi").GetComponent<Boss>();
 
         if (isRocket)
         {
@@ -112,7 +115,8 @@ public class KohaiRocket : MonoBehaviour
             Sound.SoundPlaySE(10);
 
             //ダメージ処理
-            Boss.Damage(Parameter.save.atkValue);
+            boss.Damage(Parameter.save.atkValue);
+            boss.Explosion();
 
             //エフェクト処理
             explosion = Instantiate(explosion, transform.localPosition, Quaternion.identity);
