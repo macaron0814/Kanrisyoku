@@ -8,13 +8,15 @@ public class Boss : MonoBehaviour
 
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private GameObject flash;
+
     [SerializeField] private GameObject smoke;
     [SerializeField] private GameObject explosion;
 
     [SerializeField] private double bossHP;
     private static double hp;
     private double explosionHp;
-    private float colorHp;
+    private float  colorHp;
 
     private Vector3[] bullet1Pos = { new Vector3(5, 3, 0), new Vector3(5, 0, 0), new Vector3(5, -3, 0) };
 
@@ -67,9 +69,6 @@ public class Boss : MonoBehaviour
 
     IEnumerator ActionType(int num, string animName, (float, float) speed)
     {
-        //死んでたら処理をやめる
-        if(bossPram == Boss_Parameter.DEATH) { yield break; }
-
         int actionCount = 0;
 
         switch (num)
@@ -82,6 +81,9 @@ public class Boss : MonoBehaviour
 
                 while (actionCount < 10)
                 {
+                    //死んでたら処理をやめる
+                    if (bossPram == Boss_Parameter.DEATH) { Generic.DestroyTag("Shot"); yield break; }
+
                     Random.InitState(System.DateTime.Now.Second);
 
                     GameObject bullet = Instantiate(kotodama[0], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
@@ -104,6 +106,9 @@ public class Boss : MonoBehaviour
 
                 while (actionCount < 7)
                 {
+                    //死んでたら処理をやめる
+                    if (bossPram == Boss_Parameter.DEATH) { Generic.DestroyTag("Shot"); yield break; }
+
                     Random.InitState(System.DateTime.Now.Second);
 
                     GameObject bullet2 = Instantiate(kotodama[1], new Vector3(Random.Range(9, 17), kotodama[1].transform.localPosition.y, 1), Quaternion.identity);
@@ -130,23 +135,69 @@ public class Boss : MonoBehaviour
     public void Damage(double damage)
     {
         hp -= damage;
-        if(hp <= 0) Death();
+        if(hp <= 0) StartCoroutine(Death());
     }
 
 
     /// <summary>
     /// 死んだときの処理
     /// </summary>
-    private void Death()
+    private IEnumerator Death()
     {
+        //シーン切り替え処理
         bossPram = Boss_Parameter.DEATH;
         GameModeConfig.sceneType = GameModeConfig.SCENETYPE.BOSSRESULT;
 
+        //アニメーション処理
         anim.SetBool("isAction1", false);
         anim.SetBool("isAction2", false);
+        flash.SetActive(true);
 
-        for (int i = 0; i < 5; i++) { Explosion(true); }
+        //音処理
+        Sound.SoundStop();
+
+        //=========================================
+        //オブジェクトの生成と削除
+        //=========================================
+        {
+            //弾削除
+            Generic.DestroyTag("Shot");
+
+            //爆破生成
+            for (int i = 0; i < 5; i++)
+            {
+                //音処理
+                Sound.SoundPlaySE(15);
+                Explosion(true);
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            //Smake削除
+            foreach (Transform n in gameObject.transform) Destroy(n.gameObject);
+
+            //音処理
+            Sound.SoundPlaySE(16);
+
+            //アニメーション処理
+            anim.SetBool("isAction1", false);
+            anim.SetBool("isAction2", false);
+
+            yield return new WaitForSeconds(4.0f);
+        }
+
+        //死亡アニメーション処理
+        anim.SetBool("isAction1", false);
+        anim.SetBool("isAction2", false);
+        anim.SetBool("isDeath", true);
+        yield return new WaitForSeconds(3.0f);
+
+        //振動
+        StartCoroutine(Generic.Shake(0.5f, 0.4f, Camera.main.gameObject));
+        //音処理
+        Sound.SoundPlaySE(15);
     }
+
+
 
     /// <summary>
     /// 爆破Effect生成
@@ -158,6 +209,8 @@ public class Boss : MonoBehaviour
         {
             if (hp >= (bossHP - explosionHp)) return;
             explosionHp += bossHP / 4;
+            //音処理
+            Sound.SoundPlaySE(14);
         }
 
         //生成に必要な情報
@@ -165,7 +218,7 @@ public class Boss : MonoBehaviour
         Random.InitState(System.DateTime.Now.Second);
 
         //生成と削除
-        GameObject ex = Instantiate(explosion,new Vector3(pos.x + Random.Range(-0.25f, 0.5f), pos.y + Random.Range(-0.5f, 2.0f), pos.z),Quaternion.identity);
+        GameObject ex = Instantiate(explosion,new Vector3(pos.x + Random.Range(-0.25f, 1.0f), pos.y + Random.Range(-0.5f, 4.0f), pos.z),Quaternion.identity);
         Destroy(ex, 0.75f);
 
         //爆破後に煙を生成

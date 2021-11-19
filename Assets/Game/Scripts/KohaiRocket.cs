@@ -30,6 +30,10 @@ public class KohaiRocket : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) Destroy(gameObject);
+    }
 
 
     /// <summary>

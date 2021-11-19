@@ -31,8 +31,8 @@ public class Sound : MonoBehaviour
 
     public static IEnumerator SoundPlayBGMforCountDown(int playbgm, float time, bool loop = true)//配列番号
     {
-        SoundStop();//停止
         yield return new WaitForSeconds(time);
+        SoundStop();//停止
 
         audioSource.clip = bgm_static[playbgm];//clipにbgmを代入
         audioSource.loop = loop;//ループするか

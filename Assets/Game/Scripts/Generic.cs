@@ -19,6 +19,16 @@ public static class Generic
     }
 
     /// <summary>
+    /// 不要なオブジェクトをタグで削除
+    /// </summary>
+    /// <param name="tagName">タグの名前</param>
+    public static void DestroyTag(string tagName)
+    {
+        foreach (var obj in GameObject.FindGameObjectsWithTag(tagName)) { GameObject.Destroy(obj); }
+    }
+
+
+    /// <summary>
     /// オブジェクトを揺らす
     /// </summary>
     /// <param name="duration">  持続時間                  </param>

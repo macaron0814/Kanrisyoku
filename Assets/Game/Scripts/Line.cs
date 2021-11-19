@@ -19,7 +19,7 @@ public class Line : MonoBehaviour
         if(player)
         {
             //足元の座標
-            float feet = player.transform.localPosition.y - (player.transform.localScale.y * 17.5f);
+            float feet = player.transform.localPosition.y - (player.transform.localScale.y * 15.0f);
 
             if (feet > transform.localPosition.y) { gameObject.GetComponent<BoxCollider2D>().isTrigger = false; }
             else { gameObject.GetComponent<BoxCollider2D>().isTrigger = true; }
