@@ -52,6 +52,9 @@ public class Boss : MonoBehaviour
         {
             yield return new WaitForSeconds(10.0f);
 
+            //死んでたら処理をやめる
+            if (bossPram == Boss_Parameter.DEATH) { yield break; }
+
             Random.InitState(System.DateTime.Now.Second);
 
             int cnt = Random.Range(0, 2);

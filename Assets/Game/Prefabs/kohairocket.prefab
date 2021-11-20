@@ -167,3 +167,4 @@ MonoBehaviour:
   kohaiRocket: {fileID: 0}
   isRocket: 0
   explosion: {fileID: 139366, guid: b185c1a9cf067374586d095111b15bd1, type: 3}
+  critical: {fileID: 3835290182548526039, guid: e193ca54f55791c46bfc2a294ef63efc, type: 3}

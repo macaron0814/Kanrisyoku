@@ -100,6 +100,9 @@ public class SelectModeConfig : MonoBehaviour
 
                 //コスト分をコインから引く
                 Parameter.save.coin -= Parameter.save.atkCost;
+
+                //音処理
+                Sound.SoundPlaySE(19);
                 break;
 
             //=======================================================
@@ -131,6 +134,9 @@ public class SelectModeConfig : MonoBehaviour
 
                 //コスト分をコインから引く
                 Parameter.save.coin -= Parameter.save.defCost;
+
+                //音処理
+                Sound.SoundPlaySE(19);
                 break;
 
             //=======================================================
@@ -161,6 +167,9 @@ public class SelectModeConfig : MonoBehaviour
                 }
                 //コスト分をコインから引く
                 Parameter.save.coin -= Parameter.save.hpCost;
+
+                //音処理
+                Sound.SoundPlaySE(19);
                 break;
 
             default:
@@ -175,6 +184,9 @@ public class SelectModeConfig : MonoBehaviour
     /// <returns></returns>
     IEnumerator CoinLack()
     {
+        //音処理
+        Sound.SoundPlaySE(24);
+
         coinLackUI.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         coinLackUI.SetActive(false);

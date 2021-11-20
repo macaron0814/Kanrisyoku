@@ -86,7 +86,7 @@ public class GameModeConfig : MonoBehaviour
     {
         cameraAnim.SetBool("GameCamera", true);
         StartCoroutine("BossBattleFromTitle");
-        Sound.SoundPlaySE(7);
+        Sound.SoundPlaySE(18);
     }
 
 

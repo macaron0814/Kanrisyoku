@@ -13,7 +13,7 @@ public class KohaiRocket : MonoBehaviour
     public bool isRocket;
 
     [SerializeField]
-    private GameObject explosion;
+    private GameObject explosion,critical;
 
     private Boss boss;
 
@@ -115,16 +115,39 @@ public class KohaiRocket : MonoBehaviour
 
         if (isRocket && col.tag == "Joshi")
         {
-            //音処理
-            Sound.SoundPlaySE(10);
-
-            //ダメージ処理
-            boss.Damage(Parameter.save.atkValue);
-            boss.Explosion();
-
             //エフェクト処理
-            explosion = Instantiate(explosion, transform.localPosition, Quaternion.identity);
-            Destroy(this.explosion, 1);
+            {
+                //乱数設定
+                Random.InitState(System.DateTime.Now.Second);
+
+                //クリティカルヒット/ノーマル
+                if (Random.Range(0, 100) < 5)
+                {
+                    //音処理
+                    Sound.SoundPlaySE(20);
+
+                    //ダメージ処理
+                    boss.Damage(Parameter.save.atkValue * 1.5f);
+                    boss.Explosion();
+
+                    //クリティカルヒット爆風生成
+                    critical = Instantiate(critical, transform.localPosition, Quaternion.identity);
+                    Destroy(this.critical, 1);
+                }
+                else
+                {
+                    //音処理
+                    Sound.SoundPlaySE(10);
+
+                    //ダメージ処理
+                    boss.Damage(Parameter.save.atkValue);
+                    boss.Explosion();
+
+                    //ノーマル爆風生成
+                    explosion = Instantiate(explosion, transform.localPosition, Quaternion.identity);
+                    Destroy(this.explosion, 1);
+                }
+            }
 
             //自身を削除
             Destroy(this.gameObject);
