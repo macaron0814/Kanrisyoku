@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    [SerializeField] private GameModeConfig gameModeConfig;
+
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject[] kotodama = new GameObject[4];
 
@@ -20,12 +22,12 @@ public class Boss : MonoBehaviour
 
     private Vector3[] bullet1Pos = { new Vector3(5, 3, 0), new Vector3(5, 0, 0), new Vector3(5, -3, 0) };
 
-    enum Boss_Parameter
+    public enum Boss_Parameter
     {
         ALIVE,
         DEATH
     }
-    Boss_Parameter bossPram;
+    public static Boss_Parameter bossPram;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +55,7 @@ public class Boss : MonoBehaviour
             yield return new WaitForSeconds(10.0f);
 
             //死んでたら処理をやめる
-            if (bossPram == Boss_Parameter.DEATH) { yield break; }
+            if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
 
             Random.InitState(System.DateTime.Now.Second);
 
@@ -85,7 +87,7 @@ public class Boss : MonoBehaviour
                 while (actionCount < 10)
                 {
                     //死んでたら処理をやめる
-                    if (bossPram == Boss_Parameter.DEATH) { Generic.DestroyTag("Shot"); yield break; }
+                    if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
 
                     Random.InitState(System.DateTime.Now.Second);
 
@@ -110,7 +112,7 @@ public class Boss : MonoBehaviour
                 while (actionCount < 7)
                 {
                     //死んでたら処理をやめる
-                    if (bossPram == Boss_Parameter.DEATH) { Generic.DestroyTag("Shot"); yield break; }
+                    if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
 
                     Random.InitState(System.DateTime.Now.Second);
 
@@ -198,6 +200,10 @@ public class Boss : MonoBehaviour
         StartCoroutine(Generic.Shake(0.5f, 0.4f, Camera.main.gameObject));
         //音処理
         Sound.SoundPlaySE(15);
+
+        yield return new WaitForSeconds(2.0f);
+
+        StartCoroutine(gameModeConfig.BossResult());
     }
 
 

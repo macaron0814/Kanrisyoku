@@ -5,6 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
+    GameModeConfig gameModeConfig;
+
+    [SerializeField]
     Animator anim;
 
     [SerializeField]
@@ -197,7 +200,13 @@ public class Player : MonoBehaviour
         }
         else if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSBATTLE)
         {
+            BossScore.b_point.penalty = true;
 
+            //シーン処理
+            StartCoroutine(gameModeConfig.BossResult());
+
+            //弾削除
+            Generic.DestroyTag("Shot");
         }
     }
 
@@ -243,8 +252,10 @@ public class Player : MonoBehaviour
                 StartCoroutine(Generic.Shake(0.2f, 0.05f, Camera.main.gameObject));
                 itemSystem.AddStamina(-5);
 
+                BossScore.b_point.jump++;
+
                 //オートジャンプ発動
-                if(PlayerAutoJumpCountDown() > 0.9f)
+                if (PlayerAutoJumpCountDown() > 0.9f)
                 {
                     Vector3 force = new Vector3(0.0f, 700.0f, 0.0f);    // 力を設定
                     rb.AddForce(force);  // 力を加える
@@ -308,6 +319,8 @@ public class Player : MonoBehaviour
             damageFlashTime = 2.0f;
             StartCoroutine(Generic.Shake(0.5f, 15.0f, bossBattleHP, true));
             StartCoroutine(Generic.DamageFlash(GetComponent<SpriteRenderer>(), 0.2f));
+
+            BossScore.b_point.avoid++;
         }
     }
 }

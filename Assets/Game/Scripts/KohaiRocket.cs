@@ -121,7 +121,7 @@ public class KohaiRocket : MonoBehaviour
                 Random.InitState(System.DateTime.Now.Second);
 
                 //クリティカルヒット/ノーマル
-                if (Random.Range(0, 100) < 5)
+                if (Random.Range(0, 100) < 70)
                 {
                     //音処理
                     Sound.SoundPlaySE(20);
@@ -133,6 +133,8 @@ public class KohaiRocket : MonoBehaviour
                     //クリティカルヒット爆風生成
                     critical = Instantiate(critical, transform.localPosition, Quaternion.identity);
                     Destroy(this.critical, 1);
+
+                    BossScore.b_point.damage++;
                 }
                 else
                 {

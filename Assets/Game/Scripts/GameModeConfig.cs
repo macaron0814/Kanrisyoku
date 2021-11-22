@@ -10,7 +10,10 @@ public class GameModeConfig : MonoBehaviour
     private Animator cameraAnim;
 
     [SerializeField]
-    private GameObject titleUI, gameUI, loadUI, tutorialUI, resultUI, sendenUI, bossBattleUI, contentsUI;
+    private GameObject titleUI, gameUI, loadUI, tutorialUI, resultUI, sendenUI, bossBattleUI, bossResultUI, contentsUI;
+
+    [SerializeField]
+    private GameObject win, lose;
 
     [SerializeField]
     private Text coinUI;
@@ -61,6 +64,10 @@ public class GameModeConfig : MonoBehaviour
             case SCENETYPE.RESULT:
                 gameUI.SetActive(false);
                 resultUI.SetActive(true);
+                break;
+
+            case SCENETYPE.BOSSBATTLE:
+                BossScore.b_point.time += Time.deltaTime;
                 break;
         }
     }
@@ -154,6 +161,28 @@ public class GameModeConfig : MonoBehaviour
         Sound.SoundPlayBGM(2);
 
         sceneType = SCENETYPE.BOSSBATTLE;
+    }
+
+
+
+    /// <summary>
+    /// ボスリザルト画面への移行処理
+    /// </summary>
+    public IEnumerator BossResult()
+    {
+        sceneType = SCENETYPE.BOSSRESULT;
+
+        bossBattleUI.SetActive(false); //ボスバトルUI非表示
+        bossResultUI.SetActive(true); //ボスリザルトUI表示
+        Sound.SoundStop();
+
+        yield return new WaitForSeconds(1f);
+        Sound.SoundPlaySE(25);
+
+        yield return new WaitForSeconds(2.75f);
+
+        if (Boss.bossPram == Boss.Boss_Parameter.DEATH) win.SetActive(true);
+        else lose.SetActive(true);
     }
 
 
