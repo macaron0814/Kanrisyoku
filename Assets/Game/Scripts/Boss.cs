@@ -16,7 +16,7 @@ public class Boss : MonoBehaviour
     [SerializeField] private GameObject explosion;
 
     [SerializeField] private double bossHP;
-    private static double hp;
+    public static double hp;
     private double explosionHp;
     private float  colorHp;
 
@@ -34,6 +34,7 @@ public class Boss : MonoBehaviour
     {
         bossPram = Boss_Parameter.ALIVE;
 
+        BossScore.b_point.bossHp = (int)bossHP;
         hp = bossHP;
         explosionHp = bossHP / 4;
         colorHp = 1 / (float)bossHP;

@@ -35,11 +35,19 @@ public class GameModeConfig : MonoBehaviour
     {
         if(sceneType == SCENETYPE.GAME)
         {
-            sceneType = SCENETYPE.GAME;
             cameraAnim.SetBool("GameCamera", true);
             titleUI.SetActive(false);
             StartCoroutine("GameFromTitle");
             StartCoroutine(Sound.SoundPlaySEforCountDown(7,0.1f));
+            contentsUI.SetActive(false);
+        }
+
+        if (sceneType == SCENETYPE.BOSSRESULT)
+        {
+            cameraAnim.SetBool("GameCamera", true);
+            titleUI.SetActive(false);
+            StartCoroutine("BossBattleFromTitle");
+            StartCoroutine(Sound.SoundPlaySEforCountDown(18, 0.1f));
             contentsUI.SetActive(false);
         }
     }
@@ -93,6 +101,7 @@ public class GameModeConfig : MonoBehaviour
     {
         cameraAnim.SetBool("GameCamera", true);
         StartCoroutine("BossBattleFromTitle");
+        Sound.SoundStop();
         Sound.SoundPlaySE(18);
     }
 
@@ -147,7 +156,8 @@ public class GameModeConfig : MonoBehaviour
     IEnumerator BossBattleFromTitle()
     {
         bossBattleUI.SetActive(true); //ボスバトルUI表示
-        Sound.SoundStop();
+
+        yield return new WaitForSeconds(0.5f);
 
         yield return new WaitForSeconds(1f);
         cameraAnim.enabled = false;
@@ -170,6 +180,10 @@ public class GameModeConfig : MonoBehaviour
     /// </summary>
     public IEnumerator BossResult()
     {
+        //スコア送信
+        int score = BossScore.b_point.score;
+        iOSRankingUtility.ReportScore("hiBossScore", score);
+
         sceneType = SCENETYPE.BOSSRESULT;
 
         bossBattleUI.SetActive(false); //ボスバトルUI非表示
@@ -199,6 +213,12 @@ public class GameModeConfig : MonoBehaviour
     public void RestartButton()
     {
         GameModeConfig.sceneType = GameModeConfig.SCENETYPE.GAME;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
+    public void BossRestartButton()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

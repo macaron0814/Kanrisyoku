@@ -3979,6 +3979,7 @@ MonoBehaviour:
   jumpText: {fileID: 1305052305}
   damageText: {fileID: 1546416054}
   scoreText: {fileID: 2089331087}
+  hpText: {fileID: 1438791199}
 --- !u!1 &399722270
 GameObject:
   m_ObjectHideFlags: 0
@@ -4839,8 +4840,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 374419903}
-        m_TargetAssemblyTypeName: Scene, Assembly-CSharp
-        m_MethodName: RestartButton
+        m_TargetAssemblyTypeName: GameModeConfig, Assembly-CSharp
+        m_MethodName: BossRestartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10629,7 +10630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1101902757
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11670,7 +11671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1176945869
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24540,8 +24541,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 374419903}
-        m_TargetAssemblyTypeName: Scene, Assembly-CSharp
+      - m_Target: {fileID: 1275033387}
+        m_TargetAssemblyTypeName: SelectModeConfig, Assembly-CSharp
         m_MethodName: RankingButton
         m_Mode: 1
         m_Arguments:

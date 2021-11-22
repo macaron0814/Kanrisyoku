@@ -17,9 +17,11 @@ public class Loading : MonoBehaviour
         {
             StartCoroutine(LoadingTime());
             rand = Random.Range(2, 5);
+            return;
         }
 
-        if (GameModeConfig.sceneType != GameModeConfig.SCENETYPE.LOAD) { Sound.SoundPlayBGM(0); Destroy(gameObject); }
+        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.TITLE || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.GAME) Sound.SoundPlayBGM(0);
+        Destroy(gameObject);
     }
 
     void Update()

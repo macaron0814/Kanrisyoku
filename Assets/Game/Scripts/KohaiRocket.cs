@@ -121,7 +121,7 @@ public class KohaiRocket : MonoBehaviour
                 Random.InitState(System.DateTime.Now.Second);
 
                 //クリティカルヒット/ノーマル
-                if (Random.Range(0, 100) < 70)
+                if (Random.Range(0, 100) < 7)
                 {
                     //音処理
                     Sound.SoundPlaySE(20);
