@@ -11335,7 +11335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1154125244
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12655,6 +12655,7 @@ MonoBehaviour:
   - {fileID: 747489057}
   coinUI: {fileID: 1200783164}
   coinLackUI: {fileID: 2019484498}
+  levelMax: {fileID: 0}
 --- !u!4 &1275033388
 Transform:
   m_ObjectHideFlags: 0
