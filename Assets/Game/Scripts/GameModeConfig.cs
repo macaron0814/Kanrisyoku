@@ -130,6 +130,8 @@ public class GameModeConfig : MonoBehaviour
         Record.ClearRecord();
 
         Parameter.save.coin += ItemSystem.coin;
+        if (Parameter.save.coin > 9999) Parameter.save.coin = 9999;
+
         Parameter.SaveParameter(); //セーブ
     }
 
@@ -181,7 +183,7 @@ public class GameModeConfig : MonoBehaviour
     public IEnumerator BossResult()
     {
         //スコア送信
-        int score = BossScore.b_point.score;
+        long score = (long)BossScore.b_point.score;
         iOSRankingUtility.ReportScore("hiBossScore", score);
 
         sceneType = SCENETYPE.BOSSRESULT;
@@ -195,8 +197,16 @@ public class GameModeConfig : MonoBehaviour
 
         yield return new WaitForSeconds(2.75f);
 
-        if (Boss.bossPram == Boss.Boss_Parameter.DEATH) win.SetActive(true);
-        else lose.SetActive(true);
+        if (Boss.bossPram == Boss.Boss_Parameter.DEATH)
+        {
+            win.SetActive(true);
+            Sound.SoundPlaySE(26);
+        }
+        else 
+        {
+            lose.SetActive(true);
+            Sound.SoundPlaySE(27);
+        }
     }
 
 

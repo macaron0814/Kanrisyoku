@@ -442,6 +442,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9b0fdefd64bbc024c8b6c54a89079abb, type: 3}
   - {fileID: 8300000, guid: d784f930cf51a614188c59bffc91e536, type: 3}
   - {fileID: 8300000, guid: d4d484efd65b3e14ab5481be80ff4314, type: 3}
+  - {fileID: 8300000, guid: 24d496a8e8d1dff4d865a051bd652c28, type: 3}
+  - {fileID: 8300000, guid: fdd1bb70a2c7b3b4993b7c630754a371, type: 3}
 --- !u!4 &22553373
 Transform:
   m_ObjectHideFlags: 0
@@ -11333,7 +11335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1154125244
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12647,6 +12649,10 @@ MonoBehaviour:
   - {fileID: 1851923381}
   - {fileID: 616010199}
   - {fileID: 1203935222}
+  button:
+  - {fileID: 1172329118}
+  - {fileID: 1897059050}
+  - {fileID: 747489057}
   coinUI: {fileID: 1200783164}
   coinLackUI: {fileID: 2019484498}
 --- !u!4 &1275033388

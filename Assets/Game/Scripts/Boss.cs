@@ -141,7 +141,11 @@ public class Boss : MonoBehaviour
     public void Damage(double damage)
     {
         hp -= damage;
-        if(hp <= 0) StartCoroutine(Death());
+        if (hp <= 0)
+        {
+            hp = 0;
+            StartCoroutine(Death());
+        }
     }
 
 

@@ -8,9 +8,12 @@ public class SelectModeConfig : MonoBehaviour
     [SerializeField] private Text[] level;
     [SerializeField] private Text[] pram;
     [SerializeField] private Text[] value;
+    [SerializeField] private GameObject[] button;
 
     [SerializeField] private Text coinUI;           //コインUI
     [SerializeField] private GameObject coinLackUI; //コインが不足していた場合に表示されるUI
+
+    [SerializeField] private GameObject levelMax;   //レベル上限を知らせる通知
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +79,13 @@ public class SelectModeConfig : MonoBehaviour
             //=======================================================
             case "ATK":
 
+                //レベル上限を超えた場合はreturn
+                if (Parameter.save.atkLevel > 99)
+                {
+                    StartCoroutine(LevelMaxPush());
+                    return;
+                }
+
                 //コインが足りない場合はreturn
                 if (Parameter.save.coin < Parameter.save.atkCost)
                 {
@@ -101,6 +111,9 @@ public class SelectModeConfig : MonoBehaviour
                 //コスト分をコインから引く
                 Parameter.save.coin -= Parameter.save.atkCost;
 
+                //ボタンが押されたという処理
+                StartCoroutine(PowerButtonDown(0));
+
                 //音処理
                 Sound.SoundPlaySE(19);
                 break;
@@ -109,6 +122,13 @@ public class SelectModeConfig : MonoBehaviour
             //防御力
             //=======================================================
             case "DEF":
+
+                //レベル上限を超えた場合はreturn
+                if (Parameter.save.defLevel > 99)
+                {
+                    StartCoroutine(LevelMaxPush());
+                    return;
+                }
 
                 //コインが足りない場合はreturn
                 if (Parameter.save.coin < Parameter.save.defCost)
@@ -135,6 +155,9 @@ public class SelectModeConfig : MonoBehaviour
                 //コスト分をコインから引く
                 Parameter.save.coin -= Parameter.save.defCost;
 
+                //ボタンが押されたという処理
+                StartCoroutine(PowerButtonDown(1));
+
                 //音処理
                 Sound.SoundPlaySE(19);
                 break;
@@ -143,6 +166,13 @@ public class SelectModeConfig : MonoBehaviour
             //体力
             //=======================================================
             case "HP":
+
+                //レベル上限を超えた場合はreturn
+                if (Parameter.save.hpLevel > 99)
+                {
+                    StartCoroutine(LevelMaxPush());
+                    return;
+                }
 
                 //コインが足りない場合はreturn
                 if (Parameter.save.coin < Parameter.save.hpCost)
@@ -168,6 +198,9 @@ public class SelectModeConfig : MonoBehaviour
                 //コスト分をコインから引く
                 Parameter.save.coin -= Parameter.save.hpCost;
 
+                //ボタンが押されたという処理
+                StartCoroutine(PowerButtonDown(2));
+
                 //音処理
                 Sound.SoundPlaySE(19);
                 break;
@@ -178,11 +211,41 @@ public class SelectModeConfig : MonoBehaviour
         Parameter.SaveParameter(); //セーブ
     }
 
+
+
+    /// <summary>
+    /// 強化ボタンを押したとき
+    /// </summary>
+    /// <param name="num">押されたボタン番号</param>
+    /// <returns></returns>
+    IEnumerator PowerButtonDown(int num)
+    {
+        button[num].SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        button[num].SetActive(true);
+    }
+
+
     /// <summary>
     /// コインが足りなかったときの処理
     /// </summary>
     /// <returns></returns>
     IEnumerator CoinLack()
+    {
+        //音処理
+        Sound.SoundPlaySE(24);
+
+        coinLackUI.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        coinLackUI.SetActive(false);
+    }
+
+    /// <summary>
+    /// レベル上限を知らせる通知
+    /// </summary>
+    /// <param name="num">押されたボタン番号</param>
+    /// <returns></returns>
+    IEnumerator LevelMaxPush()
     {
         //音処理
         Sound.SoundPlaySE(24);
