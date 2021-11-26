@@ -22,6 +22,14 @@ public class Boss : MonoBehaviour
 
     private Vector3[] bullet1Pos = { new Vector3(5, 3, 0), new Vector3(5, 0, 0), new Vector3(5, -3, 0) };
 
+    public enum Boss_Name
+    {
+        JOSHI,
+        SYACHO,
+        KAICHO
+    }
+    public Boss_Name bossName;
+
     public enum Boss_Parameter
     {
         ALIVE,
@@ -39,7 +47,8 @@ public class Boss : MonoBehaviour
         explosionHp = bossHP / 4;
         colorHp = 1 / (float)bossHP;
 
-        StartCoroutine(BossAction1());
+        if (bossName == Boss_Name.JOSHI)  StartCoroutine(BossAction1());
+        if (bossName == Boss_Name.SYACHO) StartCoroutine(BossAction2());
     }
 
     private void Update()
@@ -49,6 +58,10 @@ public class Boss : MonoBehaviour
         spriteRenderer.color = new Color(1, color, color, 1);
     }
 
+    /// <summary>
+    /// 上司の攻撃パターン
+    /// </summary>
+    /// <returns></returns>
     IEnumerator BossAction1()
     {
         while (true)
@@ -64,18 +77,58 @@ public class Boss : MonoBehaviour
             switch (cnt)
             {
                 case 0:
-                    yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 2.5f)));
+                    yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 2.5f),10));
                     break;
                 case 1:
-                    yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f)));
+                    yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f),7));
                     break;
             }
         }
     }
 
-    IEnumerator ActionType(int num, string animName, (float, float) speed)
+    /// <summary>
+    /// 社長の攻撃パターン
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator BossAction2()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(10.0f);
+
+            //死んでたら処理をやめる
+            if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
+
+            Random.InitState(System.DateTime.Now.Second);
+
+            int cnt = 0;
+            switch (cnt)
+            {
+                case 0:
+                    yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 1.0f),20,true));
+                    break;
+                case 1:
+                    yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f),7));
+                    break;
+            }
+        }
+    }
+
+
+
+    /// <summary>
+    /// 攻撃パターン
+    /// </summary>
+    /// <param name="num">番号で攻撃の種類を選択</param>
+    /// <param name="animName">再生するAnimationを選択</param>
+    /// <param name="speed">攻撃速度</param>
+    /// <param name="shotCount">攻撃回数</param>
+    /// <param name="isRot">回転するかどうか</param>
+    /// <returns></returns>
+    IEnumerator ActionType(int num, string animName, (float, float) speed, int shotCount, bool isRot = false)
     {
         int actionCount = 0;
+        Transform trans;
 
         switch (num)
         {
@@ -85,7 +138,7 @@ public class Boss : MonoBehaviour
                 anim.SetBool(animName, true);
                 yield return new WaitForSeconds(2.0f);
 
-                while (actionCount < 10)
+                while (actionCount < shotCount)
                 {
                     //死んでたら処理をやめる
                     if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
@@ -94,6 +147,23 @@ public class Boss : MonoBehaviour
 
                     GameObject bullet = Instantiate(kotodama[0], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
                     Destroy(bullet, 5);
+
+                    //角度
+                    if (isRot)
+                    {
+                        trans = bullet.transform;
+                        Vector3[] vec = { new Vector3(0, 0, 15), new Vector3(0, 0, -15) };
+
+                        if (Random.Range(0, 100) % 2 == 0)
+                        {
+                            //上下
+                            if (trans.localPosition == bullet1Pos[0]) trans.Rotate(new Vector3(0, 0, 15));
+                            else if (trans.localPosition == bullet1Pos[2]) trans.Rotate(new Vector3(0, 0, -15));
+
+                            //真ん中
+                            if (trans.localPosition == bullet1Pos[1]) trans.Rotate(RandomFixedValue.forVector3(vec));
+                        }
+                    }
 
                     StartCoroutine(Sound.SoundPlaySEforCountDown(13, 1.0f));
 
@@ -110,7 +180,7 @@ public class Boss : MonoBehaviour
                 anim.SetBool(animName, true);
                 yield return new WaitForSeconds(2.0f);
 
-                while (actionCount < 7)
+                while (actionCount < shotCount)
                 {
                     //死んでたら処理をやめる
                     if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }

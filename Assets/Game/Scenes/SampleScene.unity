@@ -960,7 +960,7 @@ GameObject:
   - component: {fileID: 68587825}
   m_Layer: 0
   m_Name: Joshi
-  m_TagString: Joshi
+  m_TagString: Syain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1099,6 +1099,7 @@ MonoBehaviour:
   smoke: {fileID: 3320048349479599835, guid: 44601d75ca5d4a042bef2fa25f4354d9, type: 3}
   explosion: {fileID: 3495029125308151975, guid: 29af22ceb75cbb84fa9ce30d6d9da439, type: 3}
   bossHP: 50
+  bossName: 0
 --- !u!1 &71453240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2822,6 +2823,7 @@ MonoBehaviour:
   - {fileID: 3393628580034731646, guid: cfbb8d18f586a0f44b28bcc8b76e0384, type: 3}
   - {fileID: 6529862349245503003, guid: ac9cda8158535674092d0fb7ba68ca9e, type: 3}
   - {fileID: 5683321591436635241, guid: cfb758945a70f6445812120ea7c511bd, type: 3}
+  - {fileID: 5683321591436635241, guid: 0c99791151fb2114782112da5da7d828, type: 3}
   backWaveCategory:
   - {fileID: 7241507948518157394, guid: f613ef47c10c08e48bde8541946bd6b9, type: 3}
   - {fileID: 4484470062903603831, guid: d59f26d8aed7ef94d993e707545e5779, type: 3}
@@ -2952,8 +2954,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 374419903}
-        m_TargetAssemblyTypeName: Scene, Assembly-CSharp
+      - m_Target: {fileID: 1275033387}
+        m_TargetAssemblyTypeName: SelectModeConfig, Assembly-CSharp
         m_MethodName: RankingButton
         m_Mode: 1
         m_Arguments:
@@ -11026,7 +11028,7 @@ GameObject:
   - component: {fileID: 1133427764}
   m_Layer: 0
   m_Name: Kaicho
-  m_TagString: Joshi
+  m_TagString: Syain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11165,6 +11167,7 @@ MonoBehaviour:
   smoke: {fileID: 0}
   explosion: {fileID: 0}
   bossHP: 0
+  bossName: 0
 --- !u!1 &1136559739
 GameObject:
   m_ObjectHideFlags: 0
@@ -11673,7 +11676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1176945869
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23277,7 +23280,7 @@ GameObject:
   - component: {fileID: 1963421398}
   m_Layer: 0
   m_Name: Syacho
-  m_TagString: Joshi
+  m_TagString: Syain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23404,18 +23407,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00edf07ba8b0dca4ea8bc923a28b760a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameModeConfig: {fileID: 0}
-  anim: {fileID: 0}
+  gameModeConfig: {fileID: 374419903}
+  anim: {fileID: 1963421396}
   kotodama:
+  - {fileID: 7511329779904125144, guid: 4002a9b43fe3a664e8bc0e5252067369, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  flash: {fileID: 0}
-  smoke: {fileID: 0}
-  explosion: {fileID: 0}
-  bossHP: 0
+  spriteRenderer: {fileID: 1963421394}
+  flash: {fileID: 2122980809}
+  smoke: {fileID: 3320048349479599835, guid: 44601d75ca5d4a042bef2fa25f4354d9, type: 3}
+  explosion: {fileID: 3495029125308151975, guid: 29af22ceb75cbb84fa9ce30d6d9da439, type: 3}
+  bossHP: 150
+  bossName: 1
 --- !u!1 &1974178977
 GameObject:
   m_ObjectHideFlags: 0

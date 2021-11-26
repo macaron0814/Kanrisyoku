@@ -18,6 +18,8 @@ public static class Generic
         }
     }
 
+
+
     /// <summary>
     /// 不要なオブジェクトをタグで削除
     /// </summary>
@@ -26,6 +28,7 @@ public static class Generic
     {
         foreach (var obj in GameObject.FindGameObjectsWithTag(tagName)) { GameObject.Destroy(obj); }
     }
+
 
 
     /// <summary>
@@ -60,5 +63,34 @@ public static class Generic
 
         if (!isUI) { obj.transform.localPosition = pos; }
         else { obj.GetComponent<RectTransform>().position = pos; }
+    }
+}
+
+
+
+public static class RandomFixedValue
+{
+    public static Vector3 forVector3(Vector3[] vec)
+    {
+        Random.InitState(System.DateTime.Now.Second);
+        int rand = Random.Range(0, vec.Length);
+        for (int i = 0; i < vec.Length; i++) if (i == rand) return vec[i];
+        return Vector3.zero;
+    }
+
+    public static float forFloat(float[] value)
+    {
+        Random.InitState(System.DateTime.Now.Second);
+        int rand = Random.Range(0, value.Length);
+        for (int i = 0; i < value.Length; i++) if (i == rand) return value[i];
+        return 0;
+    }
+
+    public static int forInt(int[] value)
+    {
+        Random.InitState(System.DateTime.Now.Second);
+        int rand = Random.Range(0, value.Length);
+        for (int i = 0; i < value.Length; i++) if (i == rand) return value[i];
+        return 0;
     }
 }

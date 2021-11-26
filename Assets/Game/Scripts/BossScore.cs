@@ -62,9 +62,12 @@ public class BossScore : MonoBehaviour
         damageText.text = b_point.damage.ToString();
 
         //合計スコアを算出
-        scoreText.text = "Score " + (b_point.time + b_point.avoid + b_point.jump + b_point.damage).ToString();
+        b_point.score = (int)(b_point.time + b_point.avoid + b_point.jump + b_point.damage);
+        scoreText.text = "Score " + b_point.score.ToString();
 
-        b_point.bossHp = (int)((100 / b_point.bossHp) * Boss.hp);
+
+        //残りHPをテキストに反映
+        b_point.bossHp = (int)((100.0 / b_point.bossHp) * Boss.hp);
         hpText.text = b_point.bossHp.ToString();
     }
 }

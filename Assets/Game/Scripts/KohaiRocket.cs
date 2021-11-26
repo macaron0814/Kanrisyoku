@@ -21,7 +21,7 @@ public class KohaiRocket : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        boss = GameObject.Find("Joshi").GetComponent<Boss>();
+        boss = GameObject.FindGameObjectWithTag("Syain").GetComponent<Boss>();
 
         if (isRocket)
         {
@@ -113,7 +113,7 @@ public class KohaiRocket : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (isRocket && col.tag == "Joshi")
+        if (isRocket && col.tag == "Syain")
         {
             //エフェクト処理
             {
