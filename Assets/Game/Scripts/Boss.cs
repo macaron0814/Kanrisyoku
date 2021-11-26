@@ -132,6 +132,7 @@ public class Boss : MonoBehaviour
     {
         int actionCount = 0;
         Transform bossTrans, playerTrans;
+        playerTrans = player.transform;
 
         switch (num)
         {
@@ -148,27 +149,29 @@ public class Boss : MonoBehaviour
 
                     Random.InitState(System.DateTime.Now.Second);
 
-                    GameObject bullet = Instantiate(kotodama[0], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
+                    //コの生成
+                    GameObject bullet = bullet = Instantiate(kotodama[0], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
                     Destroy(bullet, 5);
 
                     //角度
                     if (isRot)
                     {
                         bossTrans   = bullet.transform;
-                        playerTrans = player.transform;
 
-                        Vector3[] vecUp = { new Vector3(0, 0, -15), new Vector3(0, 0, -35) };
-                        Vector3[] vecDown = { new Vector3(0, 0, 15), new Vector3(0, 0, 35) };
-                        Vector3[] vecCenter = { new Vector3(0, 0,  15), new Vector3(0, 0, -15), new Vector3(0, 0, 25), new Vector3(0, 0, -25) };
+                        Vector3[] vecUp   = { new Vector3(0, 0, -15), new Vector3(0, 0, -35) };
+                        Vector3[] vecDown = { new Vector3(0, 0,  15), new Vector3(0, 0,  35) };
+                        Vector3[] vecCenterUp   = { new Vector3(0, 0, -15), new Vector3(0, 0, -20) };
+                        Vector3[] vecCenterDown = { new Vector3(0, 0, 15), new Vector3(0, 0,   20) };
 
                         if (Random.Range(0, 100) % 2 == 0)
                         {
                             //上下
                             if (bossTrans.localPosition == bullet1Pos[0] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(RandomFixedValue.forVector3(vecDown));
-                            if (bossTrans.localPosition == bullet1Pos[2] && playerTrans.localPosition.y >= 0) bossTrans.Rotate(RandomFixedValue.forVector3(vecUp));
+                            if (bossTrans.localPosition == bullet1Pos[2] && playerTrans.localPosition.y >  0) bossTrans.Rotate(RandomFixedValue.forVector3(vecUp));
 
                             //真ん中
-                            if (bossTrans.localPosition == bullet1Pos[1]) bossTrans.Rotate(RandomFixedValue.forVector3(vecCenter));
+                            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(RandomFixedValue.forVector3(vecCenterDown));
+                            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y >  0) bossTrans.Rotate(RandomFixedValue.forVector3(vecCenterUp));
                         }
                     }
 
