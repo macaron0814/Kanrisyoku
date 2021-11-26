@@ -4,6 +4,7 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     [SerializeField] private GameModeConfig gameModeConfig;
+    private GameObject player;
 
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject[] kotodama = new GameObject[4];
@@ -40,6 +41,8 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         bossPram = Boss_Parameter.ALIVE;
 
         BossScore.b_point.bossHp = (int)bossHP;
@@ -128,7 +131,7 @@ public class Boss : MonoBehaviour
     IEnumerator ActionType(int num, string animName, (float, float) speed, int shotCount, bool isRot = false)
     {
         int actionCount = 0;
-        Transform trans;
+        Transform bossTrans, playerTrans;
 
         switch (num)
         {
@@ -151,17 +154,21 @@ public class Boss : MonoBehaviour
                     //角度
                     if (isRot)
                     {
-                        trans = bullet.transform;
-                        Vector3[] vec = { new Vector3(0, 0, 15), new Vector3(0, 0, -15) };
+                        bossTrans   = bullet.transform;
+                        playerTrans = player.transform;
+
+                        Vector3[] vecUp = { new Vector3(0, 0, -15), new Vector3(0, 0, -35) };
+                        Vector3[] vecDown = { new Vector3(0, 0, 15), new Vector3(0, 0, 35) };
+                        Vector3[] vecCenter = { new Vector3(0, 0,  15), new Vector3(0, 0, -15), new Vector3(0, 0, 25), new Vector3(0, 0, -25) };
 
                         if (Random.Range(0, 100) % 2 == 0)
                         {
                             //上下
-                            if (trans.localPosition == bullet1Pos[0]) trans.Rotate(new Vector3(0, 0, 15));
-                            else if (trans.localPosition == bullet1Pos[2]) trans.Rotate(new Vector3(0, 0, -15));
+                            if (bossTrans.localPosition == bullet1Pos[0] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(RandomFixedValue.forVector3(vecDown));
+                            if (bossTrans.localPosition == bullet1Pos[2] && playerTrans.localPosition.y >= 0) bossTrans.Rotate(RandomFixedValue.forVector3(vecUp));
 
                             //真ん中
-                            if (trans.localPosition == bullet1Pos[1]) trans.Rotate(RandomFixedValue.forVector3(vec));
+                            if (bossTrans.localPosition == bullet1Pos[1]) bossTrans.Rotate(RandomFixedValue.forVector3(vecCenter));
                         }
                     }
 

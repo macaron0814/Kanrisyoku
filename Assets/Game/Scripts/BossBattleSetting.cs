@@ -11,7 +11,7 @@ public class BossBattleSetting : MonoBehaviour
     private void OnEnable()
     {
         SelectSyain(0);
-        BossBattleConfig.syainNumber = 0;
+        //BossBattleConfig.syainNumber = 0;
     }
 
     /// <summary>

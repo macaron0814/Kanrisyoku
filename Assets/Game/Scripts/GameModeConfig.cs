@@ -184,7 +184,11 @@ public class GameModeConfig : MonoBehaviour
     {
         //スコア送信
         long score = (long)BossScore.b_point.score;
-        iOSRankingUtility.ReportScore("hiBossScore", score);
+
+        //ボスの種類ごとに分けて得点を管理
+        if (BossBattleConfig.syainNumber == 0) iOSRankingUtility.ReportScore("hiBossScore",  score);
+        if (BossBattleConfig.syainNumber == 1) iOSRankingUtility.ReportScore("hiBossScore2", score);
+        if (BossBattleConfig.syainNumber == 2) iOSRankingUtility.ReportScore("hiBossScore3", score);
 
         sceneType = SCENETYPE.BOSSRESULT;
 
