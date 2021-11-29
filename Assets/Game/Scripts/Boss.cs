@@ -104,7 +104,7 @@ public class Boss : MonoBehaviour
 
             Random.InitState(System.DateTime.Now.Second);
 
-            int cnt = 0;
+            int cnt = 2;
             switch (cnt)
             {
                 case 0:
@@ -112,6 +112,9 @@ public class Boss : MonoBehaviour
                     break;
                 case 1:
                     yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f),7));
+                    break;
+                case 2:
+                    yield return StartCoroutine(ActionType(2, "isAction1", (2.0f, 2.0f), 7));
                     break;
             }
         }
@@ -204,6 +207,40 @@ public class Boss : MonoBehaviour
 
                     actionCount++;
                 }
+
+                anim.SetBool(animName, false);
+                break;
+
+            //ダ
+            case 2:
+                anim.SetBool(animName, true);
+                yield return new WaitForSeconds(2.0f);
+
+                GameObject bullet3 = Instantiate(kotodama[2], new Vector3(0, 0, 1), Quaternion.identity);
+                Animator b_anim = bullet3.GetComponent<Animator>();
+
+                while (true)
+                {
+                    //死んでたら処理をやめる
+                    if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
+
+                    //弾を撃ち終えたら終了
+                    if (b_anim.GetCurrentAnimatorStateInfo(0).IsName("Bullet3_E")) break;
+
+                    yield return null;
+
+                    //while (actionCount < shotCount)
+                    //{
+                    //    Random.InitState(System.DateTime.Now.Second);
+
+
+
+                    //    yield return new WaitForSeconds(speed.Item1);
+
+                    //    actionCount++;
+                    //}
+                }
+                Destroy(bullet3, 6);
 
                 anim.SetBool(animName, false);
                 break;
