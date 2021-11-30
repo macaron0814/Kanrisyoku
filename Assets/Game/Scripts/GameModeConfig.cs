@@ -170,7 +170,8 @@ public class GameModeConfig : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         BossBattleConfig.sya[BossBattleConfig.syainNumber].SetActive(true);
-        Sound.SoundPlayBGM(2);
+        if (BossBattleConfig.syainNumber == 0) Sound.SoundPlayBGM(2);
+        if (BossBattleConfig.syainNumber == 1) Sound.SoundPlayBGM(3);
 
         sceneType = SCENETYPE.BOSSBATTLE;
     }

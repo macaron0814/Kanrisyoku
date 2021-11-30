@@ -64,6 +64,23 @@ public static class Generic
         if (!isUI) { obj.transform.localPosition = pos; }
         else { obj.GetComponent<RectTransform>().position = pos; }
     }
+
+
+    /// <summary>
+    /// 2次ベジェ曲線
+    /// </summary>
+    /// <param name="p0">開始点</param>
+    /// <param name="p1">中間点</param>
+    /// <param name="p2">終着点</param>
+    /// <param name="t">Lerp(a,b)どっちによっているかの比率(a = 0,b = 1)</param>
+    /// <returns>実際に移動する座標</returns>
+    public static Vector3 GetPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
+    {
+        var a = Vector3.Lerp(p0, p1, t); // p0からp1の動き
+        var b = Vector3.Lerp(p1, p2, t); // p1からp2の動き
+
+        return Vector3.Lerp(a, b, t); // aからbの動き
+    }
 }
 
 

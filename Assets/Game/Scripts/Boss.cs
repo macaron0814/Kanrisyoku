@@ -8,6 +8,7 @@ public class Boss : MonoBehaviour
 
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject[] kotodama = new GameObject[4];
+    [SerializeField] private GameObject   landmine;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -114,7 +115,7 @@ public class Boss : MonoBehaviour
                     yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f),7));
                     break;
                 case 2:
-                    yield return StartCoroutine(ActionType(2, "isAction1", (2.0f, 2.0f), 7));
+                    yield return StartCoroutine(ActionType(2, "isAction1", (0.75f, 0.75f), 25));
                     break;
             }
         }
@@ -214,10 +215,13 @@ public class Boss : MonoBehaviour
             //ダ
             case 2:
                 anim.SetBool(animName, true);
+                StartCoroutine(Sound.SoundPlaySEforCountDown(30, 1.0f));
                 yield return new WaitForSeconds(2.0f);
 
                 GameObject bullet3 = Instantiate(kotodama[2], new Vector3(0, 0, 1), Quaternion.identity);
                 Animator b_anim = bullet3.GetComponent<Animator>();
+
+                yield return new WaitForSeconds(5.0f);
 
                 while (true)
                 {
@@ -227,18 +231,18 @@ public class Boss : MonoBehaviour
                     //弾を撃ち終えたら終了
                     if (b_anim.GetCurrentAnimatorStateInfo(0).IsName("Bullet3_E")) break;
 
+                    while (actionCount < shotCount)
+                    {
+                        GameObject lm = Instantiate(landmine);
+
+                        Sound.SoundPlaySE(29);
+                        yield return new WaitForSeconds(speed.Item1);
+
+                        actionCount++;
+                    }
+                    b_anim.SetBool("isEnd", true);
+
                     yield return null;
-
-                    //while (actionCount < shotCount)
-                    //{
-                    //    Random.InitState(System.DateTime.Now.Second);
-
-
-
-                    //    yield return new WaitForSeconds(speed.Item1);
-
-                    //    actionCount++;
-                    //}
                 }
                 Destroy(bullet3, 6);
 

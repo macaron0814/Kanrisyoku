@@ -444,6 +444,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d4d484efd65b3e14ab5481be80ff4314, type: 3}
   - {fileID: 8300000, guid: 24d496a8e8d1dff4d865a051bd652c28, type: 3}
   - {fileID: 8300000, guid: fdd1bb70a2c7b3b4993b7c630754a371, type: 3}
+  - {fileID: 8300000, guid: dabae69a8c5eeab4ca3645d6d7e5caad, type: 3}
+  - {fileID: 8300000, guid: 1f82571e5b96b524c9e81117fcfb3337, type: 3}
+  - {fileID: 8300000, guid: dc250d30ec819744b911d04d7bbe9f52, type: 3}
 --- !u!4 &22553373
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,6 +1097,7 @@ MonoBehaviour:
   - {fileID: 4772998561712013530, guid: e05dcaa3699113f4c9446ea14458dfc4, type: 3}
   - {fileID: 4772998561712013530, guid: 4cad87b87b2d875448c2f2fc3272f5a5, type: 3}
   - {fileID: 0}
+  landmine: {fileID: 0}
   spriteRenderer: {fileID: 68587821}
   flash: {fileID: 2122980809}
   smoke: {fileID: 3320048349479599835, guid: 44601d75ca5d4a042bef2fa25f4354d9, type: 3}
@@ -11162,6 +11166,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  landmine: {fileID: 0}
   spriteRenderer: {fileID: 0}
   flash: {fileID: 0}
   smoke: {fileID: 0}
@@ -23412,8 +23417,9 @@ MonoBehaviour:
   kotodama:
   - {fileID: 7511329779904125144, guid: 4002a9b43fe3a664e8bc0e5252067369, type: 3}
   - {fileID: 0}
+  - {fileID: 409830512885611110, guid: ffef27eb765a9934abe1abe5b1531d54, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
+  landmine: {fileID: 6595443326342532964, guid: a102d130784656b45802756045815590, type: 3}
   spriteRenderer: {fileID: 1963421394}
   flash: {fileID: 2122980809}
   smoke: {fileID: 3320048349479599835, guid: 44601d75ca5d4a042bef2fa25f4354d9, type: 3}
