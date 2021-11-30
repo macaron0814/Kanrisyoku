@@ -115,7 +115,7 @@ public class Boss : MonoBehaviour
                     yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f),7));
                     break;
                 case 2:
-                    yield return StartCoroutine(ActionType(2, "isAction1", (0.75f, 0.75f), 25));
+                    yield return StartCoroutine(ActionType(2, "isAction2", (0.75f, 0.75f), 25));
                     break;
             }
         }
@@ -231,8 +231,12 @@ public class Boss : MonoBehaviour
                     //弾を撃ち終えたら終了
                     if (b_anim.GetCurrentAnimatorStateInfo(0).IsName("Bullet3_E")) break;
 
+                    //技の処理
                     while (actionCount < shotCount)
                     {
+                        //死んでたら処理をやめる
+                        if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
+
                         GameObject lm = Instantiate(landmine);
 
                         Sound.SoundPlaySE(29);
