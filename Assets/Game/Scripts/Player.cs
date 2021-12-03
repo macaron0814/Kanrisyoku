@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D box2d;
     private SpriteRenderer spriteRenderer;
-    private bool isJump = false;
     public static bool isJet = false;
     public static bool isGameOver = false;
     private bool isSound;
@@ -95,13 +94,13 @@ public class Player : MonoBehaviour
         if (isTouched) { rb.gravityScale = 2; }
 
         //ジャンプ
-        if (!isJump && Input.GetMouseButtonDown(0))
+        if (isTouched && Input.GetMouseButtonDown(0))
         {
             Vector3 force = new Vector3(0.0f, 575.0f, 0.0f);    // 力を設定
+            rb.velocity = Vector3.zero;
             rb.AddForce(force);  // 力を加える
 
             anim.SetBool("Jump", true);
-            isJump = true;
         }
     }
 
@@ -161,9 +160,9 @@ public class Player : MonoBehaviour
 
         //ジャンプ
         Vector3 force = new Vector3(0.0f, 575.0f, 0.0f);    // 力を設定
+        rb.velocity = Vector3.zero;
         rb.AddForce(force);  // 力を加える
         anim.SetBool("Jump", true);
-        isJump = true;
 
         //変更したパラメータを元に戻す
         waveConfig.startScrollSpeed = waveConfig.jetBeforeScrollSpeed;
@@ -239,11 +238,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Stage" || collision.gameObject.tag == "Line")
         {
-            if (!isTouched && rb.gravityScale == 7) { Sound.SoundPlaySE(6); }
-            if (isJump && rb.gravityScale == 2) Sound.SoundPlaySE(5);
+            if (!isTouched && rb.gravityScale == 7) Sound.SoundPlaySE(6);
+            else if (isTouched && rb.gravityScale == 2) Sound.SoundPlaySE(5);
 
             anim.SetBool("Jump", false);
-            isJump = false;
 
             if (rb.gravityScale == 7)
             {
@@ -253,16 +251,6 @@ public class Player : MonoBehaviour
                 itemSystem.AddStamina(-5);
 
                 BossScore.b_point.jump++;
-
-                //オートジャンプ発動
-                if (PlayerAutoJumpCountDown() > 0.9f)
-                {
-                    Vector3 force = new Vector3(0.0f, 700.0f, 0.0f);    // 力を設定
-                    rb.AddForce(force);  // 力を加える
-
-                    anim.SetBool("Jump", true);
-                    isJump = true;
-                }
             }
         }
     }

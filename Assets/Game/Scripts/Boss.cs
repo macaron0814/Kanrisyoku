@@ -170,12 +170,12 @@ public class Boss : MonoBehaviour
                         if (Random.Range(0, 100) % 2 == 0)
                         {
                             //上下
-                            if (bossTrans.localPosition == bullet1Pos[0] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(RandomFixedValue.forVector3(vecDown));
-                            if (bossTrans.localPosition == bullet1Pos[2] && playerTrans.localPosition.y >  0) bossTrans.Rotate(RandomFixedValue.forVector3(vecUp));
+                            if (bossTrans.localPosition == bullet1Pos[0] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(vecDown[Random.Range(0, vecDown.Length)]);
+                            if (bossTrans.localPosition == bullet1Pos[2] && playerTrans.localPosition.y >  0) bossTrans.Rotate(vecUp[Random.Range(0, vecUp.Length)]);
 
                             //真ん中
-                            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(RandomFixedValue.forVector3(vecCenterDown));
-                            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y >  0) bossTrans.Rotate(RandomFixedValue.forVector3(vecCenterUp));
+                            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(vecCenterDown[Random.Range(0, vecCenterDown.Length)]);
+                            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y >  0) bossTrans.Rotate(vecCenterUp[Random.Range(0, vecCenterUp.Length)]);
                         }
                     }
 

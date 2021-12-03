@@ -34,10 +34,10 @@ public class Landmine : MonoBehaviour
         rot = new Vector3(0, 0, 36);
         startPos = transform.localPosition;
 
-        Random.InitState(System.DateTime.Now.Second * System.DateTime.Now.Second - 1);
         rand = Random.Range(0, 3);
 
-        randSpeed = RandomFixedValue.forFloat(new float[] { 0.0075f, 0.01f, 0.0025f });
+        float[] f = new float[] { 0.0075f, 0.01f, 0.0025f };
+        randSpeed = f[Random.Range(0, f.Length)];
     }
 
     // Update is called once per frame

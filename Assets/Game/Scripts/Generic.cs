@@ -82,32 +82,3 @@ public static class Generic
         return Vector3.Lerp(a, b, t); // aからbの動き
     }
 }
-
-
-
-public static class RandomFixedValue
-{
-    public static Vector3 forVector3(Vector3[] vec)
-    {
-        Random.InitState(System.DateTime.Now.Second);
-        int rand = Random.Range(0, vec.Length);
-        for (int i = 0; i < vec.Length; i++) if (i == rand) return vec[i];
-        return Vector3.zero;
-    }
-
-    public static float forFloat(float[] value)
-    {
-        Random.InitState(System.DateTime.Now.Second);
-        int rand = Random.Range(0, value.Length);
-        for (int i = 0; i < value.Length; i++) if (i == rand) return value[i];
-        return 0;
-    }
-
-    public static int forInt(int[] value)
-    {
-        Random.InitState(System.DateTime.Now.Second);
-        int rand = Random.Range(0, value.Length);
-        for (int i = 0; i < value.Length; i++) if (i == rand) return value[i];
-        return 0;
-    }
-}

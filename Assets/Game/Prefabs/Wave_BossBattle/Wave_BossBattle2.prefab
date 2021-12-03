@@ -312,6 +312,7 @@ MonoBehaviour:
   kohaiRocket: {fileID: 5738493058716464870, guid: 5d474eb406469294db1a992707d68b67, type: 3}
   isRocket: 0
   explosion: {fileID: 0}
+  critical: {fileID: 0}
 --- !u!1 &8864793376137658998
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +420,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.7567945, y: 5.2381005}
+  m_Size: {x: 6, y: 5.2381005}
   m_EdgeRadius: 0
 --- !u!1001 &238990621782365764
 PrefabInstance:
