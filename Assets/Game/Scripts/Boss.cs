@@ -75,8 +75,6 @@ public class Boss : MonoBehaviour
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
 
-            Random.InitState(System.DateTime.Now.Second);
-
             int cnt = Random.Range(0, 2);
             switch (cnt)
             {
@@ -102,8 +100,6 @@ public class Boss : MonoBehaviour
 
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
-
-            Random.InitState(System.DateTime.Now.Second);
 
             int cnt = 2;
             switch (cnt)
@@ -151,8 +147,6 @@ public class Boss : MonoBehaviour
                     //死んでたら処理をやめる
                     if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
 
-                    Random.InitState(System.DateTime.Now.Second);
-
                     //コの生成
                     GameObject bullet = bullet = Instantiate(kotodama[0], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
                     Destroy(bullet, 5);
@@ -198,8 +192,6 @@ public class Boss : MonoBehaviour
                 {
                     //死んでたら処理をやめる
                     if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
-
-                    Random.InitState(System.DateTime.Now.Second);
 
                     GameObject bullet2 = Instantiate(kotodama[1], new Vector3(Random.Range(9, 17), kotodama[1].transform.localPosition.y, 1), Quaternion.identity);
                     Destroy(bullet2, 7);
@@ -354,7 +346,6 @@ public class Boss : MonoBehaviour
 
         //生成に必要な情報
         Vector3 pos = transform.localPosition;
-        Random.InitState(System.DateTime.Now.Second);
 
         //生成と削除
         GameObject ex = Instantiate(explosion,new Vector3(pos.x + Random.Range(-0.25f, 1.0f), pos.y + Random.Range(-0.5f, 4.0f), pos.z),Quaternion.identity);

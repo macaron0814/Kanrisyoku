@@ -42,7 +42,6 @@ public class KohaiRocket : MonoBehaviour
     public void RocketFiring()
     {
         //ランダムで発射位置をセット
-        Random.InitState(System.DateTime.Now.Second);
         float sx = Random.Range(-7, -2);
         float sy = Random.Range(-2,  3);
 
@@ -117,9 +116,6 @@ public class KohaiRocket : MonoBehaviour
         {
             //エフェクト処理
             {
-                //乱数設定
-                Random.InitState(System.DateTime.Now.Second);
-
                 //クリティカルヒット/ノーマル
                 if (Random.Range(0, 100) < 7)
                 {

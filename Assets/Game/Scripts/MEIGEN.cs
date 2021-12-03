@@ -16,8 +16,6 @@ public class MEIGEN : MonoBehaviour
 
     private void OnEnable()
     {
-        Random.InitState(System.DateTime.Now.Second);
-
         meigenUI.text = meigen[Random.Range(0, meigen.Length)];
     }
 }
