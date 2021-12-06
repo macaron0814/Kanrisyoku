@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     public static bool isGameOver = false;
     private bool isSound;
     public bool isTouched;
+    private bool isJump;
 
     //ダメージ点滅中かの有無
     private float damageFlashTime;
@@ -69,6 +70,8 @@ public class Player : MonoBehaviour
         PlayerFall();//落下判定
         PlayerAutoJumpCountDown();//オートジャンプ
         PlayerDamegeFrashTime();//無敵時間計測
+
+        if (rb.velocity.y > 10.75f) rb.velocity = new Vector2(0, 10.75f);
     }
 
 
@@ -94,14 +97,7 @@ public class Player : MonoBehaviour
         if (isTouched) { rb.gravityScale = 2; }
 
         //ジャンプ
-        if (isTouched && Input.GetMouseButtonDown(0))
-        {
-            Vector3 force = new Vector3(0.0f, 575.0f, 0.0f);    // 力を設定
-            rb.velocity = Vector3.zero;
-            rb.AddForce(force);  // 力を加える
-
-            anim.SetBool("Jump", true);
-        }
+        if (isTouched && Input.GetMouseButtonDown(0)) Jump();
     }
 
 
@@ -158,11 +154,7 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(6f);
 
-        //ジャンプ
-        Vector3 force = new Vector3(0.0f, 575.0f, 0.0f);    // 力を設定
-        rb.velocity = Vector3.zero;
-        rb.AddForce(force);  // 力を加える
-        anim.SetBool("Jump", true);
+        Jump(); //ジャンプ
 
         //変更したパラメータを元に戻す
         waveConfig.startScrollSpeed = waveConfig.jetBeforeScrollSpeed;
@@ -227,21 +219,35 @@ public class Player : MonoBehaviour
         effect.SetActive(false);
     }
 
-
+    /// <summary>
+    /// 無敵時間計測
+    /// </summary>
     void PlayerDamegeFrashTime()
     {
         damageFlashTime -= Time.deltaTime;
         if (damageFlashTime < 0.0f) { damageFlashTime = 0.0f; }
     }
 
+    /// <summary>
+    /// ジャンプ
+    /// </summary>
+    void Jump()
+    {
+        Vector3 force = new Vector3(0.0f, 575.0f, 0.0f);    // 力を設定
+        if (rb.velocity.y < 5.75f) rb.AddForce(force);  // 力を加える
+        anim.SetBool("Jump", true);
+        isJump = true;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Stage" || collision.gameObject.tag == "Line")
         {
-            if (!isTouched && rb.gravityScale == 7) Sound.SoundPlaySE(6);
-            else if (isTouched && rb.gravityScale == 2) Sound.SoundPlaySE(5);
+            if (rb.gravityScale == 7) Sound.SoundPlaySE(6);
+            if (isJump && rb.gravityScale == 2) Sound.SoundPlaySE(5);
 
             anim.SetBool("Jump", false);
+            isJump = false;
 
             if (rb.gravityScale == 7)
             {
@@ -252,6 +258,9 @@ public class Player : MonoBehaviour
 
                 BossScore.b_point.jump++;
             }
+
+            //オートジャンプ発動
+            if (PlayerAutoJumpCountDown() > 0.9f) Jump();
         }
     }
 

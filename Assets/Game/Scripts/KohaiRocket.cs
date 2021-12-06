@@ -105,7 +105,7 @@ public class KohaiRocket : MonoBehaviour
     /// <param name="col"> 接触したコライダー</param>
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(!isRocket && col.tag == "Player")
+        if(!isRocket && col.tag == "Player" && !kohaiRocket.GetComponent<KohaiRocket>().isRocket)
         {
             kohaiRocket = Instantiate(kohaiRocket, player.transform.localPosition, Quaternion.identity);
             kohaiRocket.GetComponent<KohaiRocket>().isRocket = true;

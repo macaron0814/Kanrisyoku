@@ -23416,9 +23416,11 @@ MonoBehaviour:
   anim: {fileID: 1963421396}
   kotodama:
   - {fileID: 7511329779904125144, guid: 4002a9b43fe3a664e8bc0e5252067369, type: 3}
-  - {fileID: 0}
+  - {fileID: 4772998561712013530, guid: e05dcaa3699113f4c9446ea14458dfc4, type: 3}
   - {fileID: 409830512885611110, guid: ffef27eb765a9934abe1abe5b1531d54, type: 3}
   - {fileID: 0}
+  - {fileID: 4772998561712013530, guid: 206a9723867e8af4ca1975066c57748b, type: 3}
+  - {fileID: 4772998561712013530, guid: a0e9b5dc5c7073a42af5e8a5196492b8, type: 3}
   landmine: {fileID: 6595443326342532964, guid: a102d130784656b45802756045815590, type: 3}
   spriteRenderer: {fileID: 1963421394}
   flash: {fileID: 2122980809}
@@ -24019,7 +24021,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2030370024}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 79b373b92ace6b94bb16a5249d08750a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

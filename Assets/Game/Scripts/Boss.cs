@@ -101,17 +101,17 @@ public class Boss : MonoBehaviour
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
 
-            int cnt = 2;
+            int cnt = Random.Range(0,3);
             switch (cnt)
             {
                 case 0:
-                    yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 1.0f),20,true));
+                    yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 1.0f),15,true));
                     break;
                 case 1:
-                    yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f),7));
+                    yield return StartCoroutine(ActionType(1, "isAction3", (1.5f, 2.5f), 15, true));
                     break;
                 case 2:
-                    yield return StartCoroutine(ActionType(2, "isAction2", (0.75f, 0.75f), 25));
+                    yield return StartCoroutine(ActionType(2, "isAction2", (0.75f, 0.75f), 20));
                     break;
             }
         }
@@ -128,7 +128,7 @@ public class Boss : MonoBehaviour
     /// <param name="shotCount">攻撃回数</param>
     /// <param name="isRot">回転するかどうか</param>
     /// <returns></returns>
-    IEnumerator ActionType(int num, string animName, (float, float) speed, int shotCount, bool isRot = false)
+    IEnumerator ActionType(int num, string animName, (float, float) speed, int shotCount, bool isSyacho = false)
     {
         int actionCount = 0;
         Transform bossTrans, playerTrans;
@@ -148,11 +148,11 @@ public class Boss : MonoBehaviour
                     if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
 
                     //コの生成
-                    GameObject bullet = bullet = Instantiate(kotodama[0], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
+                    GameObject bullet = bullet = Instantiate(kotodama[num], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
                     Destroy(bullet, 5);
 
                     //角度
-                    if (isRot)
+                    if (isSyacho)
                     {
                         bossTrans   = bullet.transform;
 
@@ -190,13 +190,19 @@ public class Boss : MonoBehaviour
 
                 while (actionCount < shotCount)
                 {
+                    //社長の場合
+                    if (isSyacho) num = Random.Range(4, 6);
+
                     //死んでたら処理をやめる
                     if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
 
-                    GameObject bullet2 = Instantiate(kotodama[1], new Vector3(Random.Range(9, 17), kotodama[1].transform.localPosition.y, 1), Quaternion.identity);
+                    GameObject bullet2 = null;
+                    if(isSyacho) bullet2 = Instantiate(kotodama[num], new Vector3(Random.Range(5, 17), kotodama[num].transform.localPosition.y, 1), Quaternion.identity);
+                    else         bullet2 = Instantiate(kotodama[num], new Vector3(Random.Range(9, 17), kotodama[num].transform.localPosition.y, 1), Quaternion.identity);
                     Destroy(bullet2, 7);
 
-                    yield return new WaitForSeconds(speed.Item1);
+                    if (speed.Item1 == speed.Item2) yield return new WaitForSeconds(speed.Item1);
+                    else yield return new WaitForSeconds(Random.Range(speed.Item1, speed.Item2));
 
                     actionCount++;
                 }
@@ -210,7 +216,7 @@ public class Boss : MonoBehaviour
                 StartCoroutine(Sound.SoundPlaySEforCountDown(30, 1.0f));
                 yield return new WaitForSeconds(2.0f);
 
-                GameObject bullet3 = Instantiate(kotodama[2], new Vector3(0, 0, 1), Quaternion.identity);
+                GameObject bullet3 = Instantiate(kotodama[num], new Vector3(0, 0, 1), Quaternion.identity);
                 Animator b_anim = bullet3.GetComponent<Animator>();
 
                 yield return new WaitForSeconds(5.0f);
