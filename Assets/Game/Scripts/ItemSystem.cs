@@ -60,7 +60,9 @@ public class ItemSystem : MonoBehaviour
     public void AddStamina(int cnt)
     {
         ramenUI.value += cnt;
-        ramenUI_HP.value += cnt;
+        if (cnt > 0) ramenUI_HP.value += cnt * (Parameter.save.hpValue / 100.0f);
+        else         ramenUI_HP.value += cnt;
+
         if (cnt > 0) Sound.SoundPlaySE(1);
     }
 
