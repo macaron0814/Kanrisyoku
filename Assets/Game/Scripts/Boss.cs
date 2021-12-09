@@ -17,6 +17,8 @@ public class Boss : MonoBehaviour
     [SerializeField] private GameObject smoke;
     [SerializeField] private GameObject explosion;
 
+    public static int damageValue;
+
     [SerializeField] private double bossHP;
     public static double hp;
     private double explosionHp;
@@ -68,6 +70,8 @@ public class Boss : MonoBehaviour
     /// <returns></returns>
     IEnumerator BossAction1()
     {
+        damageValue = 30;
+
         while (true)
         {
             yield return new WaitForSeconds(10.0f);
@@ -94,6 +98,8 @@ public class Boss : MonoBehaviour
     /// <returns></returns>
     IEnumerator BossAction2()
     {
+        damageValue = 60;
+
         while (true)
         {
             yield return new WaitForSeconds(10.0f);

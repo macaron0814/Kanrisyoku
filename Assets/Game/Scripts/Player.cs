@@ -233,6 +233,8 @@ public class Player : MonoBehaviour
     /// </summary>
     void Jump()
     {
+        if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { return; }
+
         Vector3 force = new Vector3(0.0f, 575.0f, 0.0f);    // 力を設定
         if (rb.velocity.y < 5.75f) rb.AddForce(force);  // 力を加える
         anim.SetBool("Jump", true);
@@ -310,7 +312,9 @@ public class Player : MonoBehaviour
             Sound.SoundPlaySE(12);
 
             //ダメージ処理
-            itemSystem.AddStamina(-30 + Parameter.save.defValue);
+            int damage = Parameter.save.defValue - Boss.damageValue;
+            if (damage > 0) damage = 0;
+            itemSystem.AddStamina(damage);
 
             //ダメージ効果処理
             damageFlashTime = 2.0f;

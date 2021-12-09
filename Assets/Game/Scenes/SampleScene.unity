@@ -449,6 +449,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dc250d30ec819744b911d04d7bbe9f52, type: 3}
   - {fileID: 8300000, guid: 1fd5f37a434abd949a72d73d28f11c0d, type: 3}
   - {fileID: 8300000, guid: 0220cdef600b1ec479d51a3707e79692, type: 3}
+  - {fileID: 8300000, guid: 3200c79ed5ca5c244aeb9f08446861a0, type: 3}
 --- !u!4 &22553373
 Transform:
   m_ObjectHideFlags: 0
@@ -3030,6 +3031,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.92307687
       objectReference: {fileID: 0}
+    - target: {fileID: 2065878105336738675, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
+      propertyPath: lengthInSec
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 3558640603632561661, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -3037,6 +3042,10 @@ PrefabInstance:
     - target: {fileID: 4548828137777317643, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4757080292057432026, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
+      propertyPath: lengthInSec
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5451389174913412258, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
       propertyPath: m_Enabled
@@ -3049,6 +3058,14 @@ PrefabInstance:
     - target: {fileID: 5848974695806964440, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662329992991037691, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
+      propertyPath: lengthInSec
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662329993077355152, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
+      propertyPath: lengthInSec
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6662854436563396000, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
       propertyPath: m_Enabled
@@ -3489,6 +3506,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &320683069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8866672468005074496, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
+  m_PrefabInstance: {fileID: 289020842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &320683070 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8866672468005074559, guid: 1e49d4426995afb46b0d88df97c8f718, type: 3}
@@ -3837,6 +3859,7 @@ MonoBehaviour:
   contentsUI: {fileID: 901540754}
   win: {fileID: 966232958}
   lose: {fileID: 1499004610}
+  fanfare: {fileID: 320683069}
   coinUI: {fileID: 0}
 --- !u!4 &374419904
 Transform:
