@@ -35,6 +35,7 @@ public static class Record
 
     //=================================================
     //Recordに設定された変数の更新
+    //(達成が期待できるタイミングで呼ぶ)
     //=================================================
     public static void UpdateRecord(RecordList list, float value = 0)
     {

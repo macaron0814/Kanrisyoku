@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sound : MonoBehaviour
 {
+    public static Sound instance;
     public AudioClip[] bgm, se;//bgm,seを取得
     public static AudioClip[] bgm_static, se_static;//bgm,seを取得
     static AudioSource audioSource;//AudioSourceのデータを取得
@@ -12,6 +13,14 @@ public class Sound : MonoBehaviour
     {
         bgm_static = bgm;
         se_static = se;
+
+        // シングルトンかつ、シーン遷移しても破棄されないようにする
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
     }
 
     // Start is called before the first frame update

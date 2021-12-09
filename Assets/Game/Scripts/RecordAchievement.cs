@@ -124,18 +124,22 @@ public class RecordAchievement : MonoBehaviour
 
             case "run_totalmeter_500":
                 Record.save.recordKey[5] = key;
+                Record.SaveRecord();
                 return 5;
 
             case "run_totalmeter_2000":
                 Record.save.recordKey[6] = key;
+                Record.SaveRecord();
                 return 6;
 
             case "run_totalmeter_5000":
                 Record.save.recordKey[7] = key;
+                Record.SaveRecord();
                 return 7;
 
             case "kohai_jet":
                 Record.save.recordKey[8] = key;
+                Record.SaveRecord();
                 return 8;
 
             default:

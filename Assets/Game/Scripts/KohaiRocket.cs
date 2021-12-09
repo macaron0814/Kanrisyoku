@@ -15,6 +15,9 @@ public class KohaiRocket : MonoBehaviour
     [SerializeField]
     private GameObject explosion,critical;
 
+    [SerializeField]
+    private bool isRandom;
+
     private Boss boss;
 
     // Start is called before the first frame update
@@ -28,6 +31,7 @@ public class KohaiRocket : MonoBehaviour
             RocketFiring();
             Sound.SoundPlaySE(8);
         }
+        if (isRandom && Random.Range(0, 100) < 85) Destroy(gameObject);
     }
 
     void Update()
@@ -44,7 +48,6 @@ public class KohaiRocket : MonoBehaviour
         //ランダムで発射位置をセット
         float sx = Random.Range(-7, -2);
         float sy = Random.Range(-2,  3);
-
 
         StartCoroutine
         (
@@ -109,6 +112,7 @@ public class KohaiRocket : MonoBehaviour
         {
             kohaiRocket = Instantiate(kohaiRocket, player.transform.localPosition, Quaternion.identity);
             kohaiRocket.GetComponent<KohaiRocket>().isRocket = true;
+            if (isRandom) { Sound.SoundPlaySE(31); }
             Destroy(this.gameObject);
         }
 

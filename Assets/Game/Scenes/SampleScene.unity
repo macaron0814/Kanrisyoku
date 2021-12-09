@@ -416,7 +416,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 72e28157a7cdb9541b6dec32fca0e5cd, type: 3}
   - {fileID: 8300000, guid: 4b8acfbce1b21aa41ab206b3efa610d2, type: 3}
   se:
-  - {fileID: 8300000, guid: 2ad0ca3921a843347afe3d375d3ceb98, type: 3}
+  - {fileID: 8300000, guid: 23df424c739a66f4aa6a0582de690c83, type: 3}
   - {fileID: 8300000, guid: 457314c42fcaaef45819d3db0720e1b5, type: 3}
   - {fileID: 8300000, guid: 081c04b8233e36c4eabfcffb5393e597, type: 3}
   - {fileID: 8300000, guid: 4d78ecf3736a172438be8c17f9ac0fe4, type: 3}
@@ -447,6 +447,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dabae69a8c5eeab4ca3645d6d7e5caad, type: 3}
   - {fileID: 8300000, guid: 1f82571e5b96b524c9e81117fcfb3337, type: 3}
   - {fileID: 8300000, guid: dc250d30ec819744b911d04d7bbe9f52, type: 3}
+  - {fileID: 8300000, guid: 1fd5f37a434abd949a72d73d28f11c0d, type: 3}
+  - {fileID: 8300000, guid: 0220cdef600b1ec479d51a3707e79692, type: 3}
 --- !u!4 &22553373
 Transform:
   m_ObjectHideFlags: 0
@@ -11167,12 +11169,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   landmine: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  flash: {fileID: 0}
-  smoke: {fileID: 0}
-  explosion: {fileID: 0}
+  spriteRenderer: {fileID: 1133427760}
+  flash: {fileID: 2122980809}
+  smoke: {fileID: 3320048349479599835, guid: 44601d75ca5d4a042bef2fa25f4354d9, type: 3}
+  explosion: {fileID: 3495029125308151975, guid: 29af22ceb75cbb84fa9ce30d6d9da439, type: 3}
   bossHP: 0
-  bossName: 0
+  bossName: 2
 --- !u!1 &1136559739
 GameObject:
   m_ObjectHideFlags: 0

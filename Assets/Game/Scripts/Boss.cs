@@ -284,6 +284,7 @@ public class Boss : MonoBehaviour
         //アニメーション処理
         anim.SetBool("isAction1", false);
         anim.SetBool("isAction2", false);
+        anim.SetBool("isAction3", false);
         flash.SetActive(true);
 
         //音処理
@@ -314,6 +315,7 @@ public class Boss : MonoBehaviour
             //アニメーション処理
             anim.SetBool("isAction1", false);
             anim.SetBool("isAction2", false);
+            anim.SetBool("isAction3", false);
 
             yield return new WaitForSeconds(4.0f);
         }
@@ -321,6 +323,7 @@ public class Boss : MonoBehaviour
         //死亡アニメーション処理
         anim.SetBool("isAction1", false);
         anim.SetBool("isAction2", false);
+        anim.SetBool("isAction3", false);
         anim.SetBool("isDeath", true);
         yield return new WaitForSeconds(3.0f);
 
