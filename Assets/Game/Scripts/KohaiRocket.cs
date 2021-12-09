@@ -31,7 +31,7 @@ public class KohaiRocket : MonoBehaviour
             RocketFiring();
             Sound.SoundPlaySE(8);
         }
-        if (isRandom && Random.Range(0, 100) < 85) Destroy(gameObject);
+        if (isRandom && Random.Range(0, 100) < 95) Destroy(gameObject);
     }
 
     void Update()
