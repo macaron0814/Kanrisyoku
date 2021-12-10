@@ -368,7 +368,7 @@ public class Boss : MonoBehaviour
 
         //爆破後に煙を生成
         GameObject smk = Instantiate(smoke, ex.transform.localPosition, Quaternion.identity);
-        smk.transform.parent = this.transform;
+        smk.transform.parent = Camera.main.transform;
 
         //振動
         StartCoroutine(Generic.Shake(0.4f, 0.1f, Camera.main.gameObject));
