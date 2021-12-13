@@ -300,6 +300,14 @@ public class Player : MonoBehaviour
             //5体集めるとジェット発動
             if (ItemSystem.kohai == 5) PlayerStartJet();
         }
+        if(other.tag == "Energy")
+        {
+            //音処理
+            Sound.SoundPlaySE(32);
+
+            Energy.AddEnergy();
+            Destroy(other.gameObject);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)

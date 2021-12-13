@@ -74,6 +74,7 @@ public class WaveConfig : MonoBehaviour
 
                     if (cnt == 0 && ItemSystem.ramen < 30) { waveCategoryRotation[i] = Instantiate(waveCategoryRamen[Random.Range(0, waveCategoryRamen.Length)]); }
                     else { waveCategoryRotation[i] = Instantiate(waveCategory[Random.Range(0, waveCategory.Length)]); }
+                    waveCategoryRotation[i].name = "Wave";
                     waveCategoryRotation[i].transform.parent = transform;
                 }
 
@@ -82,6 +83,7 @@ public class WaveConfig : MonoBehaviour
                     Destroy(waveCategoryRotation[i]);
 
                     waveCategoryRotation[i] = Instantiate(waveCategoryBoss[Random.Range(0, waveCategoryBoss.Length)]);
+                    waveCategoryRotation[i].name = "Wave_BossBattle";
                     waveCategoryRotation[i].transform.parent = transform;
                 }
 

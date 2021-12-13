@@ -20,10 +20,10 @@ public class ItemSystem : MonoBehaviour
 
     private void Start()
     {
-        coin  = 0;
-        metre = 0;
-        ramen = 100;
-        kohai = 0;
+        coin   = 0;
+        metre  = 0;
+        ramen  = 100;
+        kohai  = 0;
         ramenUI.value = ramen;
         ramenUI_HP.value = ramenUI_HP.maxValue = Parameter.save.hpValue;
     }
