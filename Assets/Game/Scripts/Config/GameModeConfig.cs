@@ -13,7 +13,7 @@ public class GameModeConfig : MonoBehaviour
     private GameObject titleUI, gameUI, loadUI, tutorialUI, resultUI, sendenUI, bossBattleUI, bossResultUI, contentsUI;
 
     [SerializeField]
-    private GameObject win, lose, fanfare;
+    private GameObject win, lose, fanfare, loseResult;
 
     [SerializeField]
     private Text coinUI;
@@ -218,6 +218,7 @@ public class GameModeConfig : MonoBehaviour
         {
             lose.SetActive(true);
             Sound.SoundPlaySE(27);
+            loseResult.SetActive(true);
         }
     }
 

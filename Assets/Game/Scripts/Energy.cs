@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Energy : MonoBehaviour
 {
-    [SerializeField] GameObject waveConfig;
     [SerializeField] GameObject energyUI;
     [SerializeField] GameObject kohaiEnergyAction;
 
@@ -14,7 +13,6 @@ public class Energy : MonoBehaviour
 
     public  static float energy = 0;
     private static GameObject eneUI;
-    private static bool isGet;
 
     enum ChargeState
     {
@@ -26,7 +24,6 @@ public class Energy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGet  = false;
         energy = 0;
         eneUI  = energyUI;
         cs = ChargeState.MIN;
@@ -35,20 +32,6 @@ public class Energy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //waveConfigの要素からWave_BossBattleを探索
-        foreach (Transform child in waveConfig.transform)
-        {
-            if (GameModeConfig.sceneType != GameModeConfig.SCENETYPE.BOSSBATTLE) return;
-
-            if (child.name != "Wave_BossBattle") continue;
-
-            //Wave_BossBattleの要素からEnergyを探索
-            foreach (Transform grandChild in child)
-            {
-                if (!isGet && grandChild.tag == "Energy") ActiveEnergy(grandChild.gameObject);
-            }
-        }
-
         //３つ集めると発動
         if (cs == ChargeState.MAX)
         {
@@ -58,20 +41,28 @@ public class Energy : MonoBehaviour
     }
 
     /// <summary>
+    /// Energyがあるかどうかの確認
+    /// </summary>
+    /// <param name="waveCategoryRotation">waveCategoryRotationのObj</param>
+    public void CheckEnergy(GameObject waveCategoryRotation)
+    {
+        //waveCategoryRotationの要素からEnergyを探索
+        foreach (Transform child in waveCategoryRotation.transform)
+        {
+            if (child.tag == "Energy") ActiveEnergy(child.gameObject);
+        }
+    }
+
+    /// <summary>
     /// 一定回数に一度オブジェクトを生成する
     /// </summary>
     /// <param name="energyObj">Energyのオブジェクト</param>
     void ActiveEnergy(GameObject energyObj)
     {
-        if (energy == createinterval)
-        {
-            isGet  = true;
-            energy = 0;
-            return;
-        }
-
-        Destroy(energyObj);
         energy++;
+
+        if (energy % createinterval == 0) return;
+        Destroy(energyObj);
     }
 
     /// <summary>
@@ -80,7 +71,6 @@ public class Energy : MonoBehaviour
     public static void AddEnergy()
     {
         int cnt = 0;
-        isGet = false;
 
         foreach (Transform child in eneUI.transform)
         {

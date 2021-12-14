@@ -19,6 +19,9 @@ public class WaveConfig : MonoBehaviour
     private GameObject[] backWaveCategoryRotation = new GameObject[3];//使用しているbackwave
 
     [SerializeField]
+    private Energy energyConfig; //EnergyConfigのパラメータを参照
+
+    [SerializeField]
     private float scrollSpeed;//スクロールする速度
     public  float startScrollSpeed;//初期状態の速度
     public  float jetBeforeScrollSpeed;//ジェットが発動する前の速度
@@ -85,6 +88,7 @@ public class WaveConfig : MonoBehaviour
                     waveCategoryRotation[i] = Instantiate(waveCategoryBoss[Random.Range(0, waveCategoryBoss.Length)]);
                     waveCategoryRotation[i].name = "Wave_BossBattle";
                     waveCategoryRotation[i].transform.parent = transform;
+                    energyConfig.CheckEnergy(waveCategoryRotation[i]);
                 }
 
                 pos.x = 36;
