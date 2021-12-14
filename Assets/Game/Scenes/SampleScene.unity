@@ -450,6 +450,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1fd5f37a434abd949a72d73d28f11c0d, type: 3}
   - {fileID: 8300000, guid: 0220cdef600b1ec479d51a3707e79692, type: 3}
   - {fileID: 8300000, guid: 3200c79ed5ca5c244aeb9f08446861a0, type: 3}
+  - {fileID: 8300000, guid: 3125311951da69a448460f51ee492cce, type: 3}
 --- !u!4 &22553373
 Transform:
   m_ObjectHideFlags: 0
@@ -1108,6 +1109,7 @@ MonoBehaviour:
   explosion: {fileID: 3495029125308151975, guid: 29af22ceb75cbb84fa9ce30d6d9da439, type: 3}
   bossHP: 50
   bossName: 0
+  isWait: 1
 --- !u!1 &71453240
 GameObject:
   m_ObjectHideFlags: 0
@@ -11476,6 +11478,7 @@ MonoBehaviour:
   explosion: {fileID: 3495029125308151975, guid: 29af22ceb75cbb84fa9ce30d6d9da439, type: 3}
   bossHP: 0
   bossName: 2
+  isWait: 0
 --- !u!1 &1136559739
 GameObject:
   m_ObjectHideFlags: 0
@@ -14730,8 +14733,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveConfig: {fileID: 245006997}
   energyUI: {fileID: 1680816599}
+  kohaiEnergyAction: {fileID: 7593420047803496278, guid: 5acd92713c7226547968fb88d8284d21, type: 3}
   resetColor: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
-  createinterval: 7
+  createinterval: 1
 --- !u!4 &1501410301
 Transform:
   m_ObjectHideFlags: 0
@@ -20817,6 +20821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1680816600}
+  - component: {fileID: 1680816601}
   m_Layer: 0
   m_Name: Energy
   m_TagString: Untagged
@@ -20846,6 +20851,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1680816601
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680816599}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0069d45b0ad42b5468c81198081260dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1707612349
 GameObject:
   m_ObjectHideFlags: 0
@@ -23892,6 +23916,7 @@ MonoBehaviour:
   explosion: {fileID: 3495029125308151975, guid: 29af22ceb75cbb84fa9ce30d6d9da439, type: 3}
   bossHP: 150
   bossName: 1
+  isWait: 0
 --- !u!1 &1974178977
 GameObject:
   m_ObjectHideFlags: 0

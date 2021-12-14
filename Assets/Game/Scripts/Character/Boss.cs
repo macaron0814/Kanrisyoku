@@ -34,6 +34,9 @@ public class Boss : MonoBehaviour
     }
     public Boss_Name bossName;
 
+    [Header("デバック用")]
+    [SerializeField] bool isWait;
+
     public enum Boss_Parameter
     {
         ALIVE,
@@ -53,6 +56,7 @@ public class Boss : MonoBehaviour
         explosionHp = bossHP / 4;
         colorHp = 1 / (float)bossHP;
 
+        if (isWait) return;
         if (bossName == Boss_Name.JOSHI)  StartCoroutine(BossAction1());
         if (bossName == Boss_Name.SYACHO) StartCoroutine(BossAction2());
     }

@@ -7,6 +7,7 @@ public class Energy : MonoBehaviour
 {
     [SerializeField] GameObject waveConfig;
     [SerializeField] GameObject energyUI;
+    [SerializeField] GameObject kohaiEnergyAction;
 
     [SerializeField] Color resetColor;
     [SerializeField] int   createinterval = 30;
@@ -15,12 +16,20 @@ public class Energy : MonoBehaviour
     private static GameObject eneUI;
     private static bool isGet;
 
+    enum ChargeState
+    {
+        MIN,
+        MAX
+    }
+    private static ChargeState cs;
+
     // Start is called before the first frame update
     void Start()
     {
         isGet  = false;
         energy = 0;
         eneUI  = energyUI;
+        cs = ChargeState.MIN;
     }
 
     // Update is called once per frame
@@ -38,6 +47,13 @@ public class Energy : MonoBehaviour
             {
                 if (!isGet && grandChild.tag == "Energy") ActiveEnergy(grandChild.gameObject);
             }
+        }
+
+        //３つ集めると発動
+        if (cs == ChargeState.MAX)
+        {
+            StartCoroutine(EnergyAction());
+            cs = ChargeState.MIN;
         }
     }
 
@@ -63,6 +79,7 @@ public class Energy : MonoBehaviour
     /// </summary>
     public static void AddEnergy()
     {
+        int cnt = 0;
         isGet = false;
 
         foreach (Transform child in eneUI.transform)
@@ -73,7 +90,30 @@ public class Energy : MonoBehaviour
                 child.GetComponent<Image>().color  = Color.white;
                 break;
             }
-
+            cnt++;
         }
+        if(cnt == 2) cs = ChargeState.MAX;
+    }
+
+    /// <summary>
+    /// 3つ集めると発動するAction
+    /// </summary>
+    /// <returns>待機時間</returns>
+    IEnumerator EnergyAction()
+    {
+        Animator anim = eneUI.GetComponent<Animator>();
+        anim.Play("Charge", 0, 0.0f);
+
+        anim.enabled = true;
+        yield return new WaitForSeconds(1);
+
+        Sound.SoundPlaySE(34);
+        StartCoroutine(Generic.Shake(0.3f, 0.2f, Camera.main.gameObject));
+        yield return new WaitForSeconds(1);
+
+        anim.enabled = false;
+        Instantiate(kohaiEnergyAction);
+
+        foreach (Transform child in eneUI.transform) child.GetComponent<Image>().color = resetColor;
     }
 }
