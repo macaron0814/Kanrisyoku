@@ -24,7 +24,7 @@ public class Smoke : MonoBehaviour
     {
         enemyPos = enemyTram.localPosition;
         Vector3 vec = enemyStartPos - enemyPos;
-        transform.localPosition = new Vector3(startPos.x - vec.x, startPos.y - vec.y, 1);
+        transform.localPosition = new Vector3(startPos.x - vec.x, startPos.y - vec.y, 10);
 
         if (Boss.bossPram == Boss.Boss_Parameter.DEATH) Destroy(gameObject);
     }

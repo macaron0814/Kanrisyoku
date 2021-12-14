@@ -38,6 +38,8 @@ public class Energy : MonoBehaviour
             StartCoroutine(EnergyAction());
             cs = ChargeState.MIN;
         }
+
+        if (Boss.bossPram == Boss.Boss_Parameter.DEATH) Destroy(gameObject);
     }
 
     /// <summary>

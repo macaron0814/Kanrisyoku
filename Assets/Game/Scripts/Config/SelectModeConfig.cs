@@ -21,8 +21,16 @@ public class SelectModeConfig : MonoBehaviour
 
 #if UNITY_IOS
         iOSRankingUtility.Auth();
-        ShowAttDialog.RequestIDFA();
+        StartCoroutine(IntervalTimeIDFA());
 #endif
+    }
+    IEnumerator IntervalTimeIDFA()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2.0f);
+            ShowAttDialog.RequestIDFA();
+        }
     }
 
     // Update is called once per frame
