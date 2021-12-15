@@ -203,13 +203,12 @@ public class Boss : MonoBehaviour
                     if (isSyacho) SyachoAction(bullet.transform);
 
                     //角度(裏)
-                    if (isKaicho)
+                    else if (isKaicho)
                     {
                         if(num == 0) SyachoAction(bullet.transform);
                         if(num == 3) KaichoAction(bullet.transform);
                     }
-
-                    StartCoroutine(Sound.SoundPlaySEforCountDown(13, 1.0f));
+                    else StartCoroutine(Sound.SoundPlaySEforCountDown(13, 1.0f));
 
                     yield return new WaitForSeconds(Random.Range(speed.Item1, speed.Item2));
 
@@ -318,6 +317,7 @@ public class Boss : MonoBehaviour
             if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(vecCenterDown[Random.Range(0, vecCenterDown.Length)]);
             if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y > 0) bossTrans.Rotate(vecCenterUp[Random.Range(0, vecCenterUp.Length)]);
         }
+        StartCoroutine(Sound.SoundPlaySEforCountDown(13, 1.0f));
     }
 
 
@@ -344,7 +344,7 @@ public class Boss : MonoBehaviour
             if (bossTrans.localPosition == bullet1Pos[2])
             {
                 if (!isRot) isRot = true;
-                else bossChildTrans.Rotate(vecUp[Random.Range(0, vecUp.Length)]);
+                else bossChildTrans.Rotate(vecUp[1]);
             }
 
             //真ん中
@@ -358,9 +358,10 @@ public class Boss : MonoBehaviour
             if (bossTrans.localPosition == bullet1Pos[0])
             {
                 if (!isRot) isRot = true;
-                else bossChildTrans.Rotate(vecDown[1]);
+                else bossChildTrans.Rotate(vecDown[Random.Range(0, vecUp.Length)]);
             }
         }
+        StartCoroutine(Sound.SoundPlaySEforCountDown(36, 1.0f));
     }
 
 

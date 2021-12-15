@@ -175,6 +175,7 @@ public class GameModeConfig : MonoBehaviour
 
         if (BossBattleConfig.syainNumber == 0) Sound.SoundPlayBGM(2);
         if (BossBattleConfig.syainNumber == 1) Sound.SoundPlayBGM(3);
+        if (BossBattleConfig.syainNumber == 2) Sound.SoundPlayBGM(4);
 
         sceneType = SCENETYPE.BOSSBATTLE;
     }
@@ -220,7 +221,7 @@ public class GameModeConfig : MonoBehaviour
             Sound.SoundPlaySE(27);
             loseResult.SetActive(true);
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 
         //ボスの種類ごとにハイスコア更新
         if (Record.save.bestBossBattleScore[BossBattleConfig.syainNumber] < score)
@@ -228,6 +229,7 @@ public class GameModeConfig : MonoBehaviour
             Record.save.bestBossBattleScore[BossBattleConfig.syainNumber] = score;
             Record.SaveRecord();
             newRecord.SetActive(true);
+            Sound.SoundPlaySE(35);
         }
     }
 
