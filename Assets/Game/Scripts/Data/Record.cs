@@ -6,14 +6,16 @@ using System.Linq;
 
 public class SaveRecord
 {
-    //save変数
+    //save変数(実績)
     public bool     firstrun;
     public byte     run;
     public float    runTotalMeter;
     public bool[]   dead = new bool[3];
     public bool     kohaiJet;
 
-    public string[] recordKey = new string[100];
+    public string[] recordKey = new string[100]; //実績を解放しているのかを確認
+
+    public long[] bestBossBattleScore = new long[5];
 }
 
 public static class Record

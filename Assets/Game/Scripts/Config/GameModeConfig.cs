@@ -13,7 +13,7 @@ public class GameModeConfig : MonoBehaviour
     private GameObject titleUI, gameUI, loadUI, tutorialUI, resultUI, sendenUI, bossBattleUI, bossResultUI, contentsUI;
 
     [SerializeField]
-    private GameObject win, lose, fanfare, loseResult;
+    private GameObject win, lose, fanfare, loseResult, newRecord;
 
     [SerializeField]
     private Text coinUI;
@@ -186,19 +186,19 @@ public class GameModeConfig : MonoBehaviour
     /// </summary>
     public IEnumerator BossResult()
     {
-        //スコア送信
-        long score = (long)BossScore.b_point.score;
-
-        //ボスの種類ごとに分けて得点を管理
-        if (BossBattleConfig.syainNumber == 0) iOSRankingUtility.ReportScore("hiBossScore",  score);
-        if (BossBattleConfig.syainNumber == 1) iOSRankingUtility.ReportScore("hiBossScore2", score);
-        if (BossBattleConfig.syainNumber == 2) iOSRankingUtility.ReportScore("hiBossScore3", score);
-
         sceneType = SCENETYPE.BOSSRESULT;
 
         bossBattleUI.SetActive(false); //ボスバトルUI非表示
         bossResultUI.SetActive(true); //ボスリザルトUI表示
         Sound.SoundStop();
+
+        //スコア送信
+        long score = (long)BossScore.b_point.score;
+
+        //ボスの種類ごとに分けて得点を管理
+        if (BossBattleConfig.syainNumber == 0) iOSRankingUtility.ReportScore("hiBossScore", score);
+        if (BossBattleConfig.syainNumber == 1) iOSRankingUtility.ReportScore("hiBossScore2", score);
+        if (BossBattleConfig.syainNumber == 2) iOSRankingUtility.ReportScore("hiBossScore3", score);
 
         yield return new WaitForSeconds(1f);
         Sound.SoundPlaySE(25);
@@ -219,6 +219,15 @@ public class GameModeConfig : MonoBehaviour
             lose.SetActive(true);
             Sound.SoundPlaySE(27);
             loseResult.SetActive(true);
+        }
+        yield return new WaitForSeconds(1);
+
+        //ボスの種類ごとにハイスコア更新
+        if (Record.save.bestBossBattleScore[BossBattleConfig.syainNumber] < score)
+        {
+            Record.save.bestBossBattleScore[BossBattleConfig.syainNumber] = score;
+            Record.SaveRecord();
+            newRecord.SetActive(true);
         }
     }
 

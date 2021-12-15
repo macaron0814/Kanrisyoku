@@ -17,7 +17,7 @@ public class Boss : MonoBehaviour
     [SerializeField] private GameObject smoke;
     [SerializeField] private GameObject explosion;
 
-    public static int damageValue;
+    public static int damageValue; //プレイヤーに与えるダメージ量
 
     [SerializeField] private double bossHP;
     public static double hp;
@@ -59,6 +59,7 @@ public class Boss : MonoBehaviour
         if (isWait) return;
         if (bossName == Boss_Name.JOSHI)  StartCoroutine(BossAction1());
         if (bossName == Boss_Name.SYACHO) StartCoroutine(BossAction2());
+        if (bossName == Boss_Name.KAICHO) StartCoroutine(BossAction3());
     }
 
     private void Update()
@@ -130,6 +131,39 @@ public class Boss : MonoBehaviour
 
 
     /// <summary>
+    /// 会長の攻撃パターン
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator BossAction3()
+    {
+        damageValue = 100;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(10.0f);
+
+            //死んでたら処理をやめる
+            if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
+
+            int cnt = 0;
+            switch (cnt)
+            {
+                case 0:
+                    yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 1.0f), 30, false, true));
+                    break;
+                case 1:
+                    yield return StartCoroutine(ActionType(1, "isAction3", (1.5f, 2.5f), 15, true));
+                    break;
+                case 2:
+                    yield return StartCoroutine(ActionType(2, "isAction2", (0.75f, 0.75f), 20));
+                    break;
+            }
+        }
+    }
+
+
+
+    /// <summary>
     /// 攻撃パターン
     /// </summary>
     /// <param name="num">番号で攻撃の種類を選択</param>
@@ -138,11 +172,9 @@ public class Boss : MonoBehaviour
     /// <param name="shotCount">攻撃回数</param>
     /// <param name="isRot">回転するかどうか</param>
     /// <returns></returns>
-    IEnumerator ActionType(int num, string animName, (float, float) speed, int shotCount, bool isSyacho = false)
+    IEnumerator ActionType(int num, string animName, (float, float) speed, int shotCount, bool isSyacho = false, bool isKaicho = false)
     {
         int actionCount = 0;
-        Transform bossTrans, playerTrans;
-        playerTrans = player.transform;
 
         switch (num)
         {
@@ -157,30 +189,24 @@ public class Boss : MonoBehaviour
                     //死んでたら処理をやめる
                     if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
 
+                    if (isKaicho)
+                    {
+                        int[] rand = { 0, 3 };
+                        num = rand[Random.Range(0, rand.Length)];
+                    }
+
                     //コの生成
-                    GameObject bullet = bullet = Instantiate(kotodama[num], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
+                    GameObject bullet = Instantiate(kotodama[num], bullet1Pos[Random.Range(0, bullet1Pos.Length)], Quaternion.identity);
                     Destroy(bullet, 5);
 
                     //角度
-                    if (isSyacho)
+                    if (isSyacho) SyachoAction(bullet.transform);
+
+                    //角度(裏)
+                    if (isKaicho)
                     {
-                        bossTrans   = bullet.transform;
-
-                        Vector3[] vecUp   = { new Vector3(0, 0, -15), new Vector3(0, 0, -35) };
-                        Vector3[] vecDown = { new Vector3(0, 0,  15), new Vector3(0, 0,  35) };
-                        Vector3[] vecCenterUp   = { new Vector3(0, 0, -15), new Vector3(0, 0, -20) };
-                        Vector3[] vecCenterDown = { new Vector3(0, 0, 15), new Vector3(0, 0,   20) };
-
-                        if (Random.Range(0, 100) % 2 == 0)
-                        {
-                            //上下
-                            if (bossTrans.localPosition == bullet1Pos[0] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(vecDown[Random.Range(0, vecDown.Length)]);
-                            if (bossTrans.localPosition == bullet1Pos[2] && playerTrans.localPosition.y >  0) bossTrans.Rotate(vecUp[Random.Range(0, vecUp.Length)]);
-
-                            //真ん中
-                            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(vecCenterDown[Random.Range(0, vecCenterDown.Length)]);
-                            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y >  0) bossTrans.Rotate(vecCenterUp[Random.Range(0, vecCenterUp.Length)]);
-                        }
+                        if(num == 0) SyachoAction(bullet.transform);
+                        if(num == 3) KaichoAction(bullet.transform);
                     }
 
                     StartCoroutine(Sound.SoundPlaySEforCountDown(13, 1.0f));
@@ -265,6 +291,78 @@ public class Boss : MonoBehaviour
                 break;
         }
     }
+
+
+
+    /// <summary>
+    /// 社長、会長専用アクション
+    /// </summary>
+    /// <param name="bossTrans">社長のTransform</param>
+    private void SyachoAction(Transform bossTrans)
+    {
+        Transform playerTrans;
+        playerTrans = player.transform;
+
+        Vector3[] vecUp = { new Vector3(0, 0, -15), new Vector3(0, 0, -35) };
+        Vector3[] vecDown = { new Vector3(0, 0, 15), new Vector3(0, 0, 35) };
+        Vector3[] vecCenterUp = { new Vector3(0, 0, -15), new Vector3(0, 0, -20) };
+        Vector3[] vecCenterDown = { new Vector3(0, 0, 15), new Vector3(0, 0, 20) };
+
+        if (Random.Range(0, 100) % 2 == 0)
+        {
+            //上下
+            if (bossTrans.localPosition == bullet1Pos[0] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(vecDown[Random.Range(0, vecDown.Length)]);
+            if (bossTrans.localPosition == bullet1Pos[2] && playerTrans.localPosition.y > 0) bossTrans.Rotate(vecUp[Random.Range(0, vecUp.Length)]);
+
+            //真ん中
+            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y <= 0) bossTrans.Rotate(vecCenterDown[Random.Range(0, vecCenterDown.Length)]);
+            if (bossTrans.localPosition == bullet1Pos[1] && playerTrans.localPosition.y > 0) bossTrans.Rotate(vecCenterUp[Random.Range(0, vecCenterUp.Length)]);
+        }
+    }
+
+
+
+    /// <summary>
+    /// 会長専用アクション
+    /// </summary>
+    /// <param name="bossTrans">会長のTransform</param>
+    private void KaichoAction(Transform bossTrans)
+    {
+        Vector3 playerPos;
+        playerPos = player.transform.localPosition;
+
+        bool isRot = false;
+
+        foreach (Transform bossChildTrans in bossTrans)
+        {
+            Vector3[] vecUp = { new Vector3(0, 0, -15), new Vector3(0, 0, -35) };
+            Vector3[] vecDown = { new Vector3(0, 0, 15), new Vector3(0, 0, 35) };
+            Vector3[] vecCenterUp = { new Vector3(0, 0, -15), new Vector3(0, 0, -20) };
+            Vector3[] vecCenterDown = { new Vector3(0, 0, 15), new Vector3(0, 0, 20) };
+
+            //上
+            if (bossTrans.localPosition == bullet1Pos[2])
+            {
+                if (!isRot) isRot = true;
+                else bossChildTrans.Rotate(vecUp[Random.Range(0, vecUp.Length)]);
+            }
+
+            //真ん中
+            if (bossTrans.localPosition == bullet1Pos[1])
+            {
+                if (!isRot) { bossChildTrans.Rotate(vecCenterUp[1]); isRot = true; }
+                else bossChildTrans.Rotate(vecCenterDown[1]);
+            }
+
+            //下
+            if (bossTrans.localPosition == bullet1Pos[0])
+            {
+                if (!isRot) isRot = true;
+                else bossChildTrans.Rotate(vecDown[1]);
+            }
+        }
+    }
+
 
 
     /// <summary>
