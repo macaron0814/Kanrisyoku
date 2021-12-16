@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     GameObject bossBattleHP;
+
+    [SerializeField]
+    Image bossBattleHPImage;
 
     private ContactFilter2D filter2d;
 
@@ -241,6 +245,8 @@ public class Player : MonoBehaviour
         isJump = true;
     }
 
+
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Stage" || collision.gameObject.tag == "Line")
@@ -316,13 +322,20 @@ public class Player : MonoBehaviour
         {
             if (other.transform.localScale.y <= 0.35f) { return; }
 
-            //音処理
-            Sound.SoundPlaySE(12);
-
             //ダメージ処理
             int damage = Parameter.save.defValue - Boss.damageValue;
             if (damage > 0) damage = 0;
-            itemSystem.AddStamina(damage);
+
+            if (other.name == "ShotBlack")
+            {
+                itemSystem.AddStamina(-Boss.damageValue);
+                Sound.SoundPlaySE(37); //音処理
+            }
+            else
+            {
+                itemSystem.AddStamina(damage);
+                Sound.SoundPlaySE(12); //音処理
+            }
 
             //ダメージ効果処理
             damageFlashTime = 2.0f;

@@ -11,11 +11,12 @@ public class ItemSystem : MonoBehaviour
     [SerializeField] private Text kohaiUI;
     [SerializeField] private GameObject kohaiObj;
 
-    public static int   coin = 0;
+    public static int   coin  = 0;
     public static float metre = 0;
     public static float ramen = 0;
     public static float kohai = 0;
-    public static int gameoverPattern = 0;
+    public static int   gameoverPattern = 0;
+
     private bool isKohaiCountInterval; //カウントが連続で増えてしまわないようにフラグで管理
 
     private void Start()
@@ -32,7 +33,6 @@ public class ItemSystem : MonoBehaviour
     {
         if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.GAME)
         {
-
             if (!Player.isJet)
             {
                 ramenUI.value -= 1.0f / 30.0f;

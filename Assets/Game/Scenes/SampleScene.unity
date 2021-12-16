@@ -453,6 +453,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3125311951da69a448460f51ee492cce, type: 3}
   - {fileID: 8300000, guid: b675409d693d652478d8907c102c8793, type: 3}
   - {fileID: 8300000, guid: 01436c25fce1d7649a0303015773b5fd, type: 3}
+  - {fileID: 8300000, guid: bea995133ac81f44dbd70b49602f5934, type: 3}
 --- !u!4 &22553373
 Transform:
   m_ObjectHideFlags: 0
@@ -25336,6 +25337,7 @@ MonoBehaviour:
   - {fileID: 1974178977}
   - {fileID: 1894793254}
   bossBattleHP: {fileID: 1027247738}
+  bossBattleHPImage: {fileID: 1037698522}
   isTouched: 0
 --- !u!58 &2030370031
 CircleCollider2D:
