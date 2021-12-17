@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Sound : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSource_SE;//AudioSource_SEのデータを取得
+
     public static Sound instance;
     public AudioClip[] bgm, se;//bgm,seを取得
     public static AudioClip[] bgm_static, se_static;//bgm,seを取得
     static AudioSource audioSource;//AudioSourceのデータを取得
+    static AudioSource audio_SE;//AudioSource_SEのデータを取得
 
     void Awake()
     {
         bgm_static = bgm;
         se_static = se;
+        audio_SE = audioSource_SE;
 
         // シングルトンかつ、シーン遷移しても破棄されないようにする
         if (instance == null)
@@ -27,6 +31,8 @@ public class Sound : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();//AudioSourceのデータを代入
+        audioSource.volume = SystemSetting.save.bgm;
+        audio_SE.volume    = SystemSetting.save.se;
     }
 
     //BGM再生
@@ -51,13 +57,13 @@ public class Sound : MonoBehaviour
     //SE再生
     public static void SoundPlaySE(int playse)//配列番号
     {
-        audioSource.PlayOneShot(se_static[playse]);//再生
+        audio_SE.PlayOneShot(se_static[playse]);//再生
     }
 
     public static IEnumerator SoundPlaySEforCountDown(int playse, float time)//配列番号
     {
         yield return new WaitForSeconds(time);
-        audioSource.PlayOneShot(se_static[playse]);//再生
+        audio_SE.PlayOneShot(se_static[playse]);//再生
     }
 
     public static void SoundStop()

@@ -138,21 +138,23 @@ public class Boss : MonoBehaviour
     {
         damageValue = 100;
 
+        yield return new WaitForSeconds(5.0f);
+
         while (true)
         {
-            yield return new WaitForSeconds(10.0f);
+            yield return new WaitForSeconds(5.0f);
 
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
 
-            int cnt = 2;
+            int cnt = 1;
             switch (cnt)
             {
                 case 0:
                     yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 1.0f), 30, false, true));
                     break;
                 case 1:
-                    yield return StartCoroutine(ActionType(1, "isAction2", (1.5f, 2.5f), 15, true));
+                    yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f), 7));
                     break;
                 case 2:
                     yield return StartCoroutine(ActionType(2, "isAction3", (0.75f, 0.75f), 20, false, true));
