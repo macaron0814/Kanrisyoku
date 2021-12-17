@@ -107,7 +107,7 @@ public class Boss : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(10.0f);
+            yield return new WaitForSeconds(7.5f);
 
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
@@ -145,17 +145,17 @@ public class Boss : MonoBehaviour
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
 
-            int cnt = 0;
+            int cnt = 2;
             switch (cnt)
             {
                 case 0:
                     yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 1.0f), 30, false, true));
                     break;
                 case 1:
-                    yield return StartCoroutine(ActionType(1, "isAction3", (1.5f, 2.5f), 15, true));
+                    yield return StartCoroutine(ActionType(1, "isAction2", (1.5f, 2.5f), 15, true));
                     break;
                 case 2:
-                    yield return StartCoroutine(ActionType(2, "isAction2", (0.75f, 0.75f), 20));
+                    yield return StartCoroutine(ActionType(2, "isAction3", (0.75f, 0.75f), 20, false, true));
                     break;
             }
         }
@@ -252,6 +252,18 @@ public class Boss : MonoBehaviour
                 yield return new WaitForSeconds(2.0f);
 
                 GameObject bullet3 = Instantiate(kotodama[num], new Vector3(0, 0, 1), Quaternion.identity);
+                GameObject bulletParent = null;
+                Animator b_animParent = null;
+
+                if (isKaicho)
+                {
+                    bulletParent = bullet3;
+                    bullet3 = bullet3.transform.GetChild(0).gameObject;
+
+                    b_animParent = bulletParent.GetComponent<Animator>();
+                    b_animParent.enabled = false;
+                }
+
                 Animator b_anim = bullet3.GetComponent<Animator>();
 
                 yield return new WaitForSeconds(5.0f);
@@ -271,6 +283,11 @@ public class Boss : MonoBehaviour
                         if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { Generic.DestroyTag("Shot"); yield break; }
 
                         GameObject lm = Instantiate(landmine);
+                        if (isKaicho)
+                        {
+                            lm.transform.localPosition += bulletParent.transform.localPosition;
+                            b_animParent.enabled = true;
+                        }
 
                         Sound.SoundPlaySE(29);
                         yield return new WaitForSeconds(speed.Item1);
@@ -281,7 +298,7 @@ public class Boss : MonoBehaviour
 
                     yield return null;
                 }
-                Destroy(bullet3, 6);
+                Destroy(bullet3, 4);
 
                 anim.SetBool(animName, false);
                 break;

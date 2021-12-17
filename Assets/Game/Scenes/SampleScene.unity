@@ -11967,9 +11967,9 @@ MonoBehaviour:
   kotodama:
   - {fileID: 7511329779904125144, guid: 4002a9b43fe3a664e8bc0e5252067369, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 976239208678439242, guid: fe09c251eb901fb4a9de2f3659efff8e, type: 3}
   - {fileID: 1824961607060459942, guid: 79455851c4e8d2e49a97786c50e037f2, type: 3}
-  landmine: {fileID: 0}
+  landmine: {fileID: 6595443326342532964, guid: 5148125ca01d2aa49bc5b20de83a0abe, type: 3}
   spriteRenderer: {fileID: 1133427760}
   flash: {fileID: 2122980809}
   smoke: {fileID: 3320048349479599835, guid: 44601d75ca5d4a042bef2fa25f4354d9, type: 3}
