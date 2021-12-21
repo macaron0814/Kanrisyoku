@@ -147,11 +147,11 @@ public class Boss : MonoBehaviour
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
 
-            int cnt = 3;
+            int cnt = Random.Range(0, 4);
             switch (cnt)
             {
                 case 0:
-                    yield return StartCoroutine(ActionType(0, "isAction1", (1.0f, 1.0f), 30, false, true));
+                    yield return StartCoroutine(ActionType(0, "isAction1", (0.75f, 0.75f), 20, false, true));
                     break;
                 case 1:
                     yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f), 7));
@@ -160,7 +160,7 @@ public class Boss : MonoBehaviour
                     yield return StartCoroutine(ActionType(2, "isAction3", (0.75f, 0.75f), 25, false, true));
                     break;
                 case 3:
-                    yield return StartCoroutine(ActionType(3, "isAction3", (0.0f, 0.35f), 30, false, true));
+                    yield return StartCoroutine(ActionType(3, "isAction4", (0.0f, 0.35f), 20, false, true));
                     break;
             }
         }
@@ -457,6 +457,7 @@ public class Boss : MonoBehaviour
         anim.SetBool("isAction1", false);
         anim.SetBool("isAction2", false);
         anim.SetBool("isAction3", false);
+        anim.SetBool("isAction4", false);
         flash.SetActive(true);
 
         //音処理
@@ -488,6 +489,7 @@ public class Boss : MonoBehaviour
             anim.SetBool("isAction1", false);
             anim.SetBool("isAction2", false);
             anim.SetBool("isAction3", false);
+            anim.SetBool("isAction4", false);
 
             yield return new WaitForSeconds(4.0f);
         }
@@ -496,6 +498,7 @@ public class Boss : MonoBehaviour
         anim.SetBool("isAction1", false);
         anim.SetBool("isAction2", false);
         anim.SetBool("isAction3", false);
+        anim.SetBool("isAction4", false);
         anim.SetBool("isDeath", true);
         yield return new WaitForSeconds(3.0f);
 

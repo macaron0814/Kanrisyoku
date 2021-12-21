@@ -455,6 +455,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b675409d693d652478d8907c102c8793, type: 3}
   - {fileID: 8300000, guid: 01436c25fce1d7649a0303015773b5fd, type: 3}
   - {fileID: 8300000, guid: bea995133ac81f44dbd70b49602f5934, type: 3}
+  - {fileID: 8300000, guid: f936956c44944d74badef7c33ec34190, type: 3}
 --- !u!4 &22553373
 Transform:
   m_ObjectHideFlags: 0
@@ -11976,7 +11977,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1133427760}
   flash: {fileID: 2122980809}
   smoke: {fileID: 3320048349479599835, guid: 44601d75ca5d4a042bef2fa25f4354d9, type: 3}
-  explosion: {fileID: 3495029125308151975, guid: 9c2711b36d70b434685187d33b67bf03, type: 3}
+  explosion: {fileID: 3495029125308151975, guid: 29af22ceb75cbb84fa9ce30d6d9da439, type: 3}
   bossHP: 300
   bossName: 2
   isWait: 0

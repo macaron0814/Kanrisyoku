@@ -19,7 +19,7 @@ public class SyainRocket : MonoBehaviour
         transform.eulerAngles -= new Vector3(0, 0, 90);
 
         RocketFiring();
-        Sound.SoundPlaySE(8);
+        Sound.SoundPlaySE(38);
     }
 
     void Update()
