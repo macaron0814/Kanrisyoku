@@ -147,7 +147,7 @@ public class Boss : MonoBehaviour
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
 
-            int cnt = 1;
+            int cnt = 3;
             switch (cnt)
             {
                 case 0:
@@ -157,7 +157,10 @@ public class Boss : MonoBehaviour
                     yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f), 7));
                     break;
                 case 2:
-                    yield return StartCoroutine(ActionType(2, "isAction3", (0.75f, 0.75f), 20, false, true));
+                    yield return StartCoroutine(ActionType(2, "isAction3", (0.75f, 0.75f), 25, false, true));
+                    break;
+                case 3:
+                    yield return StartCoroutine(ActionType(3, "isAction3", (0.0f, 0.35f), 30, false, true));
                     break;
             }
         }
@@ -303,6 +306,47 @@ public class Boss : MonoBehaviour
                 Destroy(bullet3, 4);
 
                 anim.SetBool(animName, false);
+                break;
+
+            //マ
+            case 3:
+                GameObject bullet5 = Instantiate(kotodama[4], new Vector3(6.5f, 0, 1), Quaternion.identity);
+                Animator bAnim = bullet5.GetComponent<Animator>();
+                float time = 0.0f;
+
+                yield return new WaitForSeconds(3.0f);
+                bAnim.SetBool("isStart", true);
+
+                bullet5.transform.GetChild(0).gameObject.SetActive(true);
+
+                while (actionCount < shotCount)
+                {
+                    if (bAnim.GetCurrentAnimatorStateInfo(0).IsName("Bullet5")) yield return null;
+
+                    time += Time.deltaTime;
+
+                    if (time > 0) bAnim.enabled = false;
+                    if (time >= speed.Item1)
+                    {
+                        bAnim.Play("Bullet5", 0, 0.0f);
+                        bAnim.enabled = true;
+                        GameObject shot = Instantiate(kotodama[5], new Vector3(4, bullet5.transform.localPosition.y + 0.75f, 1), Quaternion.identity);
+                        shot.name = "Penetrate"; //貫通弾に変更
+                        actionCount++;
+                        time = -speed.Item2;
+                    }
+
+                    float distance = bullet5.transform.localPosition.y - player.transform.localPosition.y;
+                    bullet5.transform.localPosition -= new Vector3(0, distance / 20.0f, 0);
+
+                    yield return null;
+                }
+                bullet5.transform.GetChild(0).gameObject.SetActive(false);
+
+                bAnim.SetBool("isEnd", true);
+                yield return new WaitForSeconds(3.0f);
+
+                Destroy(bullet5);
                 break;
 
             default:

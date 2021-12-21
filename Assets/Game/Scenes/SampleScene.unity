@@ -481,7 +481,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11970,11 +11970,13 @@ MonoBehaviour:
   - {fileID: 4772998561712013530, guid: dc9584249898b594db49c398bd59dbe9, type: 3}
   - {fileID: 976239208678439242, guid: fe09c251eb901fb4a9de2f3659efff8e, type: 3}
   - {fileID: 1824961607060459942, guid: 79455851c4e8d2e49a97786c50e037f2, type: 3}
+  - {fileID: 4505793817130312649, guid: 3ceb338e651a46b43bf364fb5e747a2e, type: 3}
+  - {fileID: 6958167523136426081, guid: 6858f800853bd7e45bfc167993976492, type: 3}
   landmine: {fileID: 6595443326342532964, guid: 5148125ca01d2aa49bc5b20de83a0abe, type: 3}
   spriteRenderer: {fileID: 1133427760}
   flash: {fileID: 2122980809}
   smoke: {fileID: 3320048349479599835, guid: 44601d75ca5d4a042bef2fa25f4354d9, type: 3}
-  explosion: {fileID: 3495029125308151975, guid: 29af22ceb75cbb84fa9ce30d6d9da439, type: 3}
+  explosion: {fileID: 3495029125308151975, guid: 9c2711b36d70b434685187d33b67bf03, type: 3}
   bossHP: 300
   bossName: 2
   isWait: 0

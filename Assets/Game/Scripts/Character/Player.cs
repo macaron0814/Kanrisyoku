@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     private bool isJump;
 
     //ダメージ点滅中かの有無
-    private float damageFlashTime;
+    public static float damageFlashTime;
 
     ItemSystem itemSystem = null;
     WaveConfig waveConfig = null;
@@ -320,7 +320,8 @@ public class Player : MonoBehaviour
     {
         if (damageFlashTime == 0.0f && other.tag == "Shot")
         {
-            if (other.transform.localScale.y <= 0.35f) { return; }
+            //貫通弾でなければ指定サイズ以下はダメージ判定を取らない
+            if (other.name != "Penetrate" && other.transform.localScale.y <= 0.35f) { return; }
 
             //ダメージ処理
             int damage = Parameter.save.defValue - Boss.damageValue;
