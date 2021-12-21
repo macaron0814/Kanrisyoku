@@ -16,6 +16,8 @@ public class SyainRocket : MonoBehaviour
         //自身を削除
         Destroy(this.gameObject,5);
 
+        transform.eulerAngles -= new Vector3(0, 0, 90);
+
         RocketFiring();
         Sound.SoundPlaySE(8);
     }
@@ -35,7 +37,7 @@ public class SyainRocket : MonoBehaviour
         (
             RocketFiringFrame
             (
-                new Vector3(5, transform.localPosition.y, 0), new Vector3(-10, transform.localPosition.y, 0), //位置
+                new Vector3(3.75f, transform.localPosition.y, 0), new Vector3(-10, transform.localPosition.y, 0), //位置
                 transform.eulerAngles, new Vector3(0, 0, -450),         //回転軸
                 3                                                       //速度
              )
@@ -56,6 +58,16 @@ public class SyainRocket : MonoBehaviour
     {
         float time = 0;
         float frameCount = (1.0f / 60.0f * speed);
+        Vector3 startPos = new Vector3(7, currentPos.y, 1);
+
+        //移動
+        while (time < 1)
+        {
+            time += (frameCount * 1.5f);
+            transform.localPosition = Vector3.Lerp(startPos, currentPos, time);
+            yield return null; //1フレーム待機
+        }
+        time = 0;
 
         //移動①
         while (time < 1)
