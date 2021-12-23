@@ -11,6 +11,11 @@ public class FrameConfig : MonoBehaviour
     [SerializeField] private Texture2D[]  colorPalette;
     [SerializeField] private GameObject[] selectFrame;
 
+    private void Start()
+    {
+        SetFrame(Parameter.save.frame);
+    }
+
     /// <summary>
     /// フレームの変更
     /// </summary>
@@ -38,6 +43,11 @@ public class FrameConfig : MonoBehaviour
                 sgb_filter.enabled = true;
                 sgb_filter.colorPalette = colorPalette[1];
                 break;
+
+            default: //それ以外の数字の場合はセーブをしない
+                sgb_filter.enabled = false;
+                RenderSettings.skybox = def;
+                return;
         }
         SelectFrame(num);
     }
@@ -53,5 +63,7 @@ public class FrameConfig : MonoBehaviour
             if(i == num) selectFrame[i].SetActive(true);
             else         selectFrame[i].SetActive(false);
         }
+        Parameter.save.frame = num;
+        Parameter.SaveParameter();
     }
 }

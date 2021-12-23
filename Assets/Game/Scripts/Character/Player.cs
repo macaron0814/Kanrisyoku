@@ -327,7 +327,7 @@ public class Player : MonoBehaviour
             int damage = Parameter.save.defValue - Boss.damageValue;
             if (damage > 0) damage = 0;
 
-            if (other.name == "ShotBlack")
+            if (other.name == "ShotBlack" || other.name == "Penetrate")
             {
                 itemSystem.AddStamina(-Boss.damageValue);
                 Sound.SoundPlaySE(37); //音処理

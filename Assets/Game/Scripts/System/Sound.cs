@@ -16,7 +16,6 @@ public class Sound : MonoBehaviour
     {
         bgm_static = bgm;
         se_static = se;
-        audio_SE = audioSource_SE;
 
         // シングルトンかつ、シーン遷移しても破棄されないようにする
         if (instance == null)
@@ -30,6 +29,7 @@ public class Sound : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audio_SE = audioSource_SE;
         audioSource = gameObject.GetComponent<AudioSource>();//AudioSourceのデータを代入
         audioSource.volume = SystemSetting.save.bgm;
         audio_SE.volume    = SystemSetting.save.se;

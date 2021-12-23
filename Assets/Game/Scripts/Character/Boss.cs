@@ -154,7 +154,7 @@ public class Boss : MonoBehaviour
                     yield return StartCoroutine(ActionType(0, "isAction1", (0.75f, 0.75f), 20, false, true));
                     break;
                 case 1:
-                    yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f), 7));
+                    yield return StartCoroutine(ActionType(1, "isAction2", (2.0f, 2.0f), 7, false, true));
                     break;
                 case 2:
                     yield return StartCoroutine(ActionType(2, "isAction3", (0.75f, 0.75f), 25, false, true));
@@ -239,6 +239,13 @@ public class Boss : MonoBehaviour
                     GameObject bullet2 = null;
                     if(isSyacho) bullet2 = Instantiate(kotodama[num], new Vector3(Random.Range(5, 17), kotodama[num].transform.localPosition.y, 1), Quaternion.identity);
                     else         bullet2 = Instantiate(kotodama[num], new Vector3(Random.Range(9, 17), kotodama[num].transform.localPosition.y, 1), Quaternion.identity);
+
+                    //子オブジェクトの名前変更(防御貫通仕様に変更)
+                    if (isKaicho)
+                    {
+                        bullet2.transform.GetChild(0).name = "ShotBlack";
+                        bullet2.transform.GetChild(1).name = "ShotBlack";
+                    }
                     Destroy(bullet2, 7);
 
                     if (speed.Item1 == speed.Item2) yield return new WaitForSeconds(speed.Item1);
