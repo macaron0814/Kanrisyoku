@@ -3,32 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class SaveParameter
+public class SaveSystemData
 {
     //save変数
-    public int    atkLevel = 1;
-    public double atkValue = 1;
-    public int    atkCost  = 10;
-    public int    defLevel = 1;
-    public int    defValue = 1;
-    public int    defCost  = 10;
-    public int    hpLevel  = 1;
-    public int    hpValue  = 100;
-    public int    hpCost   = 10;
-    public int    coin     = 0;
+    public int setFrame = 0;
+    public int frameUnlock = 0;
 }
 
-public static class Parameter
+public static class SystemData
 {
     private static string filePath;//ファイルのパスを登録
-    public  static SaveParameter save = new SaveParameter();//セーブデータを取得
+    public static SaveSystemData save = new SaveSystemData();//セーブデータを取得
 
     //=================================================
     //セーブ
     //=================================================
-    public static void SaveParameter()
+    public static void SaveSystemData()
     {
-        filePath = Application.persistentDataPath + "/" + ".saveData.json";
+        filePath = Application.persistentDataPath + "/" + ".saveSystem.json";
 
         string json = JsonUtility.ToJson(save);
 
@@ -42,9 +34,9 @@ public static class Parameter
     //ロード
     //=================================================
     [RuntimeInitializeOnLoadMethod()]
-    private static void LoadParameter()
+    private static void LoadSystemData()
     {
-        filePath = Application.persistentDataPath + "/" + ".saveData.json";
+        filePath = Application.persistentDataPath + "/" + ".saveSystem.json";
 
         if (File.Exists(filePath))
         {
@@ -53,7 +45,7 @@ public static class Parameter
             string data = streamReader.ReadToEnd();
             streamReader.Close();
 
-            save = JsonUtility.FromJson<SaveParameter>(data);
+            save = JsonUtility.FromJson<SaveSystemData>(data);
         }
     }
 }

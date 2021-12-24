@@ -12,11 +12,21 @@ public class BossBattleConfig : MonoBehaviour
     public static GameObject[] syaUI;
     public static int syainNumber;
 
+    [SerializeField] private GameObject lockBoss;   //ボスバトルをlockするUIのオブジェクト
+    [SerializeField] private Text       lockBossUI; //ボスバトルをlockするUIのテキスト
+
     // Start is called before the first frame update
     void Start()
     {
         sya = syain;
         syaUI = syainUI;
+
+        if (Record.save.runTotalMeter >= 2000) lockBoss.SetActive(false);
+        else
+        {
+            float unLockMeter = 2000 - Record.save.runTotalMeter;
+            lockBossUI.text = "あと" + unLockMeter.ToString("F0") + "m\n走ると解放";
+        }
     }
 
     // Update is called once per frame

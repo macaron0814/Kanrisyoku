@@ -10,10 +10,17 @@ public class FrameConfig : MonoBehaviour
     [SerializeField] private SGBFilter    sgb_filter;
     [SerializeField] private Texture2D[]  colorPalette;
     [SerializeField] private GameObject[] selectFrame;
+    [SerializeField] private GameObject[] lockFrame;
 
     private void Start()
     {
-        SetFrame(Parameter.save.frame);
+        SetFrame(SystemData.save.setFrame);
+
+        for (int i = 0; i < lockFrame.Length; i++)
+        {
+            //撃破しているボスによってフレームを解放
+            if (i < SystemData.save.frameUnlock) lockFrame[i].SetActive(false);
+        }
     }
 
     /// <summary>
@@ -63,7 +70,7 @@ public class FrameConfig : MonoBehaviour
             if(i == num) selectFrame[i].SetActive(true);
             else         selectFrame[i].SetActive(false);
         }
-        Parameter.save.frame = num;
-        Parameter.SaveParameter();
+        SystemData.save.setFrame = num;
+        SystemData.SaveSystemData();
     }
 }

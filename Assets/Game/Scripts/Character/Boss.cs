@@ -460,6 +460,13 @@ public class Boss : MonoBehaviour
         bossPram = Boss_Parameter.DEATH;
         GameModeConfig.sceneType = GameModeConfig.SCENETYPE.BOSSRESULT;
 
+        //フレーム解放のセーブ処理
+        if(SystemData.save.frameUnlock <= BossBattleConfig.syainNumber)
+        {
+            SystemData.save.frameUnlock = BossBattleConfig.syainNumber + 1;
+            SystemData.SaveSystemData();
+        }
+
         //アニメーション処理
         anim.SetBool("isAction1", false);
         anim.SetBool("isAction2", false);
