@@ -16,6 +16,9 @@ public class GameModeConfig : MonoBehaviour
     private GameObject win, lose, fanfare, loseResult, newRecord;
 
     [SerializeField]
+    private Notification notification;
+
+    [SerializeField]
     private Text coinUI;
 
     public enum SCENETYPE
@@ -34,6 +37,8 @@ public class GameModeConfig : MonoBehaviour
     void Start()
     {
         loadUI.SetActive(true); //初回起動時にロードを挟み忘れた場合が多発したため、強制的に表示
+
+        if(sceneType == SCENETYPE.TITLE) notification.ActiveNotification();
 
         if (sceneType == SCENETYPE.GAME)
         {
@@ -129,6 +134,8 @@ public class GameModeConfig : MonoBehaviour
 
         Record.UpdateRecord(Record.RecordList.DEAD, ItemSystem.gameoverPattern);
 
+        if (Record.save.runTotalMeter >= 2000) Record.UpdateRecord(Record.RecordList.OPENBOSSBATTLE);
+
         Record.ClearRecord();
 
         Parameter.save.coin += ItemSystem.coin;
@@ -200,6 +207,11 @@ public class GameModeConfig : MonoBehaviour
         if (BossBattleConfig.syainNumber == 0) iOSRankingUtility.ReportScore("hiBossScore", score);
         if (BossBattleConfig.syainNumber == 1) iOSRankingUtility.ReportScore("hiBossScore2", score);
         if (BossBattleConfig.syainNumber == 2) iOSRankingUtility.ReportScore("hiBossScore3", score);
+
+        //スコア送信
+
+
+        Record.ClearRecord();
 
         yield return new WaitForSeconds(1f);
         Sound.SoundPlaySE(25);

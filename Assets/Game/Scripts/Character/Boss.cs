@@ -481,8 +481,8 @@ public class Boss : MonoBehaviour
         //オブジェクトの生成と削除
         //=========================================
         {
-            //弾削除
-            Generic.DestroyTag("Shot");
+            Generic.DestroyTag("Shot");   //弾削除
+            Generic.DestroyTag("Energy"); //エネルギー削除
 
             //爆破生成
             for (int i = 0; i < 5; i++)

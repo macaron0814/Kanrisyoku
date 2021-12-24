@@ -8,6 +8,7 @@ public class SaveSystemData
     //save変数
     public int setFrame = 0;
     public int frameUnlock = 0;
+    public string[] waitNotificationName = new string[10] { "", "", "", "", "", "", "", "", "", "" };
 }
 
 public static class SystemData

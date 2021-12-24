@@ -7,15 +7,16 @@ using System.Linq;
 public class SaveRecord
 {
     //save変数(実績)
-    public bool     firstrun;
-    public byte     run;
-    public float    runTotalMeter;
-    public bool[]   dead = new bool[3];
-    public bool     kohaiJet;
+    public bool     firstrun;           //初めて走った
+    public byte     run;                //走った回数
+    public float    runTotalMeter;      //走った距離
+    public bool[]   dead = new bool[3]; //死んだ種類
+    public bool     kohaiJet;           //コーハイジェット発動
+    public bool     openBossBattle;     //ボスバトル解放
 
     public string[] recordKey = new string[100]; //実績を解放しているのかを確認
 
-    public long[] bestBossBattleScore = new long[5];
+    public long[] bestBossBattleScore = new long[5]; //ハイスコア
 }
 
 public static class Record
@@ -32,7 +33,8 @@ public static class Record
         RUNCOUNT,
         RUNTOTALMETER,
         DEAD,
-        KOHAIJET
+        KOHAIJET,
+        OPENBOSSBATTLE
     }
 
     //=================================================
@@ -49,6 +51,12 @@ public static class Record
         if (list == RecordList.DEAD)            save.dead[(int)value] = true;
 
         if (list == RecordList.KOHAIJET)        save.kohaiJet = true;
+
+        if (list == RecordList.OPENBOSSBATTLE)
+        {
+            save.openBossBattle = true;
+            Notification.WaitNotification(Notification.sNotification[0]);
+        }
 
         SaveRecord();
     }
@@ -76,6 +84,9 @@ public static class Record
 
         //コーハイジェット発動
         if (save.kohaiJet) { iOSRankingUtility.ReportProgress("kohai_jet", 100); }
+
+        //ボスバトル解放
+        if (save.openBossBattle) { iOSRankingUtility.ReportProgress("open_bossbattle", 100); }
     }
 
     //=================================================

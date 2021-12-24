@@ -7,6 +7,8 @@ public class Loading : MonoBehaviour
     [SerializeField] Text load;
     [SerializeField] GameObject loadFirst;
 
+    [SerializeField] Notification notification;
+
     static int loadingCount;
     int rand;
 
@@ -32,6 +34,7 @@ public class Loading : MonoBehaviour
         {
             Destroy(gameObject);
             GameModeConfig.sceneType = GameModeConfig.SCENETYPE.TITLE;
+            notification.ActiveNotification();
             Sound.SoundPlayBGM(0);
 
             GoogleAdmob.LoadAdmob(); //広告読み込み

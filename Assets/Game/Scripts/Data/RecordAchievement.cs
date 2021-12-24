@@ -142,6 +142,11 @@ public class RecordAchievement : MonoBehaviour
                 Record.SaveRecord();
                 return 8;
 
+            case "open_bossbattle":
+                Record.save.recordKey[9] = key;
+                Record.SaveRecord();
+                return 9;
+
             default:
                 return -1;
         }
