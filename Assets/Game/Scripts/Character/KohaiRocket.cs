@@ -127,7 +127,7 @@ public class KohaiRocket : MonoBehaviour
                     Sound.SoundPlaySE(20);
 
                     //ダメージ処理
-                    boss.Damage(Parameter.save.atkValue * 1.5f);
+                    boss.Damage(Parameter.save.atkValue * (1.5f + (SystemData.save.bossBattleATK + 1)));
                     boss.Explosion();
 
                     //クリティカルヒット爆風生成
@@ -142,7 +142,7 @@ public class KohaiRocket : MonoBehaviour
                     Sound.SoundPlaySE(10);
 
                     //ダメージ処理
-                    boss.Damage(Parameter.save.atkValue);
+                    boss.Damage(Parameter.save.atkValue * (SystemData.save.bossBattleATK + 1));
                     boss.Explosion();
 
                     //ノーマル爆風生成

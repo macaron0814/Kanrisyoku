@@ -42,12 +42,17 @@ public class Notification : MonoBehaviour
 
         for (int i = 0; i < setNotification.Length; i++)
         {
-            if (setNotification[i] != null && SystemData.save.waitNotificationName[i] == setNotification[i].name)
+            for (int j = 0; j < SystemData.save.waitNotificationName.Length; j++)
             {
-                setNotification[i].SetActive(true);
-                break;
+                if (setNotification[i] != null && SystemData.save.waitNotificationName[j] == setNotification[i].name)
+                {
+                    if (i == 1) SystemData.save.rouletteCount = 0;
+                    setNotification[i].SetActive(true);
+                    Sound.SoundPlaySE(39);
+                    return;
+                }
+                backGround.SetActive(false);
             }
-            backGround.SetActive(false);
         }
         SystemData.SaveSystemData();
     }
@@ -58,12 +63,15 @@ public class Notification : MonoBehaviour
     /// <param name="Obj">参照オブジェクト</param>
     public void NextNotification(GameObject Obj)
     {
-        for (int i = 0; i < setNotification.Length; i++)
+        Sound.SoundPlaySE(7);
+
+        for (int i = 0; i < SystemData.save.waitNotificationName.Length; i++)
         {
-            if (setNotification[i] != null && SystemData.save.waitNotificationName[i] == Obj.name)
+            if (SystemData.save.waitNotificationName[i] == Obj.name)
             {
                 SystemData.save.waitNotificationName[i] = "";
                 Obj.SetActive(false);
+                break;
             }
         }
         ActiveNotification();

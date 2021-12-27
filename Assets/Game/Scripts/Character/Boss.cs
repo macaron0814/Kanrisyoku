@@ -79,7 +79,7 @@ public class Boss : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(10.0f);
+            yield return new WaitForSeconds(10.0f + SystemData.save.bossWait);
 
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
@@ -107,7 +107,7 @@ public class Boss : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(7.5f);
+            yield return new WaitForSeconds(7.5f + SystemData.save.bossWait);
 
             //死んでたら処理をやめる
             if (bossPram == Boss_Parameter.DEATH || GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { yield break; }
@@ -138,7 +138,7 @@ public class Boss : MonoBehaviour
     {
         damageValue = 100;
 
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(5.0f + SystemData.save.bossWait);
 
         while (true)
         {

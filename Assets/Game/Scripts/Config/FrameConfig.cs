@@ -12,6 +12,8 @@ public class FrameConfig : MonoBehaviour
     [SerializeField] private GameObject[] selectFrame;
     [SerializeField] private GameObject[] lockFrame;
 
+    private bool isSE = false;
+
     private void Start()
     {
         SetFrame(SystemData.save.setFrame);
@@ -65,6 +67,9 @@ public class FrameConfig : MonoBehaviour
     /// <param name="num">選択されたフレーム番号</param>
     public void SelectFrame(int num)
     {
+        if (isSE) Sound.SoundPlaySE(40);
+        else isSE = true;
+
         for (int i = 0; i < selectFrame.Length; i++)
         {
             if(i == num) selectFrame[i].SetActive(true);

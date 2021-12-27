@@ -19,6 +19,19 @@ public static class Generic
     }
 
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj">対象オブジェクト</param>
+    /// <param name="waitTime">待機時間</param>
+    /// <returns></returns>
+    public static IEnumerator ActiveObjWaitTime(GameObject obj, float waitTime,bool isActive = true)
+    {
+        yield return new WaitForSeconds(waitTime);
+        obj.SetActive(isActive);
+    }
+
+
 
     /// <summary>
     /// 不要なオブジェクトをタグで削除

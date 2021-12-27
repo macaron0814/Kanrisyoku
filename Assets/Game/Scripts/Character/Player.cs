@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     GameObject[] resultType;
 
     [SerializeField]
+    GameObject[] resultRouletteText;
+
+    [SerializeField]
     GameObject bossBattleHP;
 
     [SerializeField]
@@ -216,6 +219,24 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(2.25f);
         Sound.SoundPlaySE(9);
         isSound = true;
+
+        SystemData.save.rouletteCount++;
+        if (SystemData.save.rouletteCount < SystemData.save.rouletteNolma) 
+        {
+            int cnt = SystemData.save.rouletteNolma - SystemData.save.rouletteCount;
+            resultRouletteText[0].SetActive(true);
+            resultRouletteText[0].GetComponent<Text>().text = "ルーレットまであと" + cnt + "回";
+        }
+        else
+        {
+            resultRouletteText[1].SetActive(true);
+
+            int[] rand = { 5, 10, 15, 20 };
+            SystemData.save.rouletteNolma = rand[Random.Range(0, rand.Length)];
+            SystemData.save.rouletteCount = 100;
+            Notification.WaitNotification(Notification.sNotification[1]);
+        }
+        SystemData.SaveSystemData();
     }
 
     void DestroyEffect()

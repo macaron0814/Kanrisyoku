@@ -6,8 +6,20 @@ using System.IO;
 public class SaveSystemData
 {
     //save変数
+
+    //フレーム
     public int setFrame = 0;
     public int frameUnlock = 0;
+
+    //ボス
+    public float bossWait = 0;
+    public float bossBattleATK = 0;
+
+    //ルーレット
+    public int rouletteNolma = 10;
+    public int rouletteCount = 0;
+
+    //通知
     public string[] waitNotificationName = new string[10] { "", "", "", "", "", "", "", "", "", "" };
 }
 

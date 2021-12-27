@@ -13,7 +13,7 @@ public class GameModeConfig : MonoBehaviour
     private GameObject titleUI, gameUI, loadUI, tutorialUI, resultUI, sendenUI, bossBattleUI, bossResultUI, contentsUI;
 
     [SerializeField]
-    private GameObject win, lose, fanfare, loseResult, newRecord;
+    private GameObject win, lose, fanfare, loseResult, newRecord, rewardBossWait10, rewardBossWait20, rewardATK;
 
     [SerializeField]
     private Notification notification;
@@ -86,6 +86,20 @@ public class GameModeConfig : MonoBehaviour
                 break;
         }
     }
+
+
+
+    /// <summary>
+    /// ボスバトルの表示の画面の報酬の有無
+    /// </summary>
+    public void BossBattlePageReward()
+    {
+        if (SystemData.save.bossWait == 10.0) rewardBossWait10.SetActive(true);
+        if (SystemData.save.bossWait == 20.0) rewardBossWait20.SetActive(true);
+        if (SystemData.save.bossBattleATK != 0.0) rewardATK.SetActive(true);
+    }
+
+
 
     /// <summary>
     /// ゲーム画面切り替え時に関する処理
@@ -196,6 +210,10 @@ public class GameModeConfig : MonoBehaviour
     {
         sceneType = SCENETYPE.BOSSRESULT;
 
+        SystemData.save.bossWait = 0;
+        SystemData.save.bossBattleATK = 0;
+        SystemData.SaveSystemData();
+
         bossBattleUI.SetActive(false); //ボスバトルUI非表示
         bossResultUI.SetActive(true); //ボスリザルトUI表示
         Sound.SoundStop();
@@ -208,10 +226,7 @@ public class GameModeConfig : MonoBehaviour
         if (BossBattleConfig.syainNumber == 1) iOSRankingUtility.ReportScore("hiBossScore2", score);
         if (BossBattleConfig.syainNumber == 2) iOSRankingUtility.ReportScore("hiBossScore3", score);
 
-        //スコア送信
-
-
-        Record.ClearRecord();
+        //Record.ClearRecord();
 
         yield return new WaitForSeconds(1f);
         Sound.SoundPlaySE(25);
