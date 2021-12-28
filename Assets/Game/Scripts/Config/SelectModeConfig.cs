@@ -12,6 +12,7 @@ public class SelectModeConfig : MonoBehaviour
 
     [SerializeField] private Text coinUI;           //コインUI
     [SerializeField] private GameObject coinLackUI; //コインが不足していた場合に表示されるUI
+    [SerializeField] private GameObject[] levelLackUI; //倒している敵の数に応じて上限に制限をかける
 
     [SerializeField] private GameObject levelMax;   //レベル上限を知らせる通知
 
@@ -101,6 +102,22 @@ public class SelectModeConfig : MonoBehaviour
                     return;
                 }
 
+                //ジョーシ撃破前
+                if (Parameter.save.atkLevel >= 10 && SystemData.save.frameUnlock == 0)
+                {
+                    StartCoroutine(LevelLock(SystemData.save.frameUnlock)); return;
+                }
+                //シャチョ撃破前
+                if (Parameter.save.atkLevel >= 25 && SystemData.save.frameUnlock == 1)
+                {
+                    StartCoroutine(LevelLock(SystemData.save.frameUnlock)); return;
+                }
+                //カイチョ撃破前
+                if (Parameter.save.atkLevel >= 50 && SystemData.save.frameUnlock == 2)
+                {
+                    StartCoroutine(LevelLock(SystemData.save.frameUnlock)); return;
+                }
+
                 //レベル上げ
                 Parameter.save.atkLevel++;
                 level[0].text = "Lv" + Parameter.save.atkLevel.ToString();
@@ -145,6 +162,22 @@ public class SelectModeConfig : MonoBehaviour
                     return;
                 }
 
+                //ジョーシ撃破前
+                if (Parameter.save.defLevel >= 15 && SystemData.save.frameUnlock == 0)
+                {
+                    StartCoroutine(LevelLock(SystemData.save.frameUnlock)); return;
+                }
+                //シャチョ撃破前
+                if (Parameter.save.defLevel >= 25 && SystemData.save.frameUnlock == 1)
+                {
+                    StartCoroutine(LevelLock(SystemData.save.frameUnlock)); return;
+                }
+                //カイチョ撃破前
+                if (Parameter.save.defLevel >= 50 && SystemData.save.frameUnlock == 2)
+                {
+                    StartCoroutine(LevelLock(SystemData.save.frameUnlock)); return;
+                }
+
                 //レベル上げ
                 Parameter.save.defLevel++;
                 level[1].text = "Lv" + Parameter.save.defLevel.ToString();
@@ -187,6 +220,22 @@ public class SelectModeConfig : MonoBehaviour
                 {
                     StartCoroutine(CoinLack());
                     return;
+                }
+
+                //ジョーシ撃破前
+                if (Parameter.save.hpLevel >= 15 && SystemData.save.frameUnlock == 0)
+                {
+                    StartCoroutine(LevelLock(SystemData.save.frameUnlock)); return;
+                }
+                //シャチョ撃破前
+                if (Parameter.save.hpLevel >= 25 && SystemData.save.frameUnlock == 1)
+                {
+                    StartCoroutine(LevelLock(SystemData.save.frameUnlock)); return;
+                }
+                //カイチョ撃破前
+                if (Parameter.save.hpLevel >= 50 && SystemData.save.frameUnlock == 2)
+                {
+                    StartCoroutine(LevelLock(SystemData.save.frameUnlock)); return;
                 }
 
                 //レベル上げ
@@ -246,6 +295,20 @@ public class SelectModeConfig : MonoBehaviour
         coinLackUI.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         coinLackUI.SetActive(false);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator LevelLock(int cnt)
+    {
+        //音処理
+        Sound.SoundPlaySE(24);
+
+        levelLackUI[cnt].SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        levelLackUI[cnt].SetActive(false);
     }
 
     /// <summary>

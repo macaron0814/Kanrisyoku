@@ -6,8 +6,8 @@ using System.IO;
 public class SaveSystemSetting
 {
     //save変数
-    public float bgm = 0.5f;
-    public float se  = 0.5f;
+    public float bgm = 0.4f;
+    public float se  = 0.3f;
 }
 
 public static class SystemSetting

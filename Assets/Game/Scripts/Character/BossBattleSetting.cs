@@ -7,11 +7,13 @@ public class BossBattleSetting : MonoBehaviour
 {
     [SerializeField] private Color  [] selectColor;
     [SerializeField] private Outline[] syainIcon;
-
+    [SerializeField] private GameObject[] syainUI;     
     private void OnEnable()
     {
         SelectSyain(0);
-        //BossBattleConfig.syainNumber = 0;
+
+        if (SystemData.save.frameUnlock >= 1) syainUI[1].SetActive(true);
+        if (SystemData.save.frameUnlock >= 2) syainUI[2].SetActive(true);
     }
 
     /// <summary>
