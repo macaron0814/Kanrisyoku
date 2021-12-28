@@ -306,7 +306,8 @@ public class Player : MonoBehaviour
         //アイテムの獲得
         if (other.tag == "Coin")
         {
-            itemSystem.AddCoin();
+            if(other.GetComponent<Coin>().isBoost) itemSystem.AddCoin(2);
+            else itemSystem.AddCoin(); 
             Destroy(other.gameObject);
         }
         if (other.tag == "Ramen")

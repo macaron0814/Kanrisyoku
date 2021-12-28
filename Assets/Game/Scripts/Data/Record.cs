@@ -52,11 +52,7 @@ public static class Record
 
         if (list == RecordList.KOHAIJET)        save.kohaiJet = true;
 
-        if (list == RecordList.OPENBOSSBATTLE)
-        {
-            save.openBossBattle = true;
-            Notification.WaitNotification(Notification.sNotification[0]);
-        }
+        if (list == RecordList.OPENBOSSBATTLE)  save.openBossBattle = true;
 
         SaveRecord();
     }

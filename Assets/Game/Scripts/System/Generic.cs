@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,16 +20,42 @@ public static class Generic
     }
 
 
+
     /// <summary>
-    /// 
+    /// 現在時刻と保存している時刻を比較して指定時間経過したかを確認
     /// </summary>
-    /// <param name="obj">対象オブジェクト</param>
-    /// <param name="waitTime">待機時間</param>
+    /// <param name="saveTime">比較する時間</param>
+    /// <param name="targetTime">数えたい時間</param>
     /// <returns></returns>
-    public static IEnumerator ActiveObjWaitTime(GameObject obj, float waitTime,bool isActive = true)
+    public static bool IsDayTimeCount(int[] saveTime, TimeSpan targetTime)
     {
-        yield return new WaitForSeconds(waitTime);
-        obj.SetActive(isActive);
+        TimeSpan distance
+            = new TimeSpan(
+                DateTime.Now.Day - saveTime[0],
+                DateTime.Now.Hour - saveTime[1],
+                DateTime.Now.Minute - saveTime[2],
+                DateTime.Now.Second - saveTime[3]);
+
+        if (distance > targetTime) return true;
+        else return false;
+    }
+
+
+
+    /// <summary>
+    /// 現在時刻と保存している時刻を比較した結果を返す
+    /// </summary>
+    /// <param name="saveTime">比較する時間</param>
+    /// <returns></returns>
+    public static TimeSpan DayTimeSpan(int[] saveTime)
+    {
+        TimeSpan distance
+            = new TimeSpan(
+                DateTime.Now.Day - saveTime[0],
+                DateTime.Now.Hour - saveTime[1],
+                DateTime.Now.Minute - saveTime[2],
+                DateTime.Now.Second - saveTime[3]);
+        return distance;
     }
 
 
@@ -63,8 +90,8 @@ public static class Generic
 
         while (elapsed < duration)
         {
-            var x = pos.x + Random.Range(-1f, 1f) * magnitude;
-            var y = pos.y + Random.Range(-1f, 1f) * magnitude;
+            var x = pos.x + UnityEngine.Random.Range(-1f, 1f) * magnitude;
+            var y = pos.y + UnityEngine.Random.Range(-1f, 1f) * magnitude;
 
             if (!isUI) { obj.transform.localPosition = new Vector3(x, y, pos.z); }
             else { obj.GetComponent<RectTransform>().position = new Vector3(x, y, pos.z); }

@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -42,6 +42,13 @@ public class GameModeConfig : MonoBehaviour
 
         if (sceneType == SCENETYPE.GAME)
         {
+            if(Generic.IsDayTimeCount(SystemData.save.coinBoostTime, new TimeSpan(0, 0, 10, 0)))
+            {
+                SystemData.save.coinBoost = 0;
+                SystemData.save.bossLoseCount = UnityEngine.Random.Range(3, 7);
+                SystemData.SaveSystemData();
+            }
+
             cameraAnim.SetBool("GameCamera", true);
             titleUI.SetActive(false);
             StartCoroutine("GameFromTitle");
@@ -137,6 +144,8 @@ public class GameModeConfig : MonoBehaviour
         GameModeConfig.sceneType = GameModeConfig.SCENETYPE.RESULT;
         Sound.SoundStop();
 
+        if (Record.save.runTotalMeter >= 2000 && !Record.save.openBossBattle) Notification.WaitNotification(Notification.sNotification[0]);
+
         //スコア送信
         long score = (long)(ItemSystem.metre * 100);
         iOSRankingUtility.ReportScore("hiScore", score);
@@ -212,7 +221,6 @@ public class GameModeConfig : MonoBehaviour
 
         SystemData.save.bossWait = 0;
         SystemData.save.bossBattleATK = 0;
-        SystemData.SaveSystemData();
 
         bossBattleUI.SetActive(false); //ボスバトルUI非表示
         bossResultUI.SetActive(true); //ボスリザルトUI表示
@@ -247,7 +255,16 @@ public class GameModeConfig : MonoBehaviour
             lose.SetActive(true);
             Sound.SoundPlaySE(27);
             loseResult.SetActive(true);
+
+            if (SystemData.save.bossLoseCount == 0)
+            {
+                SystemData.save.coinBoost = 2;
+                Notification.WaitNotification(Notification.sNotification[2]);
+            }
+            else if (SystemData.save.bossLoseCount != 0) SystemData.save.bossLoseCount--;
         }
+        SystemData.SaveSystemData();
+
         yield return new WaitForSeconds(0.5f);
 
         //ボスの種類ごとにハイスコア更新

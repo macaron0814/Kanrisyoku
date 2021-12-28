@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.IO;
 
 public class SaveSystemData
@@ -18,6 +19,13 @@ public class SaveSystemData
     //ルーレット
     public int rouletteNolma = 10;
     public int rouletteCount = 0;
+
+    //コインブースト
+    public int coinBoost = 0;
+    public int[] coinBoostTime = new int[4];
+
+    //コインブーストまでのボスに負けた回数
+    public int bossLoseCount = 3;
 
     //通知
     public string[] waitNotificationName = new string[10] { "", "", "", "", "", "", "", "", "", "" };

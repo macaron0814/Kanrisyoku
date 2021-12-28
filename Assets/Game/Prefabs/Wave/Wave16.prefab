@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 7709697357072399387}
   - component: {fileID: 6429258478954621499}
   - component: {fileID: 5176843033521535248}
+  - component: {fileID: 6486564501062306469}
   m_Layer: 0
   m_Name: Coin (1)
   m_TagString: Coin
@@ -229,6 +230,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &6486564501062306469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4622145201815734701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4764357736985832348
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +323,7 @@ GameObject:
   - component: {fileID: 8975599017185458407}
   - component: {fileID: 5713013642144542407}
   - component: {fileID: 5883447592150367724}
+  - component: {fileID: 8064626510121240072}
   m_Layer: 0
   m_Name: Coin (2)
   m_TagString: Coin
@@ -417,6 +431,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &8064626510121240072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6220820960220450129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7516987407069169878
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +537,7 @@ GameObject:
   - component: {fileID: 5942764044806465410}
   - component: {fileID: 7043621066143723938}
   - component: {fileID: 9174254379408548489}
+  - component: {fileID: 3978742780359288036}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -618,6 +645,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &3978742780359288036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692932571055952436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8755365901894621970
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +668,8 @@ GameObject:
   - component: {fileID: 8082908793204099341}
   - component: {fileID: 2535178131912753293}
   - component: {fileID: 6913743803394667486}
-  - component: {fileID: 1012884495321790034}
+  - component: {fileID: 6186808703658456338}
+  - component: {fileID: 8923448881729266911}
   m_Layer: 0
   m_Name: long
   m_TagString: Line
@@ -728,18 +768,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8654349, y: 10}
   m_EdgeRadius: 0
---- !u!114 &1012884495321790034
-MonoBehaviour:
+--- !u!251 &6186808703658456338
+PlatformEffector2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8755365901894621970}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e0a3cb3812f9124b9a84eae45c92c07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: -0.15
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 150
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 0
+--- !u!61 &8923448881729266911
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755365901894621970}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.13228261, y: 1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.13, y: 6.4}
+    newSize: {x: 2.13, y: 6.4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.8654349, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &161856179593083118
 PrefabInstance:
   m_ObjectHideFlags: 0

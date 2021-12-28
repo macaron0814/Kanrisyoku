@@ -50,9 +50,9 @@ public class ItemSystem : MonoBehaviour
         }
     }
 
-    public void AddCoin()
+    public void AddCoin(int cnt = 1)
     {
-        coin++;
+        coin += cnt;
         coinResultUI.text = coinUI.text = coin.ToString("D4");
         Sound.SoundPlaySE(0);
     }

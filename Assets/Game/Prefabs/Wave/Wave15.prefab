@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 4477006589378924667}
   - component: {fileID: 1001643711245895259}
   - component: {fileID: 1371357546716288368}
+  - component: {fileID: 3781772726609989262}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -201,6 +202,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &3781772726609989262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511790768607602125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2289990342561903409
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +336,7 @@ GameObject:
   - component: {fileID: 479401683298143202}
   - component: {fileID: 3846114942564867522}
   - component: {fileID: 3138625090135330537}
+  - component: {fileID: 4825026920219043486}
   m_Layer: 0
   m_Name: Coin (1)
   m_TagString: Coin
@@ -430,6 +444,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &4825026920219043486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205539556139236948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3334655704388082789
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +501,7 @@ GameObject:
   - component: {fileID: 1213384113445900062}
   - component: {fileID: 2527018637875271998}
   - component: {fileID: 4467361672744094229}
+  - component: {fileID: 1422009560751308782}
   m_Layer: 0
   m_Name: Coin (2)
   m_TagString: Coin
@@ -582,6 +609,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &1422009560751308782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4183208640302955176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4589890308464303432
 GameObject:
   m_ObjectHideFlags: 0
