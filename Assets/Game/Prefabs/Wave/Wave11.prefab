@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoost: 0
 --- !u!1 &1986179749312697371
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoost: 0
 --- !u!1 &4087461962072696708
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoost: 0
 --- !u!1001 &1604326006446146943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -470,6 +473,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3012537319837316009}
     m_Modifications:
+    - target: {fileID: 4339576610106759459, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
+      propertyPath: m_RotationalOffset
+      value: -0.215
+      objectReference: {fileID: 0}
     - target: {fileID: 5979755255312503241, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.62

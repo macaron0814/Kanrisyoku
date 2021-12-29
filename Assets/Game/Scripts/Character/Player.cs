@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
     GameObject[] resultRouletteText;
 
     [SerializeField]
+    GameObject tutorial;
+
+    [SerializeField]
     GameObject bossBattleHP;
 
     [SerializeField]
@@ -68,7 +71,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameModeConfig.sceneType != GameModeConfig.SCENETYPE.GAME && GameModeConfig.sceneType != GameModeConfig.SCENETYPE.BOSSBATTLE) { return; }
+        if (GameModeConfig.sceneType != GameModeConfig.SCENETYPE.TUTORIAL  && 
+            GameModeConfig.sceneType != GameModeConfig.SCENETYPE.GAME &&
+            GameModeConfig.sceneType != GameModeConfig.SCENETYPE.BOSSBATTLE) { return; }
+
         if (ItemSystem.ramen <= 0) { PlayerDestroy(2); }
 
         if (isGameOver) { return; }
@@ -172,7 +178,7 @@ public class Player : MonoBehaviour
         concentrationLine.SetActive(false);
         isJet = false;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2.5f);
 
         spriteRenderer.sortingLayerName = "Player";
     }
@@ -258,6 +264,13 @@ public class Player : MonoBehaviour
     /// </summary>
     void Jump()
     {
+        if(GameModeConfig.sceneType == GameModeConfig.SCENETYPE.TUTORIAL)
+        {
+            tutorial.SetActive(false);
+            SystemData.save.isTutorial = true;
+            SystemData.SaveSystemData();
+            GameModeConfig.sceneType = GameModeConfig.SCENETYPE.GAME;
+        }
         if (GameModeConfig.sceneType == GameModeConfig.SCENETYPE.BOSSRESULT) { return; }
 
         Vector3 force = new Vector3(0.0f, 575.0f, 0.0f);    // 力を設定

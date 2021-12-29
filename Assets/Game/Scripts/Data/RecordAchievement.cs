@@ -147,6 +147,36 @@ public class RecordAchievement : MonoBehaviour
                 Record.SaveRecord();
                 return 9;
 
+            case "joshi":
+                Record.save.recordKey[10] = key;
+                Record.SaveRecord();
+                return 10;
+
+            case "syacho":
+                Record.save.recordKey[11] = key;
+                Record.SaveRecord();
+                return 11;
+
+            case "kaicho":
+                Record.save.recordKey[12] = key;
+                Record.SaveRecord();
+                return 12;
+
+            case "perfect_joshi":
+                Record.save.recordKey[13] = key;
+                Record.SaveRecord();
+                return 13;
+
+            case "perfect_syacho":
+                Record.save.recordKey[14] = key;
+                Record.SaveRecord();
+                return 14;
+
+            case "perfect_kaicho":
+                Record.save.recordKey[15] = key;
+                Record.SaveRecord();
+                return 15;
+
             default:
                 return -1;
         }

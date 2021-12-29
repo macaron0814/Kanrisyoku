@@ -260,6 +260,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8426453025053215594}
     m_Modifications:
+    - target: {fileID: 4339576610106759459, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
+      propertyPath: m_RotationalOffset
+      value: -0.33
+      objectReference: {fileID: 0}
     - target: {fileID: 5979755255312503241, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4

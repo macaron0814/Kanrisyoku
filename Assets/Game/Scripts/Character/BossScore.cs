@@ -46,7 +46,7 @@ public class BossScore : MonoBehaviour
     void OnEnable()
     {
         //条件を満たす場合はスコアが0になる
-        if (b_point.time < 40.0f || b_point.avoid > 100) b_point.avoid = 100;
+        if (b_point.time < 10.0f || b_point.avoid > 100) b_point.avoid = 100;
         if (b_point.penalty || b_point.time  > 1000)     b_point.time  = 1000;
 
         //各スコアの計算

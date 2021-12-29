@@ -13,6 +13,12 @@ public class SaveRecord
     public bool[]   dead = new bool[3]; //死んだ種類
     public bool     kohaiJet;           //コーハイジェット発動
     public bool     openBossBattle;     //ボスバトル解放
+    public bool     joshi;              //ジョーシ撃破
+    public bool     syacho;             //シャチョ撃破
+    public bool     kaicho;             //カイチョ撃破
+    public bool     perfectJoshi;       //ノーミスでジョーシを撃破
+    public bool     perfectSyacho;      //ノーミスでシャチョを撃破
+    public bool     perfectKaicho;      //ノーミスでカイチョを撃破
 
     public string[] recordKey = new string[100]; //実績を解放しているのかを確認
 
@@ -34,7 +40,13 @@ public static class Record
         RUNTOTALMETER,
         DEAD,
         KOHAIJET,
-        OPENBOSSBATTLE
+        OPENBOSSBATTLE,
+        JOSHI,
+        SYACHO,
+        KAICHO,
+        PERFECTJOSHI,
+        PERFECTSYACHO,
+        PERFECTKAICHO
     }
 
     //=================================================
@@ -53,6 +65,10 @@ public static class Record
         if (list == RecordList.KOHAIJET)        save.kohaiJet = true;
 
         if (list == RecordList.OPENBOSSBATTLE)  save.openBossBattle = true;
+
+        if (list == RecordList.JOSHI)  save.joshi = true;
+        if (list == RecordList.SYACHO) save.syacho = true;
+        if (list == RecordList.KAICHO) save.kaicho = true;
 
         SaveRecord();
     }
@@ -83,6 +99,16 @@ public static class Record
 
         //ボスバトル解放
         if (save.openBossBattle) { iOSRankingUtility.ReportProgress("open_bossbattle", 100); }
+
+        //ボス撃破
+        if (save.joshi)  { iOSRankingUtility.ReportProgress("joshi" , 100); }
+        if (save.syacho) { iOSRankingUtility.ReportProgress("syacho", 100); }
+        if (save.kaicho) { iOSRankingUtility.ReportProgress("kaicho", 100); }
+
+        //ボスノーミス撃破
+        if (save.joshi)  { iOSRankingUtility.ReportProgress("perfect_joshi" , 100); }
+        if (save.syacho) { iOSRankingUtility.ReportProgress("perfect_syacho", 100); }
+        if (save.kaicho) { iOSRankingUtility.ReportProgress("perfect_kaicho", 100); }
     }
 
     //=================================================

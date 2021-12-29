@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoost: 0
 --- !u!1 &2289990342561903409
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoost: 0
 --- !u!1 &3334655704388082789
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,6 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d90fe9a25cb951479b5a5019a3d1021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoost: 0
 --- !u!1 &4589890308464303432
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,6 +860,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1003297370661518074}
     m_Modifications:
+    - target: {fileID: 4339576610106759459, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
+      propertyPath: m_RotationalOffset
+      value: -0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 5979755255312503241, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.78
@@ -919,6 +926,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1003297370661518074}
     m_Modifications:
+    - target: {fileID: 4339576610106759459, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
+      propertyPath: m_RotationalOffset
+      value: -0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 5979755255312503241, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.88
@@ -1047,6 +1058,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1003297370661518074}
     m_Modifications:
+    - target: {fileID: 4339576610106759459, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
+      propertyPath: m_RotationalOffset
+      value: -0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 5979755255312503241, guid: fa073ebcfe9751b4c9371e6dc29c57da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.9

@@ -27,6 +27,12 @@ public class SaveSystemData
     //コインブーストまでのボスに負けた回数
     public int bossLoseCount = 3;
 
+    //チューリアル
+    public bool isTutorial;
+
+    //レビュー
+    public bool isReview;
+
     //通知
     public string[] waitNotificationName = new string[10] { "", "", "", "", "", "", "", "", "", "" };
 }

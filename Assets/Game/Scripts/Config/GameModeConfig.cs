@@ -26,6 +26,7 @@ public class GameModeConfig : MonoBehaviour
         LOAD,
         SENDEN,
         TITLE,
+        TUTORIAL,
         GAME,
         RESULT,
         BOSSBATTLE,
@@ -38,7 +39,16 @@ public class GameModeConfig : MonoBehaviour
     {
         loadUI.SetActive(true); //初回起動時にロードを挟み忘れた場合が多発したため、強制的に表示
 
-        if(sceneType == SCENETYPE.TITLE) notification.ActiveNotification();
+        if (sceneType == SCENETYPE.TITLE)
+        {
+            if (!SystemData.save.isReview && SystemData.save.frameUnlock == 1)
+            {
+                ReviewManager.Instance.RequestReview();
+                SystemData.save.isReview = true;
+                SystemData.SaveSystemData();
+            }
+            notification.ActiveNotification();
+        }
 
         if (sceneType == SCENETYPE.GAME)
         {
@@ -113,7 +123,8 @@ public class GameModeConfig : MonoBehaviour
     /// </summary>
     public void ChangeGameScene()
     {
-        sceneType = SCENETYPE.GAME;
+        if (!SystemData.save.isTutorial) sceneType = SCENETYPE.TUTORIAL;
+        else sceneType = SCENETYPE.GAME;
         cameraAnim.SetBool("GameCamera", true);
         titleUI.SetActive(false);
         StartCoroutine("GameFromTitle");
@@ -177,9 +188,7 @@ public class GameModeConfig : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         cameraAnim.enabled = false;
-
-        yield return new WaitForSeconds(3f);
-        tutorialUI.SetActive(false);
+        if (!SystemData.save.isTutorial) tutorialUI.SetActive(true);
     }
 
 
@@ -230,11 +239,25 @@ public class GameModeConfig : MonoBehaviour
         long score = (long)BossScore.b_point.score;
 
         //ボスの種類ごとに分けて得点を管理
-        if (BossBattleConfig.syainNumber == 0) iOSRankingUtility.ReportScore("hiBossScore", score);
-        if (BossBattleConfig.syainNumber == 1) iOSRankingUtility.ReportScore("hiBossScore2", score);
-        if (BossBattleConfig.syainNumber == 2) iOSRankingUtility.ReportScore("hiBossScore3", score);
-
-        //Record.ClearRecord();
+        if (BossBattleConfig.syainNumber == 0)
+        {
+            iOSRankingUtility.ReportScore("hiBossScore", score);
+            Record.UpdateRecord(Record.RecordList.JOSHI);
+            if (BossScore.b_point.avoid == 1000000) { Record.UpdateRecord(Record.RecordList.PERFECTJOSHI); }
+        }
+        else if (BossBattleConfig.syainNumber == 1)
+        {
+            iOSRankingUtility.ReportScore("hiBossScore2", score);
+            Record.UpdateRecord(Record.RecordList.SYACHO);
+            if (BossScore.b_point.avoid == 1000000) { Record.UpdateRecord(Record.RecordList.PERFECTSYACHO); }
+        }
+        else if (BossBattleConfig.syainNumber == 2)
+        {
+            iOSRankingUtility.ReportScore("hiBossScore3", score);
+            Record.UpdateRecord(Record.RecordList.KAICHO);
+            if (BossScore.b_point.avoid == 1000000) { Record.UpdateRecord(Record.RecordList.PERFECTKAICHO); }
+        }
+        Record.ClearRecord();
 
         yield return new WaitForSeconds(1f);
         Sound.SoundPlaySE(25);

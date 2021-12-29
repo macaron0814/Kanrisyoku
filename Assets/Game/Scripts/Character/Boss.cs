@@ -463,7 +463,6 @@ public class Boss : MonoBehaviour
         //フレーム解放のセーブ処理
         if(SystemData.save.frameUnlock <= BossBattleConfig.syainNumber)
         {
-            if (SystemData.save.frameUnlock == 0) { ReviewManager.Instance.RequestReview(); }
             SystemData.save.frameUnlock = BossBattleConfig.syainNumber + 1;
             SystemData.SaveSystemData();
         }
