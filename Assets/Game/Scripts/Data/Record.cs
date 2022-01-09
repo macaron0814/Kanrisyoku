@@ -70,6 +70,10 @@ public static class Record
         if (list == RecordList.SYACHO) save.syacho = true;
         if (list == RecordList.KAICHO) save.kaicho = true;
 
+        if (list == RecordList.PERFECTJOSHI) save.perfectJoshi = true;
+        if (list == RecordList.PERFECTSYACHO) save.perfectSyacho = true;
+        if (list == RecordList.PERFECTKAICHO) save.perfectKaicho = true;
+
         SaveRecord();
     }
 
@@ -106,9 +110,9 @@ public static class Record
         if (save.kaicho) { iOSRankingUtility.ReportProgress("kaicho", 100); }
 
         //ボスノーミス撃破
-        if (save.joshi)  { iOSRankingUtility.ReportProgress("perfect_joshi" , 100); }
-        if (save.syacho) { iOSRankingUtility.ReportProgress("perfect_syacho", 100); }
-        if (save.kaicho) { iOSRankingUtility.ReportProgress("perfect_kaicho", 100); }
+        if (save.perfectJoshi)  { iOSRankingUtility.ReportProgress("perfect_joshi" , 100); }
+        if (save.perfectSyacho) { iOSRankingUtility.ReportProgress("perfect_syacho", 100); }
+        if (save.perfectKaicho) { iOSRankingUtility.ReportProgress("perfect_kaicho", 100); }
     }
 
     //=================================================
@@ -143,6 +147,15 @@ public static class Record
 
             save = JsonUtility.FromJson<SaveRecord>(data);
         }
+    }
+
+    //=================================================
+    //削除
+    //=================================================
+    public static void DeleteRecord()
+    {
+        filePath = Application.persistentDataPath + "/" + ".saveRecord.json";
+        File.Delete(filePath);
     }
 }
 

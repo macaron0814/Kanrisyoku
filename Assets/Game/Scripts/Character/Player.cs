@@ -218,16 +218,8 @@ public class Player : MonoBehaviour
     {
         if (isSound) { yield break; }
 
-        yield return new WaitForSeconds(1f);
-        Sound.SoundPlayBGM(1);
-        resultType[type].SetActive(true);
-
-        yield return new WaitForSeconds(2.25f);
-        Sound.SoundPlaySE(9);
-        isSound = true;
-
         SystemData.save.rouletteCount++;
-        if (SystemData.save.rouletteCount < SystemData.save.rouletteNolma) 
+        if (SystemData.save.rouletteCount < SystemData.save.rouletteNolma)
         {
             int cnt = SystemData.save.rouletteNolma - SystemData.save.rouletteCount;
             resultRouletteText[0].SetActive(true);
@@ -237,12 +229,23 @@ public class Player : MonoBehaviour
         {
             resultRouletteText[1].SetActive(true);
 
-            int[] rand = { 5, 10, 15, 20 };
+            int[] rand = { 5, 10, 15};
             SystemData.save.rouletteNolma = rand[Random.Range(0, rand.Length)];
             SystemData.save.rouletteCount = 100;
             Notification.WaitNotification(Notification.sNotification[1]);
         }
         SystemData.SaveSystemData();
+
+        yield return new WaitForSeconds(1f);
+        Sound.SoundPlayBGM(1);
+        resultType[type].SetActive(true);
+
+        yield return new WaitForSeconds(2.25f);
+        Sound.SoundPlaySE(9);
+        isSound = true;
+
+        for (int i = 0; i < gameModeConfig.resultButton.Length; i++) gameModeConfig.resultButton[i].SetActive(true);
+
     }
 
     void DestroyEffect()

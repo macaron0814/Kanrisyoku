@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Sound : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public class Sound : MonoBehaviour
     static AudioSource audioSource;//AudioSourceのデータを取得
     static AudioSource audio_SE;//AudioSource_SEのデータを取得
 
+    [SerializeField] private Slider slider_BGM, slider_SE;//bgm,seの音量バー
+
     void Awake()
     {
         bgm_static = bgm;
-        se_static = se;
+        se_static  = se;
 
         // シングルトンかつ、シーン遷移しても破棄されないようにする
         if (instance == null)
@@ -31,8 +34,21 @@ public class Sound : MonoBehaviour
     {
         audio_SE = audioSource_SE;
         audioSource = gameObject.GetComponent<AudioSource>();//AudioSourceのデータを代入
+        slider_BGM.value = SystemSetting.save.bgm;
+        slider_SE.value  = SystemSetting.save.se;
+    }
+
+    void Update()
+    {
+        SystemSetting.save.bgm = slider_BGM.value;
+        SystemSetting.save.se  = slider_SE.value;
         audioSource.volume = SystemSetting.save.bgm;
         audio_SE.volume    = SystemSetting.save.se;
+    }
+
+    public void BackButton()
+    {
+        SystemSetting.SaveSystemSetting();
     }
 
     //BGM再生

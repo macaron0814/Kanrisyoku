@@ -15,6 +15,8 @@ public class GameModeConfig : MonoBehaviour
     [SerializeField]
     private GameObject win, lose, fanfare, loseResult, newRecord, rewardBossWait10, rewardBossWait20, rewardATK;
 
+    public GameObject[] resultButton, resultBossButton;
+
     [SerializeField]
     private Notification notification;
 
@@ -239,25 +241,9 @@ public class GameModeConfig : MonoBehaviour
         long score = (long)BossScore.b_point.score;
 
         //ボスの種類ごとに分けて得点を管理
-        if (BossBattleConfig.syainNumber == 0)
-        {
-            iOSRankingUtility.ReportScore("hiBossScore", score);
-            Record.UpdateRecord(Record.RecordList.JOSHI);
-            if (BossScore.b_point.avoid == 1000000) { Record.UpdateRecord(Record.RecordList.PERFECTJOSHI); }
-        }
-        else if (BossBattleConfig.syainNumber == 1)
-        {
-            iOSRankingUtility.ReportScore("hiBossScore2", score);
-            Record.UpdateRecord(Record.RecordList.SYACHO);
-            if (BossScore.b_point.avoid == 1000000) { Record.UpdateRecord(Record.RecordList.PERFECTSYACHO); }
-        }
-        else if (BossBattleConfig.syainNumber == 2)
-        {
-            iOSRankingUtility.ReportScore("hiBossScore3", score);
-            Record.UpdateRecord(Record.RecordList.KAICHO);
-            if (BossScore.b_point.avoid == 1000000) { Record.UpdateRecord(Record.RecordList.PERFECTKAICHO); }
-        }
-        Record.ClearRecord();
+        if (BossBattleConfig.syainNumber == 0) iOSRankingUtility.ReportScore("hiBossScore", score);
+        else if (BossBattleConfig.syainNumber == 1) iOSRankingUtility.ReportScore("hiBossScore2", score);
+        else if (BossBattleConfig.syainNumber == 2) iOSRankingUtility.ReportScore("hiBossScore3", score);
 
         yield return new WaitForSeconds(1f);
         Sound.SoundPlaySE(25);
@@ -266,6 +252,24 @@ public class GameModeConfig : MonoBehaviour
 
         if (Boss.bossPram == Boss.Boss_Parameter.DEATH)
         {
+            //ボスの種類ごとに分けて得点を管理
+            if (BossBattleConfig.syainNumber == 0)
+            {
+                Record.UpdateRecord(Record.RecordList.JOSHI);
+                if (BossScore.b_point.avoid == 1000000) { Record.UpdateRecord(Record.RecordList.PERFECTJOSHI); }
+            }
+            else if (BossBattleConfig.syainNumber == 1)
+            {
+                Record.UpdateRecord(Record.RecordList.SYACHO);
+                if (BossScore.b_point.avoid == 1000000) { Record.UpdateRecord(Record.RecordList.PERFECTSYACHO); }
+            }
+            else if (BossBattleConfig.syainNumber == 2)
+            {
+                Record.UpdateRecord(Record.RecordList.KAICHO);
+                if (BossScore.b_point.avoid == 1000000) { Record.UpdateRecord(Record.RecordList.PERFECTKAICHO); }
+            }
+            Record.ClearRecord();
+
             win.SetActive(true);
             Sound.SoundPlaySE(26);
 
@@ -287,6 +291,8 @@ public class GameModeConfig : MonoBehaviour
             else if (SystemData.save.bossLoseCount != 0) SystemData.save.bossLoseCount--;
         }
         SystemData.SaveSystemData();
+
+        for (int i = 0; i < resultBossButton.Length; i++) resultBossButton[i].SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
 

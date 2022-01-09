@@ -56,4 +56,13 @@ public static class Parameter
             save = JsonUtility.FromJson<SaveParameter>(data);
         }
     }
+
+    //=================================================
+    //削除
+    //=================================================
+    public static void DeleteParameter()
+    {
+        filePath = Application.persistentDataPath + "/" + ".saveData.json";
+        File.Delete(filePath);
+    }
 }

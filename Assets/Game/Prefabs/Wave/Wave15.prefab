@@ -996,6 +996,10 @@ PrefabInstance:
       propertyPath: createRamenValue
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: -8363699095704155328, guid: cecb46214643e0f418ca30c5f246424b, type: 3}
+      propertyPath: n
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3734880296582237450, guid: cecb46214643e0f418ca30c5f246424b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.7

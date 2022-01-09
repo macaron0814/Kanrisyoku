@@ -36,8 +36,6 @@ public class Loading : MonoBehaviour
             GameModeConfig.sceneType = GameModeConfig.SCENETYPE.TITLE;
             notification.ActiveNotification();
             Sound.SoundPlayBGM(0);
-
-            GoogleAdmob.LoadAdmob(); //広告読み込み
         }
     }
 

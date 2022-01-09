@@ -6,8 +6,8 @@ using System.IO;
 public class SaveSystemSetting
 {
     //save変数
-    public float bgm = 0.4f;
-    public float se  = 0.3f;
+    public float bgm = 40;
+    public float se  = 30;
 }
 
 public static class SystemSetting
@@ -20,7 +20,7 @@ public static class SystemSetting
     //=================================================
     public static void SaveSystemSetting()
     {
-        filePath = Application.persistentDataPath + "/" + ".saveData.json";
+        filePath = Application.persistentDataPath + "/" + ".saveSetting.json";
 
         string json = JsonUtility.ToJson(save);
 
@@ -36,7 +36,7 @@ public static class SystemSetting
     [RuntimeInitializeOnLoadMethod()]
     private static void LoadSystemSetting()
     {
-        filePath = Application.persistentDataPath + "/" + ".saveData.json";
+        filePath = Application.persistentDataPath + "/" + ".saveSetting.json";
 
         if (File.Exists(filePath))
         {

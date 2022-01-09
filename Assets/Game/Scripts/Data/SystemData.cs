@@ -75,4 +75,13 @@ public static class SystemData
             save = JsonUtility.FromJson<SaveSystemData>(data);
         }
     }
+
+    //=================================================
+    //削除
+    //=================================================
+    public static void DeleteSystemData()
+    {
+        filePath = Application.persistentDataPath + "/" + ".saveSystem.json";
+        File.Delete(filePath);
+    }
 }

@@ -27,11 +27,10 @@ public class SelectModeConfig : MonoBehaviour
     }
     IEnumerator IntervalTimeIDFA()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(2.0f);
-            ShowAttDialog.RequestIDFA();
-        }
+        yield return new WaitForSeconds(2.0f);
+        ShowAttDialog.RequestIDFA();
+        yield return new WaitForSeconds(1.0f);
+        GoogleAdmob.LoadAdmob(); //広告読み込み
     }
 
     // Update is called once per frame
@@ -53,6 +52,13 @@ public class SelectModeConfig : MonoBehaviour
             value[0].text = Parameter.save.atkCost.ToString();
             value[1].text = Parameter.save.defCost.ToString();
             value[2].text = Parameter.save.hpCost.ToString();
+        }
+
+        //コインが連打によりを下回った場合のバグ修正
+        if (Parameter.save.coin < 0)
+        {
+            Parameter.save.coin = 0;
+            Parameter.SaveParameter();
         }
 
         //コインを取得
