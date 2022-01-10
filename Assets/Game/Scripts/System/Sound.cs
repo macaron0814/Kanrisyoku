@@ -14,11 +14,18 @@ public class Sound : MonoBehaviour
     static AudioSource audio_SE;//AudioSource_SEのデータを取得
 
     [SerializeField] private Slider slider_BGM, slider_SE;//bgm,seの音量バー
+    [SerializeField] private Text bgmVolume, seVolume;//bgm,seの音量バー
+    static Slider sliB, sliS;//bgm,seの音量バー
+    static Text bV, sV;//bgm,seの音量バー
 
     void Awake()
     {
         bgm_static = bgm;
         se_static  = se;
+        sliB = slider_BGM;
+        sliS = slider_SE;
+        bV = bgmVolume;
+        sV = seVolume;
 
         // シングルトンかつ、シーン遷移しても破棄されないようにする
         if (instance == null)
@@ -34,16 +41,19 @@ public class Sound : MonoBehaviour
     {
         audio_SE = audioSource_SE;
         audioSource = gameObject.GetComponent<AudioSource>();//AudioSourceのデータを代入
-        slider_BGM.value = SystemSetting.save.bgm;
-        slider_SE.value  = SystemSetting.save.se;
+
+        sliB.value = SystemSetting.save.bgm;
+        sliS.value = SystemSetting.save.se;
     }
 
     void Update()
     {
-        SystemSetting.save.bgm = slider_BGM.value;
-        SystemSetting.save.se  = slider_SE.value;
-        audioSource.volume = SystemSetting.save.bgm;
-        audio_SE.volume    = SystemSetting.save.se;
+        SystemSetting.save.bgm = sliB.value;
+        SystemSetting.save.se  = sliS.value;
+        audioSource.volume = SystemSetting.save.bgm / 100.0f;
+        audio_SE.volume    = SystemSetting.save.se  / 100.0f;
+        bV.text = SystemSetting.save.bgm.ToString("f0");
+        sV.text  = SystemSetting.save.se.ToString("f0");
     }
 
     public void BackButton()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SelectModeConfig : MonoBehaviour
@@ -330,5 +331,18 @@ public class SelectModeConfig : MonoBehaviour
         coinLackUI.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         coinLackUI.SetActive(false);
+    }
+
+    /// <summary>
+    /// データを削除してリロードをかける
+    /// </summary>
+    public void DeleteSaveDateAll()
+    {
+        Parameter.DeleteParameter();
+        Record.DeleteRecord();
+        SystemData.DeleteSystemData();
+        SystemSetting.DeleteSystemSetting();
+        GameModeConfig.sceneType = GameModeConfig.SCENETYPE.TITLE;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

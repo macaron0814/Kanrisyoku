@@ -48,4 +48,13 @@ public static class SystemSetting
             save = JsonUtility.FromJson<SaveSystemSetting>(data);
         }
     }
+
+    //=================================================
+    //削除
+    //=================================================
+    public static void DeleteSystemSetting()
+    {
+        filePath = Application.persistentDataPath + "/" + ".saveSetting.json";
+        File.Delete(filePath);
+    }
 }

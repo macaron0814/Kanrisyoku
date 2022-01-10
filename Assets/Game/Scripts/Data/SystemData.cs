@@ -81,7 +81,19 @@ public static class SystemData
     //=================================================
     public static void DeleteSystemData()
     {
-        filePath = Application.persistentDataPath + "/" + ".saveSystem.json";
-        File.Delete(filePath);
+        save.bossBattleATK = 0;
+        save.bossLoseCount = 0;
+        save.bossWait = 0;
+        save.coinBoost = 0;
+        save.coinBoostTime = new int[4];
+        save.frameUnlock = 0;
+        save.isReview = false;
+        save.isTutorial = false;
+        save.rouletteCount = 0;
+        save.rouletteNolma = 0;
+        save.setFrame = 0;
+        save.waitNotificationName = new string[10] { "", "", "", "", "", "", "", "", "", "" };
+
+        SaveSystemData();
     }
 }
