@@ -64,9 +64,9 @@ public class Notification : MonoBehaviour
                     SystemData.SaveSystemData();
                     return;
                 }
-                backGround.SetActive(false);
             }
         }
+        backGround.SetActive(false);
         SystemData.SaveSystemData();
     }
 

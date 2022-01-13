@@ -82,7 +82,7 @@ public static class SystemData
     public static void DeleteSystemData()
     {
         save.bossBattleATK = 0;
-        save.bossLoseCount = 0;
+        save.bossLoseCount = 3;
         save.bossWait = 0;
         save.coinBoost = 0;
         save.coinBoostTime = new int[4];
@@ -90,7 +90,7 @@ public static class SystemData
         save.isReview = false;
         save.isTutorial = false;
         save.rouletteCount = 0;
-        save.rouletteNolma = 0;
+        save.rouletteNolma = 10;
         save.setFrame = 0;
         save.waitNotificationName = new string[10] { "", "", "", "", "", "", "", "", "", "" };
 

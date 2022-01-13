@@ -15,7 +15,7 @@ public class Sound : MonoBehaviour
 
     [SerializeField] private Slider slider_BGM, slider_SE;//bgm,seの音量バー
     [SerializeField] private Text bgmVolume, seVolume;//bgm,seの音量バー
-    static Slider sliB, sliS;//bgm,seの音量バー
+    public static Slider sliB, sliS;//bgm,seの音量バー
     static Text bV, sV;//bgm,seの音量バー
 
     void Awake()
@@ -41,9 +41,6 @@ public class Sound : MonoBehaviour
     {
         audio_SE = audioSource_SE;
         audioSource = gameObject.GetComponent<AudioSource>();//AudioSourceのデータを代入
-
-        sliB.value = SystemSetting.save.bgm;
-        sliS.value = SystemSetting.save.se;
     }
 
     void Update()

@@ -154,8 +154,20 @@ public static class Record
     //=================================================
     public static void DeleteRecord()
     {
-        filePath = Application.persistentDataPath + "/" + ".saveRecord.json";
-        File.Delete(filePath);
+        save.bestBossBattleScore = new long[5];
+        save.dead = new bool[3];
+        save.firstrun = false;
+        save.joshi = false;
+        save.kaicho = false;
+        save.kohaiJet = false;
+        save.openBossBattle = false;
+        save.perfectJoshi = false;
+        save.perfectKaicho = false;
+        save.perfectSyacho = false;
+        save.recordKey = new string[100];
+        save.run = 0;
+        save.runTotalMeter = 0;
+        save.syacho = false;
     }
 }
 

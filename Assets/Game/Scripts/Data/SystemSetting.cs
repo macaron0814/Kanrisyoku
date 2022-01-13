@@ -34,7 +34,7 @@ public static class SystemSetting
     //ロード
     //=================================================
     [RuntimeInitializeOnLoadMethod()]
-    private static void LoadSystemSetting()
+    public static void LoadSystemSetting()
     {
         filePath = Application.persistentDataPath + "/" + ".saveSetting.json";
 
@@ -54,7 +54,7 @@ public static class SystemSetting
     //=================================================
     public static void DeleteSystemSetting()
     {
-        filePath = Application.persistentDataPath + "/" + ".saveSetting.json";
-        File.Delete(filePath);
+        save.bgm = 40;
+        save.se = 30;
     }
 }

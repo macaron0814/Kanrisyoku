@@ -62,7 +62,15 @@ public static class Parameter
     //=================================================
     public static void DeleteParameter()
     {
-        filePath = Application.persistentDataPath + "/" + ".saveData.json";
-        File.Delete(filePath);
+        save.atkLevel = 1;
+        save.atkValue = 1;
+        save.atkCost = 10;
+        save.defLevel = 1;
+        save.defValue = 1;
+        save.defCost = 10;
+        save.hpLevel = 1;
+        save.hpValue = 100;
+        save.hpCost = 10;
+        save.coin = 0;
     }
 }

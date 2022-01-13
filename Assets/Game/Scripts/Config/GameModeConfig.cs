@@ -41,6 +41,9 @@ public class GameModeConfig : MonoBehaviour
     {
         loadUI.SetActive(true); //初回起動時にロードを挟み忘れた場合が多発したため、強制的に表示
 
+        Sound.sliB.value = SystemSetting.save.bgm;
+        Sound.sliS.value = SystemSetting.save.se;
+
         if (sceneType == SCENETYPE.TITLE)
         {
             if (!SystemData.save.isReview && SystemData.save.frameUnlock == 1)
