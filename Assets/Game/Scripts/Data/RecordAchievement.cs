@@ -14,6 +14,8 @@ public class RecordAchievement : MonoBehaviour
     [SerializeField] private string[]   recordTitle;
     [SerializeField] private string[]   recordText;
 
+    [SerializeField] private GameObject recordList;
+
     //recordAchievementのstatic変数
     [SerializeField] private static GameObject recAch;
     [SerializeField] private static Image      recCorUI;
@@ -42,6 +44,61 @@ public class RecordAchievement : MonoBehaviour
 
         mb = this;
         count = 0;
+
+        RecordAchievementList();
+    }
+
+
+
+    /// <summary>
+    /// 実績のリスト
+    /// </summary>
+    private void RecordAchievementList()
+    {
+        for (int i = 0; i < recordList.transform.childCount; i++)
+        {
+            bool isUnlock = UnlockCheck(recordList.transform.GetChild(i).name);
+
+            //フレームの色変更
+            foreach (var image in recordList.transform.GetChild(i).GetComponentsInChildren<Image>())
+            {
+                if (image.name == "Frame")
+                {
+                    if(isUnlock) image.color = recordColor[i];
+                    else image.color = Color.black;
+                }
+                if (image.name == "Image")
+                {
+                    if (isUnlock) image.gameObject.SetActive(true);
+                    else image.gameObject.SetActive(false);
+                }
+            }
+            //実績のタイトルと内容を変更
+            foreach (Text t in recordList.transform.GetChild(i).GetComponentsInChildren<Text>())
+            {
+                if (t.name == "Title")
+                {
+                    if (isUnlock) t.gameObject.SetActive(true);
+                    else t.gameObject.SetActive(false);
+
+                    t.text = recordTitle[i];
+                }
+
+                if (t.name == "Text")
+                {
+                    if(isUnlock)t.gameObject.SetActive(true);
+                    else t.gameObject.SetActive(false);
+
+                    t.text = recordText[i];
+                }
+
+                if (t.name == "Nolma") 
+                {
+                    if (!isUnlock) t.gameObject.SetActive(true);
+                    else t.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     public static void Action(string key)
@@ -51,6 +108,12 @@ public class RecordAchievement : MonoBehaviour
         if (count == 0) { count++; mb.StartCoroutine(AnimationCoroutine(key)); }
         else { count++; mb.StartCoroutine(NextAnimationCoroutine(key,count)); }
 
+    }
+
+    private bool UnlockCheck(string key)
+    {
+        foreach (var keys in Record.save.recordKey) if (keys == key) { return true; }
+        return false;
     }
 
     /// <summary>

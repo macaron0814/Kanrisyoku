@@ -27,7 +27,9 @@ public class Notification : MonoBehaviour
     {
         for (int i = 0; i < SystemData.save.waitNotificationName.Length; i++)
         {
-            if(SystemData.save.waitNotificationName[i] == "")
+            if (SystemData.save.waitNotificationName[i] == Obj.name) break; //同じ名称は保存しない
+
+            if (SystemData.save.waitNotificationName[i] == "")
             {
                 SystemData.save.waitNotificationName[i] = Obj.name;
                 break;
@@ -77,6 +79,8 @@ public class Notification : MonoBehaviour
     public void NextNotification(GameObject Obj)
     {
         Sound.SoundPlaySE(7);
+
+        if (Obj.name == "Reward" || Obj.name == "CoinBoost") InterstitialManager.OnInterRouletteAd();
 
         for (int i = 0; i < SystemData.save.waitNotificationName.Length; i++)
         {

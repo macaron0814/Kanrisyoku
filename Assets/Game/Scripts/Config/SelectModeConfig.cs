@@ -17,6 +17,8 @@ public class SelectModeConfig : MonoBehaviour
 
     [SerializeField] private GameObject levelMax;   //レベル上限を知らせる通知
 
+    [SerializeField] private GameObject recordAchievementList; //実績のリスト
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +73,12 @@ public class SelectModeConfig : MonoBehaviour
     /// </summary>
     public void RankingButton()
     {
+#if UNITY_IPHONE
         iOSRankingUtility.ShowLeaderboardUI();
+#elif UNITY_ANDROID
+        string meter = Record.save.runTotalMeter.ToString("F2"); //少数第二位より後は表示しない
+        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(float.Parse(meter));
+#endif
     }
 
     /// <summary>
@@ -79,7 +86,12 @@ public class SelectModeConfig : MonoBehaviour
     /// </summary>
     public void RecordButton()
     {
-        iOSRankingUtility.ShowAchievementsUI();
+#if UNITY_IPHONE
+        recordAchievementList.SetActive(true);
+        //iOSRankingUtility.ShowAchievementsUI();
+#elif UNITY_ANDROID
+        recordAchievementList.SetActive(true);
+#endif
     }
 
     /// <summary>

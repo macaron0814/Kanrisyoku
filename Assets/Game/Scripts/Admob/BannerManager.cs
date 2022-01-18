@@ -10,9 +10,9 @@ public class BannerManager
     public static void RequestBanner()
     {
 #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+        string adUnitId = "ca-app-pub-3937099152123084/7556581929";
 #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3937099152123084/2603949867";
+        string adUnitId = "ca-app-pub-3937099152123084/2603949867";
 #else
         string adUnitId = "unexpected_platform";
 #endif

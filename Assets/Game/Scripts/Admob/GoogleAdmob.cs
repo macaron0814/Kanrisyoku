@@ -21,5 +21,8 @@ public class GoogleAdmob
         MobileAds.Initialize((initStatus) => { });
 
         BannerManager.RequestBanner();
+        InterstitialManager.RequestInterRunAd();
+        InterstitialManager.RequestInterBossLoseAd();
+        InterstitialManager.RequestInterRouletteAd();
     }
 }

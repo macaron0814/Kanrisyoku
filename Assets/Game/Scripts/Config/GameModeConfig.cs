@@ -69,6 +69,7 @@ public class GameModeConfig : MonoBehaviour
             StartCoroutine("GameFromTitle");
             StartCoroutine(Sound.SoundPlaySEforCountDown(7,0.1f));
             contentsUI.SetActive(false);
+            resultUI.SetActive(false);
         }
 
         if (sceneType == SCENETYPE.BOSSRESULT)
@@ -78,6 +79,7 @@ public class GameModeConfig : MonoBehaviour
             StartCoroutine("BossBattleFromTitle");
             StartCoroutine(Sound.SoundPlaySEforCountDown(18, 0.1f));
             contentsUI.SetActive(false);
+            bossResultUI.SetActive(false);
         }
     }
 
@@ -160,7 +162,7 @@ public class GameModeConfig : MonoBehaviour
         GameModeConfig.sceneType = GameModeConfig.SCENETYPE.RESULT;
         Sound.SoundStop();
 
-        if (Record.save.runTotalMeter >= 2000 && !Record.save.openBossBattle) Notification.WaitNotification(Notification.sNotification[0]);
+        if (Record.save.runTotalMeter >= 1000 && !Record.save.openBossBattle) Notification.WaitNotification(Notification.sNotification[0]);
 
         //スコア送信
         long score = (long)(ItemSystem.metre * 100);
@@ -173,7 +175,7 @@ public class GameModeConfig : MonoBehaviour
 
         Record.UpdateRecord(Record.RecordList.DEAD, ItemSystem.gameoverPattern);
 
-        if (Record.save.runTotalMeter >= 2000) Record.UpdateRecord(Record.RecordList.OPENBOSSBATTLE);
+        if (Record.save.runTotalMeter >= 1000) Record.UpdateRecord(Record.RecordList.OPENBOSSBATTLE);
 
         Record.ClearRecord();
 
@@ -236,6 +238,14 @@ public class GameModeConfig : MonoBehaviour
         SystemData.save.bossWait = 0;
         SystemData.save.bossBattleATK = 0;
 
+        //広告をカウントが超えたら表示
+        InterstitialManager.interBossLoseCount++;
+        if(InterstitialManager.interBossLoseCount == 3)
+        {
+            InterstitialManager.OnInterBossLoseAd();
+            InterstitialManager.interBossLoseCount = 0;
+        }
+
         bossBattleUI.SetActive(false); //ボスバトルUI非表示
         bossResultUI.SetActive(true); //ボスリザルトUI表示
         Sound.SoundStop();
@@ -244,7 +254,7 @@ public class GameModeConfig : MonoBehaviour
         long score = (long)BossScore.b_point.score;
 
         //ボスの種類ごとに分けて得点を管理
-        if (BossBattleConfig.syainNumber == 0) iOSRankingUtility.ReportScore("hiBossScore", score);
+        if (BossBattleConfig.syainNumber == 0)      iOSRankingUtility.ReportScore("hiBossScore", score);
         else if (BossBattleConfig.syainNumber == 1) iOSRankingUtility.ReportScore("hiBossScore2", score);
         else if (BossBattleConfig.syainNumber == 2) iOSRankingUtility.ReportScore("hiBossScore3", score);
 

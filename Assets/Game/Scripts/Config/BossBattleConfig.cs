@@ -21,10 +21,10 @@ public class BossBattleConfig : MonoBehaviour
         sya = syain;
         syaUI = syainUI;
 
-        if (Record.save.runTotalMeter >= 2000) lockBoss.SetActive(false);
+        if (Record.save.runTotalMeter >= 1000) lockBoss.SetActive(false);
         else
         {
-            float unLockMeter = 2000 - Record.save.runTotalMeter;
+            float unLockMeter = 1000 - Record.save.runTotalMeter;
             lockBossUI.text = "あと" + unLockMeter.ToString("F0") + "m\n走ると解放";
         }
     }
