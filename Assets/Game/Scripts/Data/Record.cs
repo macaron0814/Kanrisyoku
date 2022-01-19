@@ -9,6 +9,7 @@ public class SaveRecord
     //save変数(実績)
     public bool     firstrun;           //初めて走った
     public byte     run;                //走った回数
+    public float    runBestMeter;       //走った中での最高距離
     public float    runTotalMeter;      //走った距離
     public bool[]   dead = new bool[3]; //死んだ種類
     public bool     kohaiJet;           //コーハイジェット発動

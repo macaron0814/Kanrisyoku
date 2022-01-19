@@ -26,6 +26,8 @@ public class SelectModeConfig : MonoBehaviour
 #if UNITY_IOS
         iOSRankingUtility.Auth();
         StartCoroutine(IntervalTimeIDFA());
+#elif UNITY_ANDROID
+        GoogleAdmob.LoadAdmob(); //広告読み込み
 #endif
     }
     IEnumerator IntervalTimeIDFA()
@@ -76,8 +78,8 @@ public class SelectModeConfig : MonoBehaviour
 #if UNITY_IPHONE
         iOSRankingUtility.ShowLeaderboardUI();
 #elif UNITY_ANDROID
-        string meter = Record.save.runTotalMeter.ToString("F2"); //少数第二位より後は表示しない
-        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(float.Parse(meter));
+        string meter = Mathf.Floor(Record.save.runBestMeter * 100).ToString("F2");
+        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(double.Parse(meter) / 100);
 #endif
     }
 

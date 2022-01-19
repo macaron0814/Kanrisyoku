@@ -240,6 +240,17 @@ public class Player : MonoBehaviour
         Sound.SoundPlayBGM(1);
         resultType[type].SetActive(true);
 
+#if UNITY_ANDROID
+        if (Record.save.runBestMeter <= ItemSystem.metre)
+        {
+            Record.save.runBestMeter = ItemSystem.metre;
+            Record.SaveRecord();
+
+            string meter = Mathf.Floor(Record.save.runBestMeter * 100).ToString("F2");
+            naichilab.RankingLoader.Instance.SendScoreAndShowRanking(double.Parse(meter) / 100);
+        }
+#endif
+
         yield return new WaitForSeconds(2.25f);
         Sound.SoundPlaySE(9);
         isSound = true;
