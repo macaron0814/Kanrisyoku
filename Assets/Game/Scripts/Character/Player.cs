@@ -255,6 +255,18 @@ public class Player : MonoBehaviour
         Sound.SoundPlaySE(9);
         isSound = true;
 
+        //体験済みのゲームオーバーの場合は豆知識に切り替え
+        if (!SystemData.save.isGameOver[type])
+        {
+            SystemData.save.isGameOver[type] = true;
+            SystemData.SaveSystemData();
+        }
+        else
+        {
+            resultType[type].SetActive(false);
+            resultType[3].SetActive(true);
+        }
+
         if (Record.save.run % 8 == 0) InterstitialManager.OnInterRunAd();
 
         for (int i = 0; i < gameModeConfig.resultButton.Length; i++) gameModeConfig.resultButton[i].SetActive(true);

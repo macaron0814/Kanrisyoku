@@ -27,6 +27,9 @@ public class SaveSystemData
     //コインブーストまでのボスに負けた回数
     public int bossLoseCount = 3;
 
+    //各種ゲームオーバーを体験したか
+    public bool[] isGameOver = new bool[3];
+
     //チューリアル
     public bool isTutorial;
 
