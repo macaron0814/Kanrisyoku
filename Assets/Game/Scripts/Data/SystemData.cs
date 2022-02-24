@@ -24,6 +24,13 @@ public class SaveSystemData
     public int coinBoost = 0;
     public int[] coinBoostTime = new int[4];
 
+    //イベント時限定の処理-Event_01======
+    public bool eventNotification = false; //イベント通知
+    public bool eventBoost = false; //イベントブースト
+    public int[] eventBoostTime = new int[4]; //イベント計測時間
+    public float eventRunTotalMeter; //イベント時の合計走行距離
+    //===================================
+
     //コインブーストまでのボスに負けた回数
     public int bossLoseCount = 3;
 

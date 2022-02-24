@@ -21,6 +21,9 @@ public class GameModeConfig : MonoBehaviour
     private Notification notification;
 
     [SerializeField]
+    private Text test;
+
+    [SerializeField]
     private Text coinUI;
 
     public enum SCENETYPE
@@ -53,6 +56,8 @@ public class GameModeConfig : MonoBehaviour
                 SystemData.SaveSystemData();
             }
             notification.ActiveNotification();
+
+            test.text = Social.localUser.ToString();
         }
 
         if (sceneType == SCENETYPE.GAME)
@@ -134,6 +139,20 @@ public class GameModeConfig : MonoBehaviour
         else sceneType = SCENETYPE.GAME;
         cameraAnim.SetBool("GameCamera", true);
         titleUI.SetActive(false);
+
+        //イベント時限定の処理-Event_01======
+        if (!SystemData.save.eventBoost)
+        {
+            SystemData.save.eventBoost = true;
+            SystemData.save.eventNotification = true;
+            SystemData.save.eventBoostTime[0] = DateTime.Now.Day;
+            SystemData.save.eventBoostTime[1] = DateTime.Now.Hour;
+            SystemData.save.eventBoostTime[2] = DateTime.Now.Minute;
+            SystemData.save.eventBoostTime[3] = DateTime.Now.Second;
+            SystemData.SaveSystemData();
+        }
+        //===================================
+
         StartCoroutine("GameFromTitle");
         Sound.SoundPlaySE(7);
     }
@@ -176,6 +195,14 @@ public class GameModeConfig : MonoBehaviour
         Record.UpdateRecord(Record.RecordList.DEAD, ItemSystem.gameoverPattern);
 
         if (Record.save.runTotalMeter >= 1000) Record.UpdateRecord(Record.RecordList.OPENBOSSBATTLE);
+
+        //イベント時限定の処理-Event_01======
+        if (SystemData.save.eventBoost)
+        {
+            SystemData.save.eventRunTotalMeter += ItemSystem.metre;
+            SystemData.SaveSystemData();
+        }
+        //===================================
 
         Record.ClearRecord();
 
@@ -301,7 +328,7 @@ public class GameModeConfig : MonoBehaviour
                 SystemData.save.coinBoost = 2;
                 Notification.WaitNotification(Notification.sNotification[2]);
             }
-            else if (SystemData.save.bossLoseCount != 0) SystemData.save.bossLoseCount--;
+            //else if (SystemData.save.bossLoseCount != 0) SystemData.save.bossLoseCount--;
         }
         SystemData.SaveSystemData();
 

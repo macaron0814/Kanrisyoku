@@ -9,6 +9,7 @@ public class Notification : MonoBehaviour
     public static GameObject[] sNotification = new GameObject[10];
 
     [SerializeField] private GameObject coinText;
+    [SerializeField] private GameObject event1Text;
 
     [SerializeField] private GameObject backGround;
 

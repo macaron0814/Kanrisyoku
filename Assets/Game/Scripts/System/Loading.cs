@@ -32,6 +32,7 @@ public class Loading : MonoBehaviour
 
         if (loadingCount > rand)
         {
+            if (!SystemData.save.eventNotification) Notification.WaitNotification(Notification.sNotification[3]);
             Destroy(gameObject);
             GameModeConfig.sceneType = GameModeConfig.SCENETYPE.TITLE;
             notification.ActiveNotification();
