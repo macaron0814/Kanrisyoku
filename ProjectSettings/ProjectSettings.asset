@@ -851,9 +851,9 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: b572af87-d880-43c1-8e47-5799a43e95ca
+  cloudProjectId: bb4067a1-f1d2-4e2c-a56c-7f9c934d969f
   framebufferDepthMemorylessMode: 0
-  projectName: Kanrisyoku
+  projectName: kanrisyoku
   organizationId: yuta_0814
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
