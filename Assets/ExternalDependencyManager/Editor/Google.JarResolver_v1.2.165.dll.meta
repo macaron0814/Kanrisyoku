@@ -1,7 +1,10 @@
 fileFormatVersion: 2
-guid: 86de22886b4f4dc42b2a6462cf01009a
+guid: 6674a07de2d44623b6933672c77d3b83
 labels:
-- gpsr
+- gvh
+- gvh_version-1.2.165
+- gvhp_exportpath-ExternalDependencyManager/Editor/Google.JarResolver_v1.2.165.dll
+- gvhp_targets-editor
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -14,11 +17,6 @@ PluginImporter:
   validateReferences: 1
   platformData:
   - first:
-      Android: Android
-    second:
-      enabled: 1
-      settings: {}
-  - first:
       Any: 
     second:
       enabled: 0
@@ -26,9 +24,15 @@ PluginImporter:
   - first:
       Editor: Editor
     second:
-      enabled: 0
+      enabled: 1
       settings:
         DefaultValueInitialized: true
+  - first:
+      Windows Store Apps: WindowsStoreApps
+    second:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
   userData: 
   assetBundleName: 
   assetBundleVariant: 
