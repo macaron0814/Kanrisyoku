@@ -81,7 +81,7 @@ public class Notification : MonoBehaviour
     {
         Sound.SoundPlaySE(7);
 
-        //if (Obj.name == "Reward" || Obj.name == "CoinBoost") InterstitialManager.OnInterRouletteAd();
+        if (Obj.name == "Reward" || Obj.name == "CoinBoost") InterstitialManager.OnInterRouletteAd();
 
         for (int i = 0; i < SystemData.save.waitNotificationName.Length; i++)
         {
