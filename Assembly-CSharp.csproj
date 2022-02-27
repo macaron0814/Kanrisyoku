@@ -770,10 +770,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Coffee.UIParticle.csproj">
-      <Project>{87BB7832-505A-FBDF-E4DC-C600B648204F}</Project>
-      <Name>Coffee.UIParticle</Name>
-    </ProjectReference>
     <ProjectReference Include="GoogleMobileAds.Editor.csproj">
       <Project>{7E1FA39A-7BD9-6298-C679-82BD801E792B}</Project>
       <Name>GoogleMobileAds.Editor</Name>
