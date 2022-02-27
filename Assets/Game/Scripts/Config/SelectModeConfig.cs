@@ -33,7 +33,7 @@ public class SelectModeConfig : MonoBehaviour
     IEnumerator IntervalTimeIDFA()
     {
         yield return new WaitForSeconds(2.0f);
-        ShowAttDialog.RequestIDFA();
+        ShowAttDialog.RequestIDFA(); 
         yield return new WaitForSeconds(1.0f);
         GoogleAdmob.LoadAdmob(); //広告読み込み
     }
