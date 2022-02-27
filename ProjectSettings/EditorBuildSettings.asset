@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Game/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/naichilab/unity-simple-ranking/Scenes/Ranking.unity
-    guid: 152244f5855414ac4a3874f14efa583c
-  - enabled: 1
     path: Assets/Game/Scenes/Event1.unity
     guid: f9871ad548b7ff94fad5aa6239cf299b
   m_configObjects: {}
