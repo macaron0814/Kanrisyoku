@@ -296,6 +296,9 @@
     <Reference Include="Google.VersionHandlerImpl_v1.2.165">
       <HintPath>Assets\ExternalDependencyManager\Editor\Google.VersionHandlerImpl_v1.2.165.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
