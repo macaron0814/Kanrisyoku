@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: a037b9f808b8c43ae91c527caf71d031
+labels:
+- gvh
+- gvh_version-6.0.2
 AssemblyDefinitionImporter:
   externalObjects: {}
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
