@@ -3,21 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Stage
-  - Line
-  - Coin
-  - Ramen
-  - Kohai
-  - GoldenRamen
-  - Jet
-  - Sound
-  - KohaiRocket
-  - Joshi
-  - Shot
-  - Syain
-  - Energy
-  - ShotBlack
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -27,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - Effect
+  - 
   - 
   - 
   - 
@@ -54,22 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Player
-    uniqueID: 2101436723
-    locked: 0
-  - name: Stage
-    uniqueID: 2690966503
-    locked: 0
-  - name: Jet
-    uniqueID: 2240268119
-    locked: 0
-  - name: Shot
-    uniqueID: 1029710067
-    locked: 0
-  - name: Effect
-    uniqueID: 137613889
-    locked: 0
-  - name: GameOver
-    uniqueID: 3945642673
     locked: 0
