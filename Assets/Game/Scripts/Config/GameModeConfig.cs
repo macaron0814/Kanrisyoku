@@ -266,12 +266,12 @@ public class GameModeConfig : MonoBehaviour
         SystemData.save.bossBattleATK = 0;
 
         //広告をカウントが超えたら表示
-        InterstitialManager.interBossLoseCount++;
-        if(InterstitialManager.interBossLoseCount == 3)
-        {
-            InterstitialManager.OnInterBossLoseAd();
-            InterstitialManager.interBossLoseCount = 0;
-        }
+        //InterstitialManager.interBossLoseCount++;
+        //if(InterstitialManager.interBossLoseCount == 3)
+        //{
+        //    InterstitialManager.OnInterBossLoseAd();
+        //    InterstitialManager.interBossLoseCount = 0;
+        //}
 
         bossBattleUI.SetActive(false); //ボスバトルUI非表示
         bossResultUI.SetActive(true); //ボスリザルトUI表示

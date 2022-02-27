@@ -267,7 +267,7 @@ public class Player : MonoBehaviour
             resultType[3].SetActive(true);
         }
 
-        if (Record.save.run % 8 == 0) InterstitialManager.OnInterRunAd();
+        //if (Record.save.run % 8 == 0) InterstitialManager.OnInterRunAd();
 
         for (int i = 0; i < gameModeConfig.resultButton.Length; i++) gameModeConfig.resultButton[i].SetActive(true);
 
