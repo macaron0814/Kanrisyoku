@@ -5,7 +5,8 @@
         "GoogleMobileAds.Core"
     ],
     "includePlatforms": [
-        "Editor"
+        "Editor",
+        "iOS"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
