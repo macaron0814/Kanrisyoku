@@ -776,6 +776,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{D7C040FD-B8A5-CB77-D610-7E44F59C455B}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="GoogleMobileAds.Editor.csproj">
       <Project>{7E1FA39A-7BD9-6298-C679-82BD801E792B}</Project>
       <Name>GoogleMobileAds.Editor</Name>

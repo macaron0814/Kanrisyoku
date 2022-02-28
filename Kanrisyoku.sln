@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{2E460C3F-9239-79C5-A239-ACB5E1C63AA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{D7C040FD-B8A5-CB77-D610-7E44F59C455B}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMobileAds.Editor", "GoogleMobileAds.Editor.csproj", "{7E1FA39A-7BD9-6298-C679-82BD801E792B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{6306009A-5433-D1B5-7411-49CEBF066558}"
@@ -17,6 +19,10 @@ Global
 		{2E460C3F-9239-79C5-A239-ACB5E1C63AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E460C3F-9239-79C5-A239-ACB5E1C63AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E460C3F-9239-79C5-A239-ACB5E1C63AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7C040FD-B8A5-CB77-D610-7E44F59C455B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C040FD-B8A5-CB77-D610-7E44F59C455B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C040FD-B8A5-CB77-D610-7E44F59C455B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C040FD-B8A5-CB77-D610-7E44F59C455B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7E1FA39A-7BD9-6298-C679-82BD801E792B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7E1FA39A-7BD9-6298-C679-82BD801E792B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E1FA39A-7BD9-6298-C679-82BD801E792B}.Release|Any CPU.ActiveCfg = Release|Any CPU
